@@ -39,3 +39,5 @@ CREATE TABLE order_details(
     FOREIGN KEY (ord_id) REFERENCES orders(ord_id)
     	ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- kljafkjhakfd
