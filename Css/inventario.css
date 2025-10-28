@@ -1,0 +1,83 @@
+:root {
+    --negro: #111111;
+    --gris-oscuro: #222222;
+    --gris: #333333;
+    --azul: #1976D2;
+    --azul-bajo: #42A5F5;
+    --blanco: #f5f5f5;
+    --barraPrincipal: #b6b6b6;
+}
+
+* {
+    color: var(--negro);
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    background-color: var(--gris);
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+table, th, td, caption{
+    border: 1px solid var(--negro);
+    border-collapse: collapse;
+    background-color: var(--barraPrincipal);
+}
+
+th, td{
+    padding: 1rem;
+}
+
+caption{
+    padding: 0.5rem;
+}
+
+.cont-principal{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    flex-direction: column;
+}
+
+td {
+    text-align: center;
+}
+
+table{
+    margin: 5rem 0 0;
+}
+
+input:focus, select:focus{
+    outline: none;
+}
+
+button{
+    padding: 0.5rem 1rem;
+}
+
+.resultado {
+    text-align: center;
+    font-size: 2rem;
+    padding: 0.5rem;
+    width: 100vw;
+    background-color: red;
+}
+
+select {
+    background-color: var(--barraPrincipal);
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    width: 100%;
+}
