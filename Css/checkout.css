@@ -1,0 +1,232 @@
+/* ===============================================
+   ESTILOS PARA CHECKOUT CONGRUENTE CON EL TEMA PRINCIPAL
+   =============================================== */
+
+/* --- Contenedor Principal --- */
+/* Esta regla asegura que el contenedor del checkout ocupe todo el ancho del grid principal */
+
+:root {
+ --negro: #1a1a1a;
+ --gris-oscuro: #2a2a2a;
+ --gris: #4a4a4a;
+ --blanco: #ffffff;
+ --azul-claro: #93c5fd;
+ --azul-bajo: #3b82f6;
+ --azul: #1d4ed8;
+ --rojo-error: #ef4444;
+}
+
+.contenedor-principal > .checkout-container {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 0; /* Ajuste de padding vertical */
+}
+
+.form-container {
+    background: var(--gris-oscuro);
+    padding: 3rem;
+    border-radius: 0.8rem;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid var(--gris);
+}
+
+.form-container h1 {
+    color: var(--azul-claro);
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gris);
+}
+
+.form-container p {
+    font-size: 1.6rem;
+    color: var(--blanco);
+    margin-bottom: 2.5rem;
+}
+
+/* --- Banner de Error --- */
+.error-banner {
+    background-color: #3e1919;
+    color: #fecaca;
+    border: 1px solid var(--rojo-error);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* --- Estilos del Formulario --- */
+.customer-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.customer-form legend {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    width: 100%;
+}
+
+.form-row {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--gris);
+    background-color: var(--negro);
+    color: var(--blanco);
+    border-radius: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--azul-bajo);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.btn-siguiente {
+    width: 100%;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--blanco);
+    background-color: var(--azul-bajo);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-siguiente:hover {
+    background-color: var(--azul);
+}
+
+/* --- Página de Selección de Pago --- */
+
+.datos-resumen {
+    background: var(--negro);
+    border: 1px solid var(--gris);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+}
+
+.datos-resumen a {
+    color: var(--azul-claro);
+    text-decoration: underline;
+    font-size: 1.4rem;
+    transition: color 0.3s;
+}
+.datos-resumen a:hover {
+    color: var(--blanco);
+}
+
+.payment-methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.payment-box {
+    border: 1px solid var(--gris);
+    background-color: var(--negro);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.payment-box h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    min-height: 32px; /* Para alinear verticalmente */
+}
+
+.payment-box .aviso {
+    color: var(--blanco);
+    font-size: 1.4rem;
+    flex-grow: 1;
+    margin-bottom: 2rem;
+}
+
+.btn-pago-paypal {
+    background-color: var(--azul-bajo);
+    color: var(--blanco);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pago-paypal:hover {
+    background-color: var(--azul);
+}
+
+.btn-pago-disabled {
+    background-color: var(--gris);
+    color: #aaa;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: not-allowed;
+    text-transform: uppercase;
+}
+
+/* --- Media Queries --- */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 2rem;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 0;
+    }
+    .form-row .form-group {
+        margin-bottom: 1.5rem;
+    }
+    .payment-methods {
+        grid-template-columns: 1fr;
+    }
+}

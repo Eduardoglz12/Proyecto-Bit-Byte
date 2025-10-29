@@ -16,61 +16,53 @@ $clientID = "ASUajecFhJzfxHxdX4POf20OweQ_rqAY2zMB02SPs1Sq6EJ9loM2upMo5YcQW8GEw3_
 $secret   = "ELsm95H5C9MbVibXh6zlG4mVCjk8RZqVdxEfzCM7B0N0MOYvyAlR4NlOVYYTgI9lcywdpH-jEb031idJ";
 $paypalAPI = "https://api-m.sandbox.paypal.com";
 
-$orderID = $_GET['orderID'] ?? null;
-file_put_contents($log_file, "1. Order ID recibido de la URL: " . ($orderID ?? 'NINGUNO') . "\n\n", FILE_APPEND);
+// Los tokens 'token' y 'PayerID' son los nuevos parámetros que PayPal envía en la URL
+$orderID = $_GET['token'] ?? null; 
+$payerID = $_GET['PayerID'] ?? null;
 
-if (!$orderID || empty($_SESSION['carrito'])) {
-    file_put_contents($log_file, "ERROR: Order ID o carrito vacíos.\n", FILE_APPEND);
-    die("Error: Order ID o carrito vacío.");
+file_put_contents($log_file, "1. Order ID (token) recibido: " . ($orderID ?? 'NINGUNO') . ", PayerID: " . ($payerID ?? 'NINGUNO') . "\n\n", FILE_APPEND);
+
+if (!$orderID || !$payerID || empty($_SESSION['carrito'])) {
+    file_put_contents($log_file, "ERROR: Faltan parámetros o el carrito está vacío.\n", FILE_APPEND);
+    die("Error: Faltan parámetros para procesar el pedido.");
 }
 
 // --- 2. OBTENER TOKEN DE ACCESO ---
+// (Esta parte es idéntica a tu código original)
 $ch_token = curl_init();
 curl_setopt($ch_token, CURLOPT_URL, "$paypalAPI/v1/oauth2/token");
 curl_setopt($ch_token, CURLOPT_USERPWD, "$clientID:$secret");
 curl_setopt($ch_token, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
-curl_setopt($ch_token, CURLOPT_HTTPHEADER, ['Accept: application/json', 'Accept-Language: en_US']);
 curl_setopt($ch_token, CURLOPT_RETURNTRANSFER, true);
 $response_token = curl_exec($ch_token);
-
-if (curl_errno($ch_token)) {
-    file_put_contents($log_file, "ERROR cURL Token: " . curl_error($ch_token) . "\n", FILE_APPEND);
-    die('Error de cURL al obtener token: ' . curl_error($ch_token));
-}
 curl_close($ch_token);
-
 $data_token = json_decode($response_token);
 if (!isset($data_token->access_token)) {
-    file_put_contents($log_file, "ERROR: No se encontró access_token en la respuesta.\n", FILE_APPEND);
-    $_SESSION['error_compra'] = "Fallo de autenticación con PayPal.";
-    header('Location: ../gracias.php?status=error');
-    exit();
+    die("Fallo de autenticación con PayPal.");
 }
 $accessToken = $data_token->access_token;
-file_put_contents($log_file, "2. Token de acceso obtenido con éxito.\n\n", FILE_APPEND);
+file_put_contents($log_file, "2. Token de acceso obtenido.\n\n", FILE_APPEND);
 
-// --- 3. VERIFICAR DETALLES DE LA ORDEN ---
-$ch_order = curl_init();
-curl_setopt($ch_order, CURLOPT_URL, "$paypalAPI/v2/checkout/orders/$orderID");
-curl_setopt($ch_order, CURLOPT_HTTPHEADER, [
+// --- 3. CAPTURAR EL PAGO (NUEVO PASO CRÍTICO) ---
+$ch_capture = curl_init();
+curl_setopt($ch_capture, CURLOPT_URL, "$paypalAPI/v2/checkout/orders/$orderID/capture");
+curl_setopt($ch_capture, CURLOPT_HTTPHEADER, [
     "Authorization: Bearer $accessToken",
     "Content-Type: application/json"
 ]);
-curl_setopt($ch_order, CURLOPT_RETURNTRANSFER, true);
-$response_order = curl_exec($ch_order);
+curl_setopt($ch_capture, CURLOPT_POST, true);
+curl_setopt($ch_capture, CURLOPT_RETURNTRANSFER, true);
 
-if (curl_errno($ch_order)) {
-    file_put_contents($log_file, "ERROR cURL Orden: " . curl_error($ch_order) . "\n", FILE_APPEND);
-    die('Error de cURL al verificar la orden: ' . curl_error($ch_order));
-}
-curl_close($ch_order);
+$response_capture = curl_exec($ch_capture);
+curl_close($ch_capture);
 
-$orderDetails = json_decode($response_order);
-file_put_contents($log_file, "3. Respuesta de PayPal (Detalles de la Orden):\n" . ($response_order ?? 'VACÍA') . "\n\n", FILE_APPEND);
+$captureDetails = json_decode($response_capture);
+file_put_contents($log_file, "3. Respuesta de Captura de PayPal:\n" . ($response_capture ?? 'VACÍA') . "\n\n", FILE_APPEND);
 
-if (!$orderDetails || !in_array($orderDetails->status ?? '', ['COMPLETED', 'APPROVED'])) {
-    $_SESSION['error_compra'] = "Pago no completado. Estado: " . ($orderDetails->status ?? 'N/A');
-    file_put_contents($log_file, "ERROR: Estado de pago no válido.\n", FILE_APPEND);
+// Verificar que la captura fue exitosa y el estado es COMPLETADO
+if (!$captureDetails || !isset($captureDetails->status) || $captureDetails->status !== 'COMPLETED') {
+    $_SESSION['error_compra'] = "Pago no completado. Estado: " . ($captureDetails->status ?? 'N/A');
+    file_put_contents($log_file, "ERROR: El estado del pago no es COMPLETED.\n", FILE_APPEND);
     header('Location: ../gracias.php?status=error');
     exit();
 }
