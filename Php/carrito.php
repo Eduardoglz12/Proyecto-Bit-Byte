@@ -1,12 +1,12 @@
 <?php
   session_start();
-  require 'db_conexion.php'; // Incluimos la conexión
+  require_once __DIR__ . '/../db_conexion.php'; // Incluimos la conexión
 
   // --- Lógica de Sesión (igual que en index.php) ---
   $textoSesion1 = "Iniciar sesion";
-  $linkSesion1 = "php/inicioSesion.php";
+  $linkSesion1 = "inicioSesion.php";
   $textoSesion2 = "Registrarme";
-  $linkSesion2 = "php/registro.php";
+  $linkSesion2 = "registro.php";
 
   if(isset($_SESSION['usr_user'])){
     $textoSesion1 = $_SESSION['usr_user'];
@@ -61,11 +61,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bit&Byte - Carrito de Compras</title>
-  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="CSS/Inicio.css">
-  <link rel="stylesheet" href="CSS/normalize.css">
-  <link rel="preload" href="CSS/Inicio.css" as="style">
-  <link rel="preload" href="CSS/normalize.css" as="style">
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../CSS/Inicio.css">
+  <link rel="stylesheet" href="../CSS/normalize.css">
+  <link rel="preload" href="../CSS/Inicio.css" as="style">
+  <link rel="preload" href="../CSS/normalize.css" as="style">
 </head>
 
 <body>
@@ -104,7 +104,7 @@
     </div>
     <div class="barra-azul">
       <div class="ba-contenedor">
-        <a href="index.php">
+        <a href="../index.php">
           <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
             <g transform="translate(5, 15)">
               <rect x="0" y="0" width="10" height="50" fill="#3B82F6" />
@@ -122,9 +122,9 @@
       </div>
       <div class="ba-contenedor">
         <ul>
-          <li><a href="index.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></a></li>
+          <li><a href="../index.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></a></li>
           <li>|</li>
-          <li><a href="comprar.php">PRODUCTOS</a></li>
+          <li><a href="../comprar.php">PRODUCTOS</a></li>
           <li>|</li>
           <li><a href="#">TIENDAS</a></li>
           <li>|</li>
@@ -142,7 +142,7 @@
             </form>
           </li>
           <li class="carrito">
-            <a href="comprar.php">
+            <a href="carrito.php">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
               <span><?php echo $totalItemsCarrito; ?></span>
             </a>
@@ -158,7 +158,7 @@
         <h1>Tu Carrito de Compras</h1>
         
         <?php if (empty($_SESSION['carrito'])): ?>
-          <p class="carrito-vacio">Tu carrito está vacío. <a href="index.php">¡Empieza a comprar!</a></p>
+          <p class="carrito-vacio">Tu carrito está vacío. <a href="../index.php">¡Empieza a comprar!</a></p>
         <?php else: ?>
           
           <table class="carrito-tabla">
@@ -195,7 +195,7 @@
                   
                   <!-- Celda Cantidad (Spin Box) -->
                   <td class="cantidad-celda">
-                    <form action="php/carrito_update.php" method="POST" class="form-cantidad">
+                    <form action="carrito_update.php" method="POST" class="form-cantidad">
                       <input type="hidden" name="prod_id" value="<?php echo $prod_id; ?>">
                       
                       <!-- ======================================================= -->
@@ -214,7 +214,7 @@
                   
                   <!-- Celda Eliminar (Botón) -->
                   <td class="eliminar-celda">
-                    <form action="php/carrito_remove.php" method="POST">
+                    <form action="carrito_remove.php" method="POST">
                       <input type="hidden" name="prod_id" value="<?php echo $prod_id; ?>">
                       <button type="submit" class="btn-remove" title="Eliminar producto">
                         <!-- Icono de "X" o "Basura" -->
