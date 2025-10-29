@@ -52,6 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prod_id'])) {
 }
 
 // 7. Redirigir a la página del CARRITO para que el usuario vea el producto añadido
-header('Location: ../comprar.php');
+header('Location: ../carrito.php');
 exit();
 ?>
