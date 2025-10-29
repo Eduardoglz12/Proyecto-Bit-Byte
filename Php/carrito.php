@@ -12,7 +12,7 @@
     $textoSesion1 = $_SESSION['usr_user'];
     $linkSesion1 = "#";
     $textoSesion2 = "Cerrar sesion";
-    $linkSesion2 = "php/cerrarSesion.php";
+    $linkSesion2 = "cerrarSesion.php";
   }
 
   // --- Lógica del Carrito (para el contador) ---
