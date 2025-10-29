@@ -1,0 +1,11 @@
+INICIO DE DEPURACIÓN DE PEDIDO - 2025-10-29 05:42:42
+
+1. Order ID recibido de la URL: 7R325305Y8354593D
+
+2. Token de acceso obtenido con éxito.
+
+3. Respuesta de PayPal (Detalles de la Orden):
+{"id":"7R325305Y8354593D","intent":"CAPTURE","status":"COMPLETED","payment_source":{"paypal":{"email_address":"sb-y2ts247258516@personal.example.com","account_id":"M55A2GG2JZUWN","account_status":"VERIFIED","name":{"given_name":"Eduardo","surname":"Gonzalez"},"address":{"country_code":"US"}}},"purchase_units":[{"reference_id":"default","amount":{"currency_code":"MXN","value":"45197.00","breakdown":{}},"payee":{"email_address":"sb-ybfxs47266929@business.example.com","merchant_id":"6JPV4CWE6Q932"},"shipping":{"name":{"full_name":"Eduardo Gonzalez"},"address":{"address_line_1":"1 Main St","admin_area_2":"San Jose","admin_area_1":"CA","postal_code":"95131","country_code":"US"}},"payments":{"captures":[{"id":"51V44198EV0903105","status":"COMPLETED","amount":{"currency_code":"MXN","value":"45197.00"},"final_capture":true,"seller_protection":{"status":"ELIGIBLE","dispute_categories":["ITEM_NOT_RECEIVED","UNAUTHORIZED_TRANSACTION"]},"seller_receivable_breakdown":{"gross_amount":{"currency_code":"MXN","value":"45197.00"},"paypal_fee":{"currency_code":"MXN","value":"1586.38"},"net_amount":{"currency_code":"MXN","value":"43610.62"},"receivable_amount":{"currency_code":"USD","value":"2304.12"},"exchange_rate":{"source_currency":"MXN","target_currency":"USD","value":"0.052833933608271"}},"links":[{"href":"https://api.sandbox.paypal.com/v2/payments/captures/51V44198EV0903105","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v2/payments/captures/51V44198EV0903105/refund","rel":"refund","method":"POST"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/7R325305Y8354593D","rel":"up","method":"GET"}],"create_time":"2025-10-29T04:42:42Z","update_time":"2025-10-29T04:42:42Z"}]}}],"payer":{"name":{"given_name":"Eduardo","surname":"Gonzalez"},"email_address":"sb-y2ts247258516@personal.example.com","payer_id":"M55A2GG2JZUWN","address":{"country_code":"US"}},"create_time":"2025-10-29T04:42:42Z","update_time":"2025-10-29T04:42:42Z","links":[{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/7R325305Y8354593D","rel":"self","method":"GET"}]}
+
+4. Pago COMPLETADO. Procediendo a guardar en BDD.
+5. ÉXITO: Pedido guardado correctamente.

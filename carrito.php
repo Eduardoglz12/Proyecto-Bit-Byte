@@ -233,7 +233,7 @@
           </table>
 
           <div class="checkout-seccion">
-            <form action="#"> <!-- Este formulario no hará nada por ahora -->
+            <form action="comprar.php"> <!-- Este formulario no hará nada por ahora -->
               <button type="submit" class="btn-checkout">Continuar con el pago</button>
             </form>
           </div>
