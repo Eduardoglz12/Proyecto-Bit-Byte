@@ -1,25 +1,23 @@
 <?php
     session_start();
-
-    // Variables base de datos 
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "bitandbyte";
-    $dbport = "3306";
+    // 1. Usamos la conexión centralizada
+    require_once __DIR__ . '/../db_conexion.php';
 
     $prod_name = $_POST['prod_name'];
+    $prod_imagen_url = $_POST['prod_imagen_url']; // Campo de imagen añadido
     $prod_stock = $_POST['prod_stock'];
     $prod_price = $_POST['prod_price'];
 
-    if(!empty($prod_name) && !empty($prod_stock) && !empty($prod_price)){
-        $conexion = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport);
+    if(!empty($prod_name) && !empty($prod_imagen_url) && !empty($prod_stock) && !empty($prod_price)){
+        
+        // 2. La variable $conexion ya viene de db_conexion.php
 
-        $sql = "INSERT INTO products(prod_name, prod_stock, prod_price)" .
-            "VALUES (?, ?, ?)";
+        $sql = "INSERT INTO products(prod_name, prod_imagen_url, prod_stock, prod_price)" .
+               "VALUES (?, ?, ?, ?)"; // Añadimos prod_imagen_url
 
         $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("sid", $prod_name, $prod_stock, $prod_price);
+        // s = string (name), s = string (imagen), i = int (stock), d = double (price)
+        $stmt->bind_param("sssd", $prod_name, $prod_imagen_url, $prod_stock, $prod_price);
 
         try{
             if($stmt->execute()){
@@ -32,7 +30,14 @@
         catch(mysqli_sql_exception $e){
                 $_SESSION['resultado'] = "Error: " . $e->getMessage();
         }
+
+        $stmt->close();
+        $conexion->close();
+    } else {
+        $_SESSION['resultado'] = "Error: Todos los campos son obligatorios.";
     }
 
     header('Location: inventario.php');
+    exit();
 ?>
+

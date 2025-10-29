@@ -1,28 +1,21 @@
 <?php
     session_start();
-
-    // Variables base de datos 
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "bitandbyte";
-    $dbport = "3306";
+    // 1. Usamos la conexión centralizada
+    require_once __DIR__ . '/../db_conexion.php';
 
     // Variables de formulario
     $usr_user = $_POST['usr_user'];
     $usr_password = $_POST['usr_password'];
 
     if(!empty($usr_user) && !empty($usr_password)){
-        // Creamos la conexion
-        $conexion = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport);
+        
+        // 2. La variable $conexion ya viene de db_conexion.php
 
         // Hasheamos la contraseña
         $hashed_password = password_hash($usr_password, PASSWORD_DEFAULT);
 
-        // Usamos sentencias preparadas para evitar inyeccion sql
         $sql = "INSERT INTO users (usr_user, usr_password) VALUES (?, ?)";
         $stmt = $conexion->prepare($sql);
-        // Vincular parametros. 's' - string
         $stmt->bind_param("ss", $usr_user, $hashed_password);
 
         try{
@@ -34,6 +27,7 @@
             }
         }
         catch(mysqli_sql_exception $e){
+            // Error 1062 es para "Entrada duplicada" (username ya existe)
             if($e->getCode() === 1062){
                 $_SESSION['resultado'] = "Nombre de usuario no disponible";
             }
@@ -44,7 +38,11 @@
 
         $stmt->close();
         $conexion->close();
+    } else {
+        $_SESSION['resultado'] = "Usuario y contraseña no pueden estar vacíos.";
     }
 
     header('Location: registro.php');
+    exit();
 ?>
+

@@ -1,22 +1,18 @@
 <?php
     session_start();
+    // 1. Usamos la conexión centralizada
+    require_once __DIR__ . '/../db_conexion.php';
 
-    // Variables base de datos 
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "bitandbyte";
-    $dbport = "3306";
-
-        // Variables de formulario
+    // Variables de formulario
     $usr_user = $_POST['usr_user'];
     $usr_password = $_POST['usr_password'];
 
     if(!empty($usr_user) && !empty($usr_password)){
-        $conexion = new mysqli($dbhost, $dbuser, $dbpass, $dbname, $dbport);
+        
+        // 2. La variable $conexion ya viene de db_conexion.php
 
         $sql = "SELECT usr_id, usr_password FROM users " .
-            "WHERE usr_user = ?";
+               "WHERE usr_user = ?";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("s", $usr_user);
         $stmt->execute();
@@ -33,11 +29,13 @@
                 $_SESSION['usr_id'] = $usr_id;
                 $_SESSION['usr_user'] = $usr_user;
 
+                // Redirigir al admin al inventario
                 if($usr_user == "admin"){
                     header('Location: inventario.php');
                     exit();
                 }
 
+                // Redirigir a otros usuarios al index
                 header('Location: ../index.php');
                 exit();
             }
@@ -50,7 +48,12 @@
         }
         $stmt->close();
         $conexion->close();
+    } else {
+        $_SESSION['mensajeError'] = "Usuario y contraseña requeridos.";
     }
 
+    // Si algo falla, regresa a la página de login
     header('Location: inicioSesion.php');
+    exit();
 ?>
+
