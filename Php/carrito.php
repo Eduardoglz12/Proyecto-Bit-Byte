@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require_once __DIR__ . '/../db_conexion.php'; // Incluimos la conexión
+  require 'db_conexion.php'; // Incluimos la conexión
 
   // --- Lógica de Sesión (igual que en index.php) ---
   $textoSesion1 = "Iniciar sesion";
@@ -70,6 +70,7 @@
 
 <body>
   <header>
+    <!-- ... (El header no cambia) ... -->
     <div class="barra-negra">
       <div class="ba-contenedor">
         <ul>
@@ -182,7 +183,7 @@
               ?>
                 <tr>
                   <!-- Celda Producto (Imagen + Nombre) -->
-                  <td class="producto-celda">
+                  <td class_name="producto-celda">
                     <img src="<?php echo htmlspecialchars($producto['prod_imagen_url']); ?>" 
                          alt="<?php echo htmlspecialchars($producto['prod_name']); ?>" class="carrito-img"
                          onerror="this.src='https://placehold.co/100x100/333333/f5f5f5?text=Img'; this.onerror=null;">
@@ -196,8 +197,14 @@
                   <td class="cantidad-celda">
                     <form action="php/carrito_update.php" method="POST" class="form-cantidad">
                       <input type="hidden" name="prod_id" value="<?php echo $prod_id; ?>">
+                      
+                      <!-- ======================================================= -->
+                      <!-- CAMBIO AQUÍ: Se añadió el evento onchange="this.form.submit()" -->
+                      <!-- ======================================================= -->
                       <input type="number" name="cantidad" value="<?php echo $cantidad; ?>" 
-                             min="1" max="<?php echo $producto['prod_stock']; ?>" class="spin-box">
+                             min="1" max="<?php echo $producto['prod_stock']; ?>" class="spin-box"
+                             onchange="this.form.submit()">
+                      
                       <button type="submit" class="btn-update">Actualizar</button>
                     </form>
                   </td>
@@ -223,7 +230,7 @@
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="3" class="carrito-total-label">Gran Total:</td>
+                <td colspan="3" class="carrito-total-label">Total:</td>
                 <td colspan="2" class="carrito-total-monto">$<?php echo number_format($gran_total, 2); ?></td>
               </tr>
             </tfoot>
@@ -246,3 +253,4 @@
   </footer>
 </body>
 </html>
+
