@@ -30,7 +30,7 @@
         <label for="usr_user">Usuario:</label>
         <input type="text" name="usr_user" id="usr_user">
         <label for="usr_password">Contraseña:</label>
-        <input type="text" name="usr_password" id="usr_password">
+        <input type="password" name="usr_password" id="usr_password">
         <button type="submit">Registrarme</button>
       </form>
     </div>
