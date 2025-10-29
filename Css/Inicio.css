@@ -749,4 +749,128 @@ footer {
  font-weight: bold;
 }
 
+/* --- ESTILOS PARA LA PÁGINA DE DETALLES (producto.php) --- */
+
+/* Contenedor principal que usa Grid para el layout */
+.detalle-producto-container {
+  grid-column: 1 / -1; /* Ocupa todo el ancho del contenedor principal */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+  gap: 3rem;
+  background-color: var(--gris-oscuro);
+  padding: 3rem;
+  border-radius: 0.8rem;
+}
+
+/* Columna izquierda con la imagen principal del producto */
+.detalle-imagen-principal {
+  grid-column: 1 / 2;
+}
+
+.detalle-imagen-principal img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain; /* Asegura que la imagen se vea completa */
+  border-radius: 0.5rem;
+}
+
+/* Columna derecha con la información y el botón de compra */
+.detalle-info-compra {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.detalle-info-compra h1 {
+  font-size: 3.2rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.detalle-precio {
+  font-size: 3.6rem;
+  font-weight: bold;
+  color: var(--azul-claro);
+  margin-bottom: 2rem;
+}
+
+/* Formulario para añadir al carrito en la página de detalles */
+.form-detalle-carrito {
+  background-color: var(--gris);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.control-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.control-cantidad label {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+/* El .btn-agregar-carrito ya tiene estilos, pero podemos ajustar el ancho */
+.form-detalle-carrito .btn-agregar-carrito {
+  width: 100%;
+  border-radius: 0.5rem; /* Bordes redondeados completos */
+  padding: 1.2rem;
+}
+
+.detalle-stock {
+  font-size: 1.4rem;
+  color: var(--blanco);
+  margin-top: auto; /* Empuja este elemento al final de la columna */
+  padding-top: 1.5rem;
+}
+
+/* Sección de la imagen de especificaciones (ocupa todo el ancho) */
+.detalle-especificaciones {
+  grid-column: 1 / -1; /* Ocupa ambas columnas */
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--gris);
+}
+
+.detalle-especificaciones h2 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.detalle-especificaciones img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* Estilos para cuando el producto no se encuentra */
+.producto-no-encontrado {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.producto-no-encontrado h1 {
+  font-size: 3rem;
+  color: var(--rojo-error);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsividad para la página de detalles */
+@media (max-width: 768px) {
+  .detalle-producto-container {
+    grid-template-columns: 1fr; /* Una sola columna en móvil */
+  }
+
+  .detalle-info-compra {
+    /* En móvil, la info va después de la imagen */
+    grid-row: 2 / 3;
+  }
+}
+
 

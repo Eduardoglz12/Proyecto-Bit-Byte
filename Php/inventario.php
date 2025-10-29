@@ -1,6 +1,5 @@
 <?php
     session_start();
-    // 1. Usamos la conexión centralizada
     require_once __DIR__ . '/../db_conexion.php';
 
     $resultado = "";
@@ -19,7 +18,7 @@
     $resultado_select = $stmt_select->get_result();
 
     // Consulta para la tabla de inventario
-    $sql_tabla = "SELECT prod_name, prod_imagen_url, prod_stock, prod_price FROM products";
+    $sql_tabla = "SELECT prod_name, prod_imagen_url, prod_spec_url, prod_stock, prod_price FROM products";
     $stmt_tabla = $conexion->prepare($sql_tabla);
     $stmt_tabla->execute();
     $resultado_tabla = $stmt_tabla->get_result();
@@ -43,77 +42,68 @@
         
         <table>
             <caption>Producto nuevo</caption>
-            <tr>
-                <th>Producto</th>
-                <th>URL Imagen (ej: img/art1.webp)</th> <!-- Campo añadido -->
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Acción</th>
-            </tr>
-            <tr>
-                <form action="insertar.php" method="post">
-                    <td><input type="text" name="prod_name" required></td>
-                    <td><input type="text" name="prod_imagen_url" required></td> <!-- Campo añadido -->
-                    <td><input type="number" name="prod_stock" required></td>
-                    <td><input type="text" name="prod_price" required></td>
-                    <td><button type="submit">Ingresar</button></td>
-                </form>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>URL Imagen (Tarjeta)</th>
+                    <th>URL Especificaciones (Grande)</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="insertar.php" method="post">
+                        <td><input type="text" name="prod_name" required></td>
+                        <td><input type="text" name="prod_imagen_url" placeholder="ej: img/art1.webp" required></td>
+                        <td><input type="text" name="prod_spec_url" placeholder="ej: img/specs/art1_specs.webp" required></td>
+                        <td><input type="number" name="prod_stock" required></td>
+                        <td><input type="text" name="prod_price" placeholder="ej: 2199.00" required></td>
+                        <td><button type="submit">Ingresar</button></td>
+                    </form>
+                </tr>
+            </tbody>
         </table>
 
         <table>
             <caption>Editar producto</caption>
-            <tr>
-                <form action="editar.php" method="GET"> <!-- Asumiendo que crearás un editar.php -->
-                    <td colspan="3">
-                        <select name="prod_id" id="">
-                            <option value="">-- Seleccione un producto --</option>
-                            <?php if($resultado_select->num_rows > 0): ?>
-                                <?php while($fila = $resultado_select->fetch_assoc()):?>
-                                    <option value="<?php echo $fila['prod_id']; ?>">
-                                        <?php echo htmlspecialchars($fila['prod_name']); ?>
-                                    </option>
-                                <?php endwhile; ?>
-                            <?php endif; ?>
-                        </select>
-                    </td>
-                    <td>
-                        <button type="submit">Elegir</button>
-                    </td>
-                </form>
-            </tr>
-            <!-- Aquí iría el formulario de edición, que se llenaría con PHP -->
-        </table>
+            </table>
 
         <table>
             <caption>Inventario Actual</caption>
-            <tr>
-                <th>Producto</th>
-                <th>Imagen (URL)</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-            </tr>
-            <?php if ($resultado_tabla->num_rows > 0): ?>
-                <?php while($fila = $resultado_tabla->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($fila['prod_name']); ?></td>
-                        <td><?php echo htmlspecialchars($fila['prod_imagen_url']); ?></td>
-                        <td><?php echo htmlspecialchars($fila['prod_stock']); ?></td>
-                        <td>$<?php echo number_format($fila['prod_price'], 2); ?></td>
-                    </tr>
-                <?php endwhile; ?>
-            <?php else: ?>
+            <thead>
                 <tr>
-                    <td colspan="4">No hay productos en el inventario.</td>
+                    <th>Producto</th>
+                    <th>URL Imagen</th>
+                    <th>URL Specs</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
                 </tr>
-            <?php endif; ?>
-            <?php
-                $stmt_select->close();
-                $stmt_tabla->close();
-                $conexion->close();
-            ?>
+            </thead>
+            <tbody>
+                <?php if ($resultado_tabla->num_rows > 0): ?>
+                    <?php while($fila = $resultado_tabla->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($fila['prod_name']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['prod_imagen_url']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['prod_spec_url']); ?></td>
+                            <td><?php echo htmlspecialchars($fila['prod_stock']); ?></td>
+                            <td>$<?php echo number_format($fila['prod_price'], 2); ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="5">No hay productos en el inventario.</td>
+                    </tr>
+                <?php endif; ?>
+                <?php
+                    $stmt_select->close();
+                    $stmt_tabla->close();
+                    $conexion->close();
+                ?>
+            </tbody>
         </table>
     </div>
 </body>
 </html>
-
