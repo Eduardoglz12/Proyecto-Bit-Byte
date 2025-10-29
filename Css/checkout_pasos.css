@@ -31,7 +31,6 @@ body {
     background: var(--gris-oscuro); /* Un fondo ligeramente más claro que el body */
     padding: 2.5rem 3rem;
     border-radius: 0.8rem;
-    border: 1px solid var(--gris);
     width: 100%;
     max-width: 700px;
 }
