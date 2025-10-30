@@ -13,8 +13,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../CSS/login.css">
-    <link rel="preload" href="../CSS/login.css" as="style">
+    <link rel="preload" href="../CSS/login.css" as="style">    
     <title>Iniciar sesion</title>
 </head>
 

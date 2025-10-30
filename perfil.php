@@ -52,6 +52,7 @@ $historial_pedidos = $stmt_orders->get_result();
 <head>
     <meta charset="UTF-8">
     <title>Mi Perfil - Bit&Byte</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="CSS/normalize.css">
     <link rel="stylesheet" href="CSS/Inicio.css">
     <link rel="stylesheet" href="CSS/perfil.css"> 

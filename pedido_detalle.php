@@ -49,7 +49,9 @@ $gran_total = 0;
     <title>Detalle del Pedido #<?= $pedido['ord_id'] ?> - Bit&Byte</title>
     <link rel="stylesheet" href="CSS/normalize.css">
     <link rel="stylesheet" href="CSS/Inicio.css">
-    <link rel="stylesheet" href="CSS/perfil.css"> </head>
+    <link rel="stylesheet" href="CSS/perfil.css"> 
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+</head>
 <body>
     <?php // include 'includes/header.php'; ?>
 
