@@ -1,17 +1,17 @@
 :root {
-    --negro: #111111;
-    --gris: #333333;
-    --gris-oscuro: #222222;
-    --azul-bajo: #42A5F5;
-    --blanco: #f5f5f5;
-    --barraPrincipal: #b6b6b6;
+    --negro: #1a1a1a;
+    --gris-oscuro: #2a2a2a;
+    --gris: #4a4a4a;
+    --blanco: #ffffff;
+    --azul-claro: #93c5fd;
+    --azul-bajo: #3b82f6;
+    --rojo-error: #ef4444;
 }
 
-* {
-    color: var(--negro);
-    font-family: sans-serif;
-    padding: 0;
-    margin: 0;
+/* Base */
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
 }
 
 *,
@@ -20,77 +20,96 @@
     box-sizing: inherit;
 }
 
-html {
-    font-size: 62.5%;
-    box-sizing: border-box;
-    background-color: var(--gris);
-}
-
-.cont-principal {
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.8;
+    background-color: var(--negro);
+    color: var(--blanco);
+    margin: 0;
+    /* Centra el contenedor principal */
     display: flex;
-    height: 100vh;
-    justify-content:flex-start;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
+    min-height: 100vh;
 }
 
+/* Contenedor del Login */
 .cont-login {
-    padding: 2rem;
-    background-color: var(--barraPrincipal);
-    border-radius: 2rem;
-    font-size: 3rem;
-    width: 45rem;
-    margin: auto;
+    background-color: var(--gris-oscuro);
+    border: 1px solid var(--gris);
+    padding: 3rem;
+    border-radius: 0.8rem;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
 }
 
+.cont-login h1 {
+    color: var(--azul-claro);
+    margin-bottom: 2.5rem;
+    font-size: 2.8rem;
+}
+
+/* Formulario */
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 100%;
 }
 
-label {
-    margin: 0 2rem;
-    align-self: start;
+form label {
+    text-align: left;
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
 }
 
-input {
-    width: 37rem;
+form input {
+    width: 100%;
+    padding: 1.2rem;
+    background-color: var(--negro);
+    color: var(--blanco);
+    border: 1px solid var(--gris);
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem; /* Margen reducido */
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input,
-button {
-    color: var(--negro);
-    background-color: var(--azul-bajo);
-    font-size: 2rem;
-    border-radius: 1rem;
-    padding: 1rem;
-    border: none;
-    margin: 1rem 0 4rem;
-}
-
-button {
-    padding: 1.5rem;
-    font-size: 2.5rem;
-}
-
-button:hover {
-    background-color: var(--blanco);
-}
-
-input:focus {
+form input:focus {
     outline: none;
+    border-color: var(--azul-bajo);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-p {
-    margin: 1rem 0 4rem;
+form button {
+    width: 100%; /* Botón al 100% del ancho */
+    padding: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--blanco);
+    background-color: var(--azul-bajo);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 1rem; /* Espacio antes del botón */
+    transition: background-color 0.3s ease;
 }
 
+form button:hover {
+    background-color: var(--azul);
+}
+
+/* CORRECCIÓN DEL MENSAJE DE ERROR */
 .mensajeError, .resultado {
+    background-color: #3e1919;
+    color: #fecaca;
+    border: 1px solid var(--rojo-error);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    width: 100%; /* Ocupa el 100% del contenedor, no de la pantalla */
     text-align: center;
-    font-size: 2rem;
-    margin: 0 0 2rem;
-    padding: 0.5rem;
-    width: 100vw;
-    background-color: red;
 }
