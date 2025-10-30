@@ -83,3 +83,9 @@ INSERT INTO `products` (`prod_name`, `prod_imagen_url`, `prod_spec_url`, `prod_s
 ('Monitor Gamer Curvo 27" 165Hz', 'img/art3.webp', 'img/specs/art3_specs.webp', 30, 4999.00),
 ('Kit de Memoria RAM DDR5 32GB (2x16GB)', 'img/art4.webp', 'img/specs/art4_specs.webp', 50, 2199.00),
 ('SSD NVMe 2TB Gen4', 'img/art5.webp', 'img/specs/art5_specs.webp', 40, 2850.75);
+
+ALTER TABLE `orders`
+ADD COLUMN `ord_customer_name` VARCHAR(255) NOT NULL AFTER `usr_id`,
+ADD COLUMN `ord_customer_email` VARCHAR(255) NOT NULL AFTER `ord_customer_name`,
+ADD COLUMN `ord_shipping_address` TEXT NOT NULL AFTER `ord_customer_email`;
+ADD COLUMN `ord_customer_phone` VARCHAR(20) NOT NULL AFTER `ord_customer_email`;
