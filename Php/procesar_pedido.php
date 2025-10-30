@@ -72,71 +72,55 @@ file_put_contents($log_file, "4. Pago COMPLETADO. Procediendo a guardar en BDD.\
 // --- 4. GUARDAR PEDIDO EN BASE DE DATOS ---
 $conexion->begin_transaction();
 try {
-
-    if (isset($_SESSION['usr_id']) && isset($_SESSION['datos_cliente'])) {
-        $datos_cliente = $_SESSION['datos_cliente'];
+    // Obtenemos los datos del cliente y del carrito de la sesión
+    $datos_cliente = $_SESSION['datos_cliente'];
+    $carrito = $_SESSION['carrito'];
+    
+    // Si el usuario ESTÁ logueado, actualizamos su perfil con los datos de la compra
+    if (isset($_SESSION['usr_id'])) {
         $usr_id = $_SESSION['usr_id'];
-
         $sql_update_user = "UPDATE users SET 
-                                usr_nombre_completo = ?,
-                                usr_email = ?,
-                                usr_telefono = ?,
-                                usr_calle = ?,
-                                usr_colonia = ?,
-                                usr_ciudad = ?,
-                                usr_estado = ?,
-                                usr_cp = ?
+                                usr_nombre_completo = ?, usr_email = ?, usr_telefono = ?, 
+                                usr_calle = ?, usr_colonia = ?, usr_ciudad = ?, 
+                                usr_estado = ?, usr_cp = ?
                             WHERE usr_id = ?";
-        
         $stmt_update = $conexion->prepare($sql_update_user);
         $stmt_update->bind_param("ssssssssi", 
-            $datos_cliente['nombre'],
-            $datos_cliente['email'],
-            $datos_cliente['telefono'],
-            $datos_cliente['calle'],
-            $datos_cliente['colonia'],
-            $datos_cliente['ciudad'],
-            $datos_cliente['estado'],
-            $datos_cliente['cp'],
-            $usr_id
+            $datos_cliente['nombre'], $datos_cliente['email'], $datos_cliente['telefono'],
+            $datos_cliente['calle'], $datos_cliente['colonia'], $datos_cliente['ciudad'],
+            $datos_cliente['estado'], $datos_cliente['cp'], $usr_id
         );
         $stmt_update->execute();
         $stmt_update->close();
     }
+    
+    // --- LÓGICA MEJORADA PARA INSERTAR LA ORDEN ---
+    
+    // 1. Preparamos la dirección completa para guardarla
+    $direccion_completa = $datos_cliente['calle'] . ", " . $datos_cliente['colonia'] . ", " . 
+                          $datos_cliente['ciudad'] . ", " . $datos_cliente['estado'] . ", C.P. " . $datos_cliente['cp'];
 
-    $carrito = $_SESSION['carrito'];
-    $usr_id  = $_SESSION['usr_id'] ?? null;
+    // 2. Preparamos la consulta para insertar la orden
+    $sql_order = "INSERT INTO orders (ord_date, os_id, usr_id, ord_customer_name, ord_customer_email, ord_shipping_address) 
+                  VALUES (NOW(), ?, ?, ?, ?, ?)";
+    
+    $stmt_order = $conexion->prepare($sql_order);
 
-    $product_ids = array_keys($carrito);
-    $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
+    // Si el usuario está logueado, usamos su ID. Si no, usamos NULL.
+    $usr_id_orden = $_SESSION['usr_id'] ?? null;
+    $os_id = 1; // Suponiendo que 1 es 'Completado'
 
-    // 4a. Verificar stock
-    $stmt_stock = $conexion->prepare("SELECT prod_id, prod_stock FROM products WHERE prod_id IN ($placeholders) FOR UPDATE");
-    $stmt_stock->bind_param(str_repeat('i', count($product_ids)), ...$product_ids);
-    $stmt_stock->execute();
-    $res_stock = $stmt_stock->get_result();
-
-    $productos_db = [];
-    $stock_suficiente = true;
-    while ($fila = $res_stock->fetch_assoc()) {
-        $productos_db[$fila['prod_id']] = $fila;
-    }
-
-    foreach ($carrito as $prod_id => $cantidad) {
-        if (!isset($productos_db[$prod_id]) || $productos_db[$prod_id]['prod_stock'] < $cantidad) {
-            $stock_suficiente = false;
-            break;
-        }
-    }
-
-    if (!$stock_suficiente) throw new Exception("Stock insuficiente.");
-
-    // 4b. Insertar orden
-    $os_id = 1;
-    $stmt_order = $conexion->prepare("INSERT INTO orders (ord_date, os_id, usr_id) VALUES (NOW(), ?, ?)");
-    $stmt_order->bind_param("ii", $os_id, $usr_id);
+    // 3. Vinculamos los parámetros y ejecutamos
+    $stmt_order->bind_param("iisss", 
+        $os_id, 
+        $usr_id_orden, 
+        $datos_cliente['nombre'], 
+        $datos_cliente['email'], 
+        $direccion_completa
+    );
     $stmt_order->execute();
     $new_ord_id = $conexion->insert_id;
+    $stmt_order->close();
 
     // 4c. Insertar detalles y actualizar stock
     $stmt_details = $conexion->prepare("INSERT INTO order_details (od_amount, prod_id, ord_id) VALUES (?, ?, ?)");
