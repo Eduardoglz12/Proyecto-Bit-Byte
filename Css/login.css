@@ -1,3 +1,9 @@
+/* ===============================================
+   ESTILOS PARA LA PÁGINA DE LOGIN
+   (Consistente con el tema de Bit&Byte)
+   =============================================== */
+
+/* --- Variables (Copiadas de tu CSS principal para referencia) --- */
 :root {
     --negro: #1a1a1a;
     --gris-oscuro: #2a2a2a;
@@ -5,10 +11,11 @@
     --blanco: #ffffff;
     --azul-claro: #93c5fd;
     --azul-bajo: #3b82f6;
+    --azul: #1d4ed8;
     --rojo-error: #ef4444;
 }
 
-/* Base */
+/* --- Base (Heredado de tu tema) --- */
 html {
     font-size: 62.5%;
     box-sizing: border-box;
@@ -27,18 +34,18 @@ body {
     background-color: var(--negro);
     color: var(--blanco);
     margin: 0;
-    /* Centra el contenedor principal */
+    /* Centra el contenedor del login en la pantalla */
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
 }
 
-/* Contenedor del Login */
+/* --- Contenedor Principal del Login --- */
 .cont-login {
     background-color: var(--gris-oscuro);
     border: 1px solid var(--gris);
-    padding: 3rem;
+    padding: 3rem 4rem;
     border-radius: 0.8rem;
     width: 100%;
     max-width: 450px;
@@ -46,12 +53,13 @@ body {
 }
 
 .cont-login h1 {
+    font-family: 'Montserrat', sans-serif;
     color: var(--azul-claro);
     margin-bottom: 2.5rem;
     font-size: 2.8rem;
 }
 
-/* Formulario */
+/* --- Formulario --- */
 form {
     display: flex;
     flex-direction: column;
@@ -62,6 +70,7 @@ form label {
     text-align: left;
     margin-bottom: 0.8rem;
     font-size: 1.4rem;
+    font-weight: 500;
 }
 
 form input {
@@ -72,7 +81,7 @@ form input {
     border: 1px solid var(--gris);
     border-radius: 0.5rem;
     font-size: 1.6rem;
-    margin-bottom: 2rem; /* Margen reducido */
+    margin-bottom: 2rem;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -83,7 +92,7 @@ form input:focus {
 }
 
 form button {
-    width: 100%; /* Botón al 100% del ancho */
+    width: 100%;
     padding: 1.2rem;
     font-size: 1.6rem;
     font-weight: bold;
@@ -93,7 +102,8 @@ form button {
     border-radius: 0.5rem;
     cursor: pointer;
     text-transform: uppercase;
-    margin-top: 1rem; /* Espacio antes del botón */
+    letter-spacing: 1px;
+    margin-top: 1rem;
     transition: background-color 0.3s ease;
 }
 
@@ -101,15 +111,15 @@ form button:hover {
     background-color: var(--azul);
 }
 
-/* CORRECCIÓN DEL MENSAJE DE ERROR */
+/* --- Mensaje de Error (Estilo Consistente) --- */
 .mensajeError, .resultado {
-    background-color: #3e1919;
-    color: #fecaca;
+    background-color: #3e1919; /* Rojo oscuro de fondo */
+    color: #fecaca;           /* Texto rojo claro */
     border: 1px solid var(--rojo-error);
     padding: 1.5rem;
     border-radius: 0.5rem;
     margin-bottom: 2rem;
     font-size: 1.5rem;
-    width: 100%; /* Ocupa el 100% del contenedor, no de la pantalla */
+    width: 100%;
     text-align: center;
 }
