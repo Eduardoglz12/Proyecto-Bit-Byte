@@ -72,6 +72,38 @@ file_put_contents($log_file, "4. Pago COMPLETADO. Procediendo a guardar en BDD.\
 // --- 4. GUARDAR PEDIDO EN BASE DE DATOS ---
 $conexion->begin_transaction();
 try {
+
+    if (isset($_SESSION['usr_id']) && isset($_SESSION['datos_cliente'])) {
+        $datos_cliente = $_SESSION['datos_cliente'];
+        $usr_id = $_SESSION['usr_id'];
+
+        $sql_update_user = "UPDATE users SET 
+                                usr_nombre_completo = ?,
+                                usr_email = ?,
+                                usr_telefono = ?,
+                                usr_calle = ?,
+                                usr_colonia = ?,
+                                usr_ciudad = ?,
+                                usr_estado = ?,
+                                usr_cp = ?
+                            WHERE usr_id = ?";
+        
+        $stmt_update = $conexion->prepare($sql_update_user);
+        $stmt_update->bind_param("ssssssssi", 
+            $datos_cliente['nombre'],
+            $datos_cliente['email'],
+            $datos_cliente['telefono'],
+            $datos_cliente['calle'],
+            $datos_cliente['colonia'],
+            $datos_cliente['ciudad'],
+            $datos_cliente['estado'],
+            $datos_cliente['cp'],
+            $usr_id
+        );
+        $stmt_update->execute();
+        $stmt_update->close();
+    }
+
     $carrito = $_SESSION['carrito'];
     $usr_id  = $_SESSION['usr_id'] ?? null;
 
@@ -120,6 +152,7 @@ try {
 
     $conexion->commit();
     unset($_SESSION['carrito']);
+    unset($_SESSION['datos_cliente']);
     $_SESSION['last_order_id'] = $new_ord_id;
 
     file_put_contents($log_file, "5. ÉXITO: Pedido guardado correctamente.\n", FILE_APPEND);

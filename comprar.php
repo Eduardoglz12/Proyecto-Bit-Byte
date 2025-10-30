@@ -3,7 +3,6 @@
 session_start();
 require 'db_conexion.php';
 
-// Si el carrito está vacío, no hay nada que comprar, redirigir al inicio.
 if (empty($_SESSION['carrito'])) {
     header('Location: index.php');
     exit();
@@ -29,12 +28,24 @@ if (!empty($_SESSION['carrito'])) {
     $totalItemsCarrito = array_sum($_SESSION['carrito']);
 }
 
-// --- LÓGICA PARA EL FORMULARIO ---
-// Recupera cualquier mensaje de error y datos del formulario de la sesión.
+// --- NUEVO BLOQUE PARA CARGAR DATOS DEL USUARIO ---
+$datos_usuario = [];
+if (isset($_SESSION['usr_id'])) {
+    $usr_id = $_SESSION['usr_id'];
+    $sql = "SELECT usr_nombre_completo, usr_email, usr_telefono, usr_calle, usr_colonia, usr_ciudad, usr_estado, usr_cp FROM users WHERE usr_id = ?";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bind_param("i", $usr_id);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    if ($resultado->num_rows > 0) {
+        $datos_usuario = $resultado->fetch_assoc();
+    }
+    $stmt->close();
+}
+
+// Recuperar datos del formulario si hubo un error de validación
 $error_msg = $_SESSION['error_datos'] ?? null;
 $form_data = $_SESSION['form_data'] ?? [];
-
-// Limpia las variables de la sesión una vez que se han recuperado.
 unset($_SESSION['error_datos'], $_SESSION['form_data']);
 ?>
 
@@ -53,7 +64,7 @@ unset($_SESSION['error_datos'], $_SESSION['form_data']);
 </head>
 <body>
 
-    <header>
+  <header>
     <!-- ... (El header no cambia) ... -->
     <div class="barra-negra">
       <div class="ba-contenedor">
@@ -152,17 +163,17 @@ unset($_SESSION['error_datos'], $_SESSION['form_data']);
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="nombre">Nombre Completo</label>
-                                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($form_data['nombre'] ?? '') ?>" required>
+                                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($datos_usuario['usr_nombre_completo'] ?? $form_data['nombre'] ?? '') ?>" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" value="<?= htmlspecialchars($form_data['email'] ?? '') ?>" required>
+                                <input type="email" id="email" name="email" value="<?= htmlspecialchars($datos_usuario['usr_email'] ?? $form_data['email'] ?? '') ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Teléfono de Contacto</label>
-                                <input type="tel" id="telefono" name="telefono" value="<?= htmlspecialchars($form_data['telefono'] ?? '') ?>" required>
+                                <input type="tel" id="telefono" name="telefono" value="<?= htmlspecialchars($datos_usuario['usr_telefono'] ?? $form_data['telefono'] ?? '') ?>" required>
                             </div>
                         </div>
                     </fieldset>
@@ -172,27 +183,27 @@ unset($_SESSION['error_datos'], $_SESSION['form_data']);
                         <div class="form-row">
                             <div class="form-group full-width">
                                 <label for="calle">Calle y Número</label>
-                                <input type="text" id="calle" name="calle" value="<?= htmlspecialchars($form_data['calle'] ?? '') ?>" required>
+                                <input type="text" id="calle" name="calle" value="<?= htmlspecialchars($datos_usuario['usr_calle'] ?? $form_data['calle'] ?? '') ?>" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="colonia">Colonia</label>
-                                <input type="text" id="colonia" name="colonia" value="<?= htmlspecialchars($form_data['colonia'] ?? '') ?>" required>
+                                <input type="text" id="colonia" name="colonia" value="<?= htmlspecialchars($datos_usuario['usr_colonia'] ?? $form_data['colonia'] ?? '') ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="cp">Código Postal</label>
-                                <input type="text" id="cp" name="cp" value="<?= htmlspecialchars($form_data['cp'] ?? '') ?>" required>
+                                <input type="text" id="cp" name="cp" value="<?= htmlspecialchars($datos_usuario['usr_cp'] ?? $form_data['cp'] ?? '') ?>" required>
                             </div>
                         </div>
                          <div class="form-row">
                             <div class="form-group">
                                 <label for="ciudad">Ciudad</label>
-                                <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($form_data['ciudad'] ?? '') ?>" required>
+                                <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($datos_usuario['usr_ciudad'] ?? $form_data['ciudad'] ?? '') ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="estado">Estado</label>
-                                <input type="text" id="estado" name="estado" value="<?= htmlspecialchars($form_data['estado'] ?? '') ?>" required>
+                                <input type="text" id="estado" name="estado" value="<?= htmlspecialchars($datos_usuario['usr_estado'] ?? $form_data['estado'] ?? '') ?>" required>
                             </div>
                         </div>
                     </fieldset>
@@ -202,10 +213,5 @@ unset($_SESSION['error_datos'], $_SESSION['form_data']);
             </div>
         </main>
     </div>
-
-    <footer>
-        Derechos Reservados © Bit&Byte
-    </footer>
-    
-</body>
+    </body>
 </html>
