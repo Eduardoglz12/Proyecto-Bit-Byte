@@ -9,13 +9,14 @@
   $textoSesion2 = "Registrarme";
   $linkSesion2 = "php/registro.php";
 
-  if(isset($_SESSION['usr_user'])){
+    // --- LÓGICA PARA EL HEADER ---
+if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "#";
-    $textoSesion2 = "Cerrar sesion";
+    $linkSesion1 = "perfil.php"; // <--- CAMBIO IMPORTANTE
+    $textoSesion2 = "Cerrar sesión";
     $linkSesion2 = "php/cerrarSesion.php";
-  }
-
+    }
+    
   // --- Lógica del Carrito (para el contador) ---
   $totalItemsCarrito = 0;
   if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
