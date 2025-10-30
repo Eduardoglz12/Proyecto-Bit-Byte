@@ -1,83 +1,139 @@
+/* ===============================================
+   ESTILOS PARA LA PÁGINA DE INVENTARIO
+   =============================================== */
+
+/* --- Variables de Color (para consistencia) --- */
 :root {
-    --negro: #111111;
-    --gris-oscuro: #222222;
-    --gris: #333333;
-    --azul: #1976D2;
-    --azul-bajo: #42A5F5;
-    --blanco: #f5f5f5;
-    --barraPrincipal: #b6b6b6;
+    --negro: #1a1a1a;
+    --gris-oscuro: #2a2a2a;
+    --gris: #4a4a4a;
+    --blanco: #ffffff;
+    --azul-claro: #93c5fd;
+    --azul-bajo: #3b82f6;
+    --rojo-error: #ef4444;
+    --verde-exito: #22c55e;
 }
 
-* {
-    color: var(--negro);
-    font-family: sans-serif;
-    padding: 0;
-    margin: 0;
-}
-
-*, *:before, *:after{
-    box-sizing: inherit;
-}
-
-html {
-    font-size: 62.5%;
-    box-sizing: border-box;
-    background-color: var(--gris);
-}
-
+/* --- Estilos Generales --- */
 body {
-    font-size: 1.6rem;
+    background-color: var(--negro);
+    font-family: 'Poppins', sans-serif, system-ui;
+    color: var(--blanco);
+    margin: 0;
+    padding: 2rem;
 }
 
-table, th, td, caption{
-    border: 1px solid var(--negro);
-    border-collapse: collapse;
-    background-color: var(--barraPrincipal);
+.cont-principal {
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-th, td{
-    padding: 1rem;
-}
-
-caption{
-    padding: 0.5rem;
-}
-
-.cont-principal{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
-    flex-direction: column;
-}
-
-td {
-    text-align: center;
-}
-
-table{
-    margin: 5rem 0 0;
-}
-
-input:focus, select:focus{
-    outline: none;
-}
-
-button{
-    padding: 0.5rem 1rem;
-}
-
-.resultado {
-    text-align: center;
-    font-size: 2rem;
-    padding: 0.5rem;
-    width: 100vw;
-    background-color: red;
-}
-
-select {
-    background-color: var(--barraPrincipal);
-    font-size: 1.5rem;
-    padding: 0.5rem;
+/* --- Estilos de las Tablas --- */
+table {
     width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 4rem;
+    background-color: var(--gris-oscuro);
+    border-radius: 8px;
+    overflow: hidden; /* Para que el borde redondeado afecte a las celdas */
+    border: 1px solid var(--gris);
+}
+
+caption {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: var(--azul-claro);
+    text-align: left;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+th, td {
+    padding: 1.2rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--gris);
+    vertical-align: middle;
+}
+
+thead th {
+    background-color: var(--gris);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none; /* Elimina la última línea para un look más limpio */
+}
+
+tbody tr:hover {
+    background-color: #3a3a3a; /* Un gris ligeramente más claro */
+}
+
+/* --- Estilos para Formularios dentro de las tablas --- */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--negro);
+    color: var(--blanco);
+    border: 1px solid var(--gris);
+    border-radius: 5px;
+    font-size: 1.4rem;
+    font-family: inherit;
+    box-sizing: border-box; /* Asegura que el padding no desborde */
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--azul-bajo);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--blanco);
+    background-color: var(--azul-bajo);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--azul);
+}
+
+/* --- Estilo específico para el botón de Eliminar --- */
+.btn-eliminar {
+    background-color: var(--rojo-error);
+    display: flex; /* Para centrar ícono y texto si se añade */
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-eliminar:hover {
+    background-color: #c13434; /* Un rojo más oscuro */
+}
+
+/* --- Mensaje de Resultado (éxito/error) --- */
+.resultado {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--verde-exito); /* Color base de éxito */
+    color: var(--blanco);
+    border: 1px solid #1a9e49;
+}
+
+/* Opcional: si el mensaje contiene "Error", cambia el color a rojo */
+.resultado.error {
+    background-color: var(--rojo-error);
+    border-color: #b91c1c;
 }
