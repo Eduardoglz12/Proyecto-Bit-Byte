@@ -749,4 +749,275 @@ footer {
  font-weight: bold;
 }
 
+/* --- ESTILOS PARA LA PÁGINA DE DETALLES (producto.php) --- */
+
+/* Contenedor principal que usa Grid para el layout */
+.detalle-producto-container {
+  grid-column: 1 / -1; /* Ocupa todo el ancho del contenedor principal */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+  gap: 3rem;
+  background-color: var(--gris-oscuro);
+  padding: 3rem;
+  border-radius: 0.8rem;
+}
+
+/* Columna izquierda con la imagen principal del producto */
+.detalle-imagen-principal {
+  grid-column: 1 / 2;
+}
+
+.detalle-imagen-principal img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  object-fit: contain; /* Asegura que la imagen se vea completa */
+  border-radius: 0.5rem;
+}
+
+/* Columna derecha con la información y el botón de compra */
+.detalle-info-compra {
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.detalle-info-compra h1 {
+  font-size: 3.2rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.detalle-precio {
+  font-size: 3.6rem;
+  font-weight: bold;
+  color: var(--azul-claro);
+  margin-bottom: 2rem;
+}
+
+/* Formulario para añadir al carrito en la página de detalles */
+.form-detalle-carrito {
+  background-color: var(--gris);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.control-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.control-cantidad label {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+/* El .btn-agregar-carrito ya tiene estilos, pero podemos ajustar el ancho */
+.form-detalle-carrito .btn-agregar-carrito {
+  width: 100%;
+  border-radius: 0.5rem; /* Bordes redondeados completos */
+  padding: 1.2rem;
+}
+
+.detalle-stock {
+  font-size: 1.4rem;
+  color: var(--blanco);
+  margin-top: auto; /* Empuja este elemento al final de la columna */
+  padding-top: 1.5rem;
+}
+
+/* Sección de la imagen de especificaciones (ocupa todo el ancho) */
+.detalle-especificaciones {
+  grid-column: 1 / -1; /* Ocupa ambas columnas */
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--gris);
+}
+
+.detalle-especificaciones h2 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.detalle-especificaciones img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+/* Estilos para cuando el producto no se encuentra */
+.producto-no-encontrado {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 5rem 0;
+}
+
+.producto-no-encontrado h1 {
+  font-size: 3rem;
+  color: var(--rojo-error);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsividad para la página de detalles */
+@media (max-width: 768px) {
+  .detalle-producto-container {
+    grid-template-columns: 1fr; /* Una sola columna en móvil */
+  }
+
+  .detalle-info-compra {
+    /* En móvil, la info va después de la imagen */
+    grid-row: 2 / 3;
+  }
+}
+
+/* --- ESTILOS PARA LA PÁGINA DE CHECKOUT (comprar.php) --- */
+
+.checkout-container {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  background-color: var(--gris-oscuro);
+  padding: 3rem;
+  border-radius: 0.8rem;
+}
+
+/* Columna izquierda: Resumen del pedido */
+.resumen-pedido {
+  background-color: var(--negro);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--gris);
+}
+
+.resumen-pedido h2 {
+  font-size: 2.2rem;
+  color: var(--azul-claro);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gris);
+}
+
+.resumen-producto {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.resumen-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.resumen-info {
+  flex-grow: 1;
+}
+
+.resumen-nombre {
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.resumen-cantidad {
+  font-size: 1.2rem;
+  color: var(--gris);
+  margin: 0;
+}
+
+.resumen-subtotal {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.resumen-total {
+  border-top: 1px solid var(--gris);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.resumen-total .total-monto {
+  font-size: 2.4rem;
+  color: var(--azul-claro);
+}
+
+/* Columna derecha: Formulario de datos */
+.form-datos-cliente h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.form-datos-cliente .campo {
+  margin-bottom: 1.5rem;
+}
+
+.form-datos-cliente label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-datos-cliente input[type="text"],
+.form-datos-cliente input[type="email"],
+.form-datos-cliente input[type="tel"],
+.form-datos-cliente textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--gris);
+  background-color: var(--negro);
+  color: var(--blanco);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+}
+
+/* Opciones de pago */
+.opciones-pago {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  background-color: var(--negro);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.opciones-pago label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--gris);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.opciones-pago input[type="radio"] {
+  accent-color: var(--azul-bajo);
+}
+
+.btn-checkout.disabled {
+  background-color: var(--gris);
+  cursor: not-allowed;
+}
+
+/* Responsividad para la página de checkout */
+@media (max-width: 992px) {
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 

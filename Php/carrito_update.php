@@ -22,6 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prod_id']) && isset($
 }
 
 // Redirigir siempre de vuelta a la página del carrito
-header('Location: ../comprar.php');
+header('Location: ../carrito.php');
 exit();
 ?>
