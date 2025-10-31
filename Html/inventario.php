@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../db_conexion.php';
+require '../php/db_conexion.php';
 
 $resultado = $_SESSION['resultado'] ?? null;
 if ($resultado) {
@@ -61,7 +61,7 @@ $resultado_tabla = $stmt_tabla->get_result();
             </thead>
             <tbody>
                 <tr>
-                    <form action="insertar.php" method="post">
+                    <form action="../php/insertar.php" method="post">
                         <td><input type="text" name="prod_name" required></td>
                         <td><input type="text" name="prod_imagen_url" placeholder="ej: img/art1.webp" required></td>
                         <td><input type="text" name="prod_spec_url" placeholder="ej: img/specs/art1_specs.webp" required></td>
@@ -95,7 +95,7 @@ $resultado_tabla = $stmt_tabla->get_result();
 
                 <?php if ($producto_a_editar): ?>
                     <tr>
-                        <form action="actualizar.php" method="post">
+                        <form action="../php/actualizar.php" method="post">
                             <input type="hidden" name="prod_id" value="<?php echo $producto_a_editar['prod_id']; ?>">
                             <td><input type="text" name="prod_name" value="<?php echo htmlspecialchars($producto_a_editar['prod_name']); ?>" required></td>
                             <td><input type="text" name="prod_imagen_url" value="<?php echo htmlspecialchars($producto_a_editar['prod_imagen_url']); ?>" required></td>
@@ -132,7 +132,7 @@ $resultado_tabla = $stmt_tabla->get_result();
                             <td>$<?php echo number_format($fila['prod_price'], 2); ?></td>
                             
                             <td>
-                                <form action="eliminar.php" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
+                                <form action="../php/eliminar.php" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
                                     <input type="hidden" name="prod_id" value="<?php echo $fila['prod_id']; ?>">
                                     <button type="submit" class="btn-eliminar">Eliminar</button>
                                 </form>

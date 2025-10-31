@@ -36,7 +36,8 @@ body {
     margin: 0;
     /* Centra el contenedor del login en la pantalla */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
 }
@@ -47,9 +48,9 @@ body {
     border: 1px solid var(--gris);
     padding: 3rem 4rem;
     border-radius: 0.8rem;
-    width: 100%;
     max-width: 450px;
     text-align: center;
+    margin: 80px 0;
 }
 
 .cont-login h1 {
@@ -60,20 +61,20 @@ body {
 }
 
 /* --- Formulario --- */
-form {
+.form-login {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
 
-form label {
+.form-login label {
     text-align: left;
     margin-bottom: 0.8rem;
     font-size: 1.4rem;
     font-weight: 500;
 }
 
-form input {
+.form-login input {
     width: 100%;
     padding: 1.2rem;
     background-color: var(--negro);
@@ -85,13 +86,13 @@ form input {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-form input:focus {
+.form-login input:focus {
     outline: none;
     border-color: var(--azul-bajo);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-form button {
+.form-login button {
     width: 100%;
     padding: 1.2rem;
     font-size: 1.6rem;
@@ -107,7 +108,7 @@ form button {
     transition: background-color 0.3s ease;
 }
 
-form button:hover {
+.form-login button:hover {
     background-color: var(--azul);
 }
 
@@ -123,3 +124,58 @@ form button:hover {
     width: 100%;
     text-align: center;
 }
+
+.barra-negra {
+  background-color: var(--negro);
+  color: var(--blanco);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Izquierda - Centro - Derecha */
+  padding: 0.5rem 3rem;
+  width: 100vw;
+}
+
+.barra-azul {
+ background-color: var(--gris-oscuro);
+ padding: 1.5rem 3.5rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.search-form form {
+ display: flex;
+ border: 1px solid var(--gris);
+ border-radius: 0.5rem;
+ overflow: hidden;
+}
+
+.search-form input[type="text"] {
+ border: none;
+ padding: 0.8rem 1rem;
+ font-size: 1.4rem;
+ background-color: var(--negro);
+ color: var(--blanco);
+ flex: 1;
+ min-width: 100px;
+}
+
+.search-form input[type="text"]::placeholder {
+ color: var(--gris);
+}
+
+.search-form .botonBuscar {
+ background-color: var(--azul-bajo);
+ color: var(--blanco);
+ border: none;
+ padding: 0.8rem 1.5rem;
+ cursor: pointer;
+ font-size: 1.4rem;
+ transition: background-color 0.3s ease;
+}
+
+.search-form .botonBuscar:hover {
+ background-color: var(--azul);
+}
+
+

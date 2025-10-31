@@ -1,7 +1,7 @@
 <?php
 session_start();
 // 1. Incluir la conexión a la BDD para validar el stock
-require_once __DIR__ . '/../db_conexion.php';
+require 'db_conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prod_id'])) {
     
@@ -52,6 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prod_id'])) {
 }
 
 // 7. Redirigir a la página del CARRITO para que el usuario vea el producto añadido
-header('Location: ../carrito.php');
+header('Location: ../html/carrito.php');
 exit();
 ?>

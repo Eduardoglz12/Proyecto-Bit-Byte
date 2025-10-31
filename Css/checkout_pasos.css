@@ -200,3 +200,67 @@ input:-webkit-autofill:active {
     .payment-methods { grid-template-columns: 1fr; }
     .form-container { padding: 1.5rem; }
 }
+
+/* --- ESTILOS PARA EL FORMULARIO DE TARJETA --- */
+.tarjeta-form {
+    text-align: left;
+}
+
+.tarjeta-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.tarjeta-form-row {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end;
+}
+
+.fecha-grupo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--negro);
+    border: 1px solid var(--gris);
+    border-radius: 0.5rem;
+    padding: 0 1rem;
+}
+
+.fecha-grupo select {
+    background: var(--negro);
+    border: none;
+    color: var(--blanco);
+    padding: 1rem 0.5rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.fecha-grupo select:focus {
+    outline: none;
+}
+
+.fecha-grupo span {
+    font-size: 1.6rem;
+    color: var(--gris);
+}
+
+.btn-pago-tarjeta {
+    width: 100%;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: var(--blanco);
+    background-color: var(--azul-bajo);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pago-tarjeta:hover {
+    background-color: var(--azul);
+}

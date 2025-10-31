@@ -25,7 +25,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Estado de tu Compra</title>
-    <link rel="stylesheet" href="CSS/Inicio.css">
+    <link rel="stylesheet" href="../CSS/Inicio.css">
     <style>
         .gracias-container {
             display: flex;
@@ -65,10 +65,11 @@
             <?php if ($status === 'success' && $order_id): ?>
                 <p>Tu número de pedido es: <strong>#<?php echo $order_id; ?></strong></p>
             <?php endif; ?>
-            <a href="index.php" class="btn-checkout">Volver a la tienda</a>
+            <a href="../index.php" class="btn-checkout">Volver a la tienda</a>
         </div>
     </main>
     <footer>
-        </footer>
+        Derechos Reservados © Bit&Byte
+    </footer>
 </body>
 </html>

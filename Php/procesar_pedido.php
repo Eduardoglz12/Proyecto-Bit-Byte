@@ -9,7 +9,7 @@ $log_file = __DIR__ . '/debug_log.txt';
 file_put_contents($log_file, "INICIO DE DEPURACIÓN DE PEDIDO - " . date('Y-m-d H:i:s') . "\n\n");
 
 session_start();
-require_once __DIR__ . '/../db_conexion.php';
+require 'db_conexion.php';
 
 // --- CREDENCIALES PAYPAL SANDBOX ---
 $clientID = "ASUajecFhJzfxHxdX4POf20OweQ_rqAY2zMB02SPs1Sq6EJ9loM2upMo5YcQW8GEw3_UMfWes7_I7yao";
@@ -63,7 +63,7 @@ file_put_contents($log_file, "3. Respuesta de Captura de PayPal:\n" . ($response
 if (!$captureDetails || !isset($captureDetails->status) || $captureDetails->status !== 'COMPLETED') {
     $_SESSION['error_compra'] = "Pago no completado. Estado: " . ($captureDetails->status ?? 'N/A');
     file_put_contents($log_file, "ERROR: El estado del pago no es COMPLETED.\n", FILE_APPEND);
-    header('Location: ../gracias.php?status=error');
+    header('Location: ../html/gracias.php?status=error');
     exit();
 }
 
@@ -140,13 +140,13 @@ try {
     $_SESSION['last_order_id'] = $new_ord_id;
 
     file_put_contents($log_file, "5. ÉXITO: Pedido guardado correctamente.\n", FILE_APPEND);
-    header('Location: ../gracias.php?status=success');
+    header('Location: ../html/gracias.php?status=success');
 
 } catch (Exception $e) {
     $conexion->rollback();
     $_SESSION['error_compra'] = "Error al procesar el pedido: " . $e->getMessage();
     file_put_contents($log_file, "ERROR BDD: " . $e->getMessage() . "\n", FILE_APPEND);
-    header('Location: ../gracias.php?status=error');
+    header('Location: ../html/gracias.php?status=error');
 }
 
 exit();

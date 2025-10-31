@@ -1,7 +1,7 @@
 <?php
 // actualizar.php
 session_start();
-require_once __DIR__ . '/../db_conexion.php';
+require 'db_conexion.php';
 
 // Verificar que los datos lleguen por POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -42,6 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $conexion->close();
 
 // 4. Redirigir de vuelta a la página del inventario
-header('Location: inventario.php');
+header('Location: ../html/inventario.php');
 exit();
 ?>

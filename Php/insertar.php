@@ -1,7 +1,7 @@
 <?php
     session_start();
     // 1. Usar la conexión centralizada
-    require_once __DIR__ . '/../db_conexion.php';
+    require 'db_conexion.php';
 
     // 2. Recibir todas las variables del formulario
     $prod_name = $_POST['prod_name'];
@@ -43,6 +43,6 @@
     }
 
     // Redirigir de vuelta al panel de inventario
-    header('Location: inventario.php');
+    header('Location: ../html/inventario.php');
     exit();
 ?>

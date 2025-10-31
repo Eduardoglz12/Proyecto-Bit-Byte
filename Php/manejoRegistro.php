@@ -1,7 +1,7 @@
 <?php
     session_start();
     // 1. Usamos la conexión centralizada
-    require_once __DIR__ . '/../db_conexion.php';
+    require 'db_conexion.php';
 
     // Variables de formulario
     $usr_user = $_POST['usr_user'];
@@ -42,7 +42,7 @@
         $_SESSION['resultado'] = "Usuario y contraseña no pueden estar vacíos.";
     }
 
-    header('Location: registro.php');
+    header('Location: ../html/registro.php');
     exit();
 ?>
 

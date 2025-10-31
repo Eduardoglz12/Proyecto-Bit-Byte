@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../db_conexion.php';
+require 'db_conexion.php';
 
 // Seguridad: verificar que el usuario esté logueado y que los datos lleguen por POST
 if (!isset($_SESSION['usr_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {

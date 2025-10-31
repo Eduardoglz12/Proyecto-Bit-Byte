@@ -1,10 +1,10 @@
 <?php
 session_start();
-require 'db_conexion.php';
+  require '../php/db_conexion.php';
 
 // 1. Seguridad: verificar login y que se haya pasado un ID
 if (!isset($_SESSION['usr_id']) || !isset($_GET['id'])) {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit();
 }
 
@@ -47,13 +47,12 @@ $gran_total = 0;
 <head>
     <meta charset="UTF-8">
     <title>Detalle del Pedido #<?= $pedido['ord_id'] ?> - Bit&Byte</title>
-    <link rel="stylesheet" href="CSS/normalize.css">
-    <link rel="stylesheet" href="CSS/Inicio.css">
-    <link rel="stylesheet" href="CSS/perfil.css"> 
-    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../CSS/normalize.css">
+    <link rel="stylesheet" href="../CSS/Inicio.css">
+    <link rel="stylesheet" href="../CSS/perfil.css"> 
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-    <?php // include 'includes/header.php'; ?>
 
     <div class="contenedor-principal">
         <main class="perfil-container">
@@ -99,6 +98,8 @@ $gran_total = 0;
         </main>
     </div>
 
-    <?php // include 'includes/footer.php'; ?>
+    <footer>
+        Derechos Reservados © Bit&Byte
+    </footer>
 </body>
 </html>

@@ -1,54 +1,4 @@
-<?php
-// seleccionar_pago.php
-session_start();
-require 'db_conexion.php'; // Se requiere para la lógica del header si es necesario
-
-// Si el carrito está vacío o no se han ingresado los datos del cliente, no se puede estar aquí.
-if (empty($_SESSION['carrito']) || empty($_SESSION['datos_cliente'])) {
-    header('Location: index.php');
-    exit();
-}
-
-// --- LÓGICA PARA EL HEADER ---
-// 1. Sesión de Usuario
-$textoSesion1 = "Iniciar sesión";
-$linkSesion1 = "php/inicioSesion.php";
-$textoSesion2 = "Registrarme";
-$linkSesion2 = "php/registro.php";
-
-if (isset($_SESSION['usr_user'])) {
-    $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "perfil.php"; // O el enlace a la página de perfil
-    $textoSesion2 = "Cerrar sesión";
-    $linkSesion2 = "php/cerrarSesion.php";
-}
-
-// 2. Total de artículos en el carrito
-$totalItemsCarrito = 0;
-if (!empty($_SESSION['carrito'])) {
-    $totalItemsCarrito = array_sum($_SESSION['carrito']);
-}
-
-// --- LÓGICA PARA LA PÁGINA ---
-$datos_cliente = $_SESSION['datos_cliente'];
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bit&Byte - Comprar</title>
-  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="CSS/Inicio.css">
-  <link rel="stylesheet" href="CSS/normalize.css">
-  <link rel="stylesheet" href="CSS/checkout_pasos.css">
-  <link rel="preload" href="CSS/Inicio.css" as="style">
-  <link rel="preload" href="CSS/normalize.css" as="style">
-</head>
-<body>
-
-    <header>
+<header>
     <!-- ... (El header no cambia) ... -->
     <div class="barra-negra">
       <div class="ba-contenedor">
@@ -83,7 +33,7 @@ $datos_cliente = $_SESSION['datos_cliente'];
     </div>
     <div class="barra-azul">
       <div class="ba-contenedor">
-        <a href="index.php">
+        <a href="../index.php">
           <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
             <g transform="translate(5, 15)">
               <rect x="0" y="0" width="10" height="50" fill="#3B82F6" />
@@ -101,7 +51,7 @@ $datos_cliente = $_SESSION['datos_cliente'];
       </div>
       <div class="ba-contenedor">
         <ul>
-          <li><a href="index.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></a></li>
+          <li><a href="../index.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></a></li>
           <li>|</li>
           <li><a href="comprar.php">PRODUCTOS</a></li>
           <li>|</li>
@@ -130,44 +80,3 @@ $datos_cliente = $_SESSION['datos_cliente'];
       </div>
     </div>
   </header>
-
-    <div class="contenedor-principal">
-        <main class="checkout-container">
-            <div class="form-container">
-                <h1>Método de Pago</h1>
-                <p>Tus datos han sido guardados. Por favor, elige cómo quieres pagar.</p>
-
-                <div class="datos-resumen">
-                    <strong>Enviar a:</strong> <?= htmlspecialchars($datos_cliente['nombre']) ?><br>
-                    <?= htmlspecialchars($datos_cliente['calle']) ?>, <?= htmlspecialchars($datos_cliente['colonia']) ?><br>
-                    <?= htmlspecialchars($datos_cliente['ciudad']) ?>, <?= htmlspecialchars($datos_cliente['estado']) ?>, C.P. <?= htmlspecialchars($datos_cliente['cp']) ?>
-                    <br><a href="comprar.php">Cambiar datos</a>
-                </div>
-
-                <div class="payment-methods">
-                    <div class="payment-box">
-                        <h3>💳 Tarjeta de Crédito/Débito</h3>
-                        <p class="aviso">Esta opción estará disponible próximamente.</p>
-                        <button class="btn-pago-disabled" disabled>Pagar con Tarjeta</button>
-                    </div>
-
-                    <div class="payment-box">
-                        <h3>
-                            <img src="https://www.paypalobjects.com/images/shared/paypal-logo-129x32.svg" alt="PayPal">
-                        </h3>
-                        <p class="aviso">Serás redirigido a PayPal para completar tu pago de forma segura.</p>
-                        <form action="php/iniciar_pago.php" method="POST">
-                            <button type="submit" class="btn-pago-paypal">Pagar con PayPal</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <footer>
-        Derechos Reservados © Bit&Byte
-    </footer>
-    
-</body>
-</html>

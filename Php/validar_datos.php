@@ -4,7 +4,7 @@ session_start();
 
 // Verificar que se envió el formulario por POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../comprar.php');
+    header('Location: ../html/comprar.php');
     exit();
 }
 
@@ -34,12 +34,12 @@ if ($campos_vacios) {
     // Si hay errores, guardar datos y error en sesión y redirigir de vuelta
     $_SESSION['error_datos'] = "Por favor, completa todos los campos requeridos.";
     $_SESSION['form_data'] = $form_data;
-    header('Location: ../comprar.php');
+    header('Location: ../html/comprar.php');
     exit();
 } else {
     // Si todo está bien, guardar los datos en sesión y redirigir a la página de pago
     $_SESSION['datos_cliente'] = $form_data;
-    header('Location: ../seleccionar_pago.php');
+    header('Location: ../html/seleccionar_pago.php');
     exit();
 }
 ?>
