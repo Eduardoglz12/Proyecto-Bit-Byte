@@ -31,6 +31,10 @@ if (!empty($_SESSION['carrito'])) {
 
 // --- LÓGICA PARA LA PÁGINA ---
 $datos_cliente = $_SESSION['datos_cliente'];
+
+// --- BLOQUE AÑADIDO: LEER Y LIMPIAR EL MENSAJE DE ERROR ---
+$error_tarjeta = $_SESSION['error_tarjeta'] ?? null;
+unset($_SESSION['error_tarjeta']); // Limpiamos la sesión para no mostrar el error de nuevo
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +59,10 @@ $datos_cliente = $_SESSION['datos_cliente'];
             <div class="form-container">
                 <h1>Método de Pago</h1>
                 <p>Tus datos han sido guardados. Por favor, elige cómo quieres pagar.</p>
+
+                <?php if ($error_tarjeta): ?>
+                    <div class="error-banner"><?= htmlspecialchars($error_tarjeta) ?></div>
+                <?php endif; ?>
 
                 <div class="datos-resumen">
                     <strong>Enviar a:</strong> <?= htmlspecialchars($datos_cliente['nombre']) ?><br>
