@@ -46,7 +46,21 @@ try {
     
     // Si el usuario está logueado, actualizamos su perfil
     if (isset($_SESSION['usr_id'])) {
-        // ... (código para actualizar perfil de usuario) ...
+        $usr_id = $_SESSION['usr_id'];
+        $sql_update_user = "UPDATE users SET 
+                                usr_nombre_completo = ?, usr_email = ?, usr_telefono = ?, 
+                                usr_calle = ?, usr_colonia = ?, usr_ciudad = ?, 
+                                usr_estado = ?, usr_cp = ?
+                            WHERE usr_id = ?";
+        $stmt_update = $conexion->prepare($sql_update_user);
+        $stmt_update->bind_param("ssssssssi", 
+            $datos_cliente['nombre'], $datos_cliente['email'], $datos_cliente['telefono'],
+            $datos_cliente['calle'], $datos_cliente['colonia'], $datos_cliente['ciudad'],
+            $datos_cliente['estado'], $datos_cliente['cp'], $usr_id
+        );
+        $stmt_update->execute();
+        $stmt_update->close();
+        
     }
 
     // Preparar y guardar la orden
@@ -61,8 +75,25 @@ try {
     $new_ord_id = $conexion->insert_id;
     $stmt_order->close();
 
-    // Guardar detalles del pedido y actualizar stock (esta lógica ya la tienes)
-    // ...
+    // Guardar detalles del pedido y actualizar stock
+    $carrito = $_SESSION['carrito'];
+
+    // Preparamos las consultas una sola vez fuera del bucle para mayor eficiencia
+    $stmt_details = $conexion->prepare("INSERT INTO order_details (od_amount, prod_id, ord_id) VALUES (?, ?, ?)");
+    $stmt_update_stock = $conexion->prepare("UPDATE products SET prod_stock = prod_stock - ? WHERE prod_id = ?");
+
+    foreach ($carrito as $prod_id => $cantidad) {
+        // Insertar el detalle del pedido
+        $stmt_details->bind_param("iii", $cantidad, $prod_id, $new_ord_id);
+        $stmt_details->execute();
+
+        // Actualizar el stock del producto
+        $stmt_update_stock->bind_param("ii", $cantidad, $prod_id);
+        $stmt_update_stock->execute();
+    }
+
+    $stmt_details->close();
+    $stmt_update_stock->close();
 
     $conexion->commit();
     unset($_SESSION['carrito'], $_SESSION['datos_cliente']);
@@ -74,6 +105,9 @@ try {
 
 } catch (Exception $e) {
     $conexion->rollback();
+
+    //die("ERROR DETALLADO: " . $e->getMessage());
+
     $_SESSION['error_tarjeta'] = "Error al procesar el pedido: " . $e->getMessage();
     header('Location: ../html/seleccionar_pago.php');
     exit();
