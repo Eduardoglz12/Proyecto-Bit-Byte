@@ -1,44 +1,40 @@
-/* ===============================================
-   ESTILOS PARA LA PÁGINA DE GRACIAS Y ERROR
-   =============================================== */
 
-/* --- Contenedor Principal --- */
+/*Contenedor Principal */
 .gracias-wrapper {
-    grid-column: 1 / -1; /* Ocupa todo el ancho del grid principal */
+    grid-column: 1 / -1;
     background-color: var(--gris-oscuro);
     border: 1px solid var(--gris);
     border-radius: 0.8rem;
     padding: 4rem;
     text-align: center;
     max-width: 700px;
-    margin: 2rem auto; /* Centra el contenedor */
+    margin: 2rem auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* --- Icono Visual (Éxito o Error) --- */
 .gracias-icon {
     font-size: 5rem;
     line-height: 1;
     margin-bottom: 2rem;
 }
 
-/* --- Título Principal --- */
+/*Título Principal*/
 .gracias-wrapper h1 {
     font-size: 2.8rem;
     margin-bottom: 1rem;
 }
 
-/* --- Color del Título según el Estado --- */
+/*Color del Título según el Estado*/
 .gracias-wrapper.success h1 {
-    color: #4ade80; /* Un verde brillante para el éxito */
+    color: #4ade80;
 }
 .gracias-wrapper.error h1 {
     color: var(--rojo-error);
 }
 
-/* --- Párrafo del Mensaje --- */
+/*Párrafo del Mensaje*/
 .gracias-wrapper .mensaje {
     font-size: 1.8rem;
     max-width: 500px;
@@ -52,7 +48,7 @@
     font-size: 1.4rem;
 }
 
-/* --- Caja para el Número de Pedido --- */
+
 .order-id-box {
     background-color: var(--negro);
     border: 1px dashed var(--gris);
@@ -67,13 +63,12 @@
     margin-left: 0.5rem;
 }
 
-/* --- Botones de Acción Final --- */
 .acciones-finales {
     display: flex;
     gap: 1.5rem;
     margin-top: 1rem;
 }
-/* Reutilizamos el estilo de .btn-checkout que ya tienes en Inicio.css */
+
 .acciones-finales .btn-volver {
     background-color: var(--azul-bajo);
     color: var(--blanco);

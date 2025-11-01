@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// 1. Recoger y sanear los datos del formulario
+//Recoger los datos del formulario
 $form_data = [
     'nombre'   => trim($_POST['nombre'] ?? ''),
     'email'    => trim($_POST['email'] ?? ''),
@@ -20,7 +20,7 @@ $form_data = [
     'estado'   => trim($_POST['estado'] ?? '')
 ];
 
-// 2. Validar que ningún campo esté vacío
+//Validar que ningún campo esté vacío
 $campos_vacios = false;
 foreach ($form_data as $campo) {
     if (empty($campo)) {
@@ -29,7 +29,7 @@ foreach ($form_data as $campo) {
     }
 }
 
-// 3. Tomar una decisión
+//Tomar una decisión
 if ($campos_vacios) {
     // Si hay errores, guardar datos y error en sesión y redirigir de vuelta
     $_SESSION['error_datos'] = "Por favor, completa todos los campos requeridos.";

@@ -2,7 +2,7 @@
 session_start();
 require 'db_conexion.php';
 
-// Seguridad: verificar que el usuario esté logueado y que los datos lleguen por POST
+//verificar que el usuario esté logueado y que los datos lleguen por POST
 if (!isset($_SESSION['usr_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../index.php');
     exit();
@@ -10,7 +10,7 @@ if (!isset($_SESSION['usr_id']) || $_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $usr_id = $_SESSION['usr_id'];
 
-// Recoger y sanear los datos del formulario
+// Recoger los datos del formulario
 $form_data = [
     'nombre'   => trim($_POST['nombre'] ?? ''),
     'email'    => trim($_POST['email'] ?? ''),
@@ -22,7 +22,7 @@ $form_data = [
     'cp'       => trim($_POST['cp'] ?? '')
 ];
 
-// Validar que ningún campo esté vacío (puedes añadir más validaciones)
+//Validar que ningún campo esté vacío
 $error = false;
 foreach ($form_data as $campo) {
     if (empty($campo)) {
@@ -34,7 +34,7 @@ foreach ($form_data as $campo) {
 if ($error) {
     $_SESSION['resultado_perfil'] = "Error: Todos los campos son obligatorios.";
 } else {
-    // Preparar la consulta UPDATE
+    //Preparar la consulta UPDATE
     $sql = "UPDATE users SET 
                 usr_nombre_completo = ?, usr_email = ?, usr_telefono = ?, 
                 usr_calle = ?, usr_colonia = ?, usr_ciudad = ?, 
@@ -57,6 +57,6 @@ if ($error) {
 }
 
 $conexion->close();
-header('Location: ../perfil.php');
+header('Location: ../html/perfil.php');
 exit();
 ?>

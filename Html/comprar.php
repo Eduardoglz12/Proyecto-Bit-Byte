@@ -8,8 +8,8 @@ if (empty($_SESSION['carrito'])) {
     exit();
 }
 
-// --- LÓGICA PARA EL HEADER ---
-// 1. Sesión de Usuario
+//LÓGICA PARA EL HEADER
+//Sesión de Usuario
 $textoSesion1 = "Iniciar sesión";
 $linkSesion1 = "inicioSesion.php";
 $textoSesion2 = "Registrarme";
@@ -17,18 +17,18 @@ $linkSesion2 = "registro.php";
 
 if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "perfil.php"; // O el enlace a la página de perfil
+    $linkSesion1 = "perfil.php";
     $textoSesion2 = "Cerrar sesión";
     $linkSesion2 = "../php/cerrarSesion.php";
 }
 
-// 2. Total de artículos en el carrito
+//Total de artículos en el carrito
 $totalItemsCarrito = 0;
 if (!empty($_SESSION['carrito'])) {
     $totalItemsCarrito = array_sum($_SESSION['carrito']);
 }
 
-// --- NUEVO BLOQUE PARA CARGAR DATOS DEL USUARIO ---
+//BLOQUE PARA CARGAR DATOS DEL USUARIO
 $datos_usuario = [];
 if (isset($_SESSION['usr_id'])) {
     $usr_id = $_SESSION['usr_id'];

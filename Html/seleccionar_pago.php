@@ -1,7 +1,7 @@
 <?php
 // seleccionar_pago.php
 session_start();
-  require '../php/db_conexion.php';// Se requiere para la lógica del header si es necesario
+  require '../php/db_conexion.php';
 
 // Si el carrito está vacío o no se han ingresado los datos del cliente, no se puede estar aquí.
 if (empty($_SESSION['carrito']) || empty($_SESSION['datos_cliente'])) {
@@ -9,8 +9,8 @@ if (empty($_SESSION['carrito']) || empty($_SESSION['datos_cliente'])) {
     exit();
 }
 
-// --- LÓGICA PARA EL HEADER ---
-// 1. Sesión de Usuario
+//LÓGICA PARA EL HEADER
+//Sesión de Usuario
 $textoSesion1 = "Iniciar sesión";
 $linkSesion1 = "inicioSesion.php";
 $textoSesion2 = "Registrarme";
@@ -18,12 +18,12 @@ $linkSesion2 = "registro.php";
 
 if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "perfil.php"; // O el enlace a la página de perfil
+    $linkSesion1 = "perfil.php";
     $textoSesion2 = "Cerrar sesión";
     $linkSesion2 = "../php/cerrarSesion.php";
 }
 
-// 2. Total de artículos en el carrito
+//Total de artículos en el carrito
 $totalItemsCarrito = 0;
 if (!empty($_SESSION['carrito'])) {
     $totalItemsCarrito = array_sum($_SESSION['carrito']);
@@ -32,7 +32,7 @@ if (!empty($_SESSION['carrito'])) {
 // --- LÓGICA PARA LA PÁGINA ---
 $datos_cliente = $_SESSION['datos_cliente'];
 
-// --- BLOQUE AÑADIDO: LEER Y LIMPIAR EL MENSAJE DE ERROR ---
+//LEER Y LIMPIAR EL MENSAJE DE ERROR
 $error_tarjeta = $_SESSION['error_tarjeta'] ?? null;
 unset($_SESSION['error_tarjeta']); // Limpiamos la sesión para no mostrar el error de nuevo
 ?>

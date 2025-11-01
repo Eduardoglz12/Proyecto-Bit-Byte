@@ -7,7 +7,7 @@ if ($resultado) {
     unset($_SESSION['resultado']);
 }
 
-// --- LÓGICA PARA CARGAR DATOS DEL PRODUCTO A EDITAR ---
+//LÓGICA PARA CARGAR DATOS DEL PRODUCTO A EDITAR
 $producto_a_editar = null;
 if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
     $edit_id = $_GET['edit_id'];
@@ -19,14 +19,14 @@ if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
     $stmt_edit->close();
 }
 
-// --- CONSULTAS PARA LOS FORMULARIOS Y LA TABLA ---
+//CONSULTAS PARA LOS FORMULARIOS Y LA TABLA
 // Consulta para el <select> de editar
 $sql_select = "SELECT prod_id, prod_name FROM products";
 $stmt_select = $conexion->prepare($sql_select);
 $stmt_select->execute();
 $resultado_select = $stmt_select->get_result();
 
-// Consulta para la tabla de inventario - AHORA SELECCIONA TAMBIÉN prod_id
+// Consulta para la tabla de inventario
 $sql_tabla = "SELECT prod_id, prod_name, prod_imagen_url, prod_spec_url, prod_stock, prod_price FROM products";
 $stmt_tabla = $conexion->prepare($sql_tabla);
 $stmt_tabla->execute();

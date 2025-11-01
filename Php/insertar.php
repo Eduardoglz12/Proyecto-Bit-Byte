@@ -1,27 +1,27 @@
 <?php
     session_start();
-    // 1. Usar la conexión centralizada
+    //Usar la conexión centralizada
     require 'db_conexion.php';
 
-    // 2. Recibir todas las variables del formulario
+    //Recibir todas las variables del formulario
     $prod_name = $_POST['prod_name'];
     $prod_imagen_url = $_POST['prod_imagen_url'];
-    $prod_spec_url = $_POST['prod_spec_url']; // <-- NUEVO CAMPO
+    $prod_spec_url = $_POST['prod_spec_url'];
     $prod_stock = $_POST['prod_stock'];
     $prod_price = $_POST['prod_price'];
 
-    // 3. Validar que todos los campos, incluido el nuevo, no estén vacíos
+    //Validar que todos los campos, incluido el nuevo, no estén vacíos
     if(!empty($prod_name) && !empty($prod_imagen_url) && !empty($prod_spec_url) && !empty($prod_stock) && !empty($prod_price)){
         
         // La variable $conexion ya viene de db_conexion.php
 
-        // 4. Actualizar la consulta SQL para incluir la nueva columna
+        //Actualizar la consulta SQL para incluir la nueva columna
         $sql = "INSERT INTO products(prod_name, prod_imagen_url, prod_spec_url, prod_stock, prod_price)" .
                "VALUES (?, ?, ?, ?, ?)";
 
         $stmt = $conexion->prepare($sql);
         
-        // 5. Actualizar los tipos de datos en bind_param para incluir el nuevo string ("sssdi")
+        //Actualizar los tipos de datos en bind_param para incluir el nuevo string ("sssdi")
         $stmt->bind_param("sssid", $prod_name, $prod_imagen_url, $prod_spec_url, $prod_stock, $prod_price);
 
         try{

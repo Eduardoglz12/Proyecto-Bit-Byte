@@ -2,7 +2,7 @@
 session_start();
   require '../php/db_conexion.php';
 
-// 1. Seguridad: verificar login y que se haya pasado un ID
+//Seguridad: verificar login y que se haya pasado un ID
 if (!isset($_SESSION['usr_id']) || !isset($_GET['id'])) {
     header('Location: ../index.php');
     exit();
@@ -15,7 +15,7 @@ if (!$ord_id) {
     die("ID de pedido no válido.");
 }
 
-// 2. Obtener detalles del pedido, asegurándose de que pertenece al usuario logueado
+//Obtener detalles del pedido, asegurándose de que pertenece al usuario logueado
 $sql_order = "SELECT ord_id, ord_date, os_name FROM orders 
               JOIN order_status ON orders.os_id = order_status.os_id
               WHERE ord_id = ? AND usr_id = ?";
@@ -30,7 +30,7 @@ if (!$pedido) {
     die("No se encontró el pedido o no tienes permiso para verlo.");
 }
 
-// 3. Obtener los productos de ese pedido
+//Obtener los productos de ese pedido
 $sql_details = "SELECT p.prod_name, od.od_amount, p.prod_price 
                 FROM order_details od
                 JOIN products p ON od.prod_id = p.prod_id

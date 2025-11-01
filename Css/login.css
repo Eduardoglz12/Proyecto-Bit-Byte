@@ -1,9 +1,4 @@
-/* ===============================================
-   ESTILOS PARA LA PÁGINA DE LOGIN
-   (Consistente con el tema de Bit&Byte)
-   =============================================== */
 
-/* --- Variables (Copiadas de tu CSS principal para referencia) --- */
 :root {
     --negro: #1a1a1a;
     --gris-oscuro: #2a2a2a;
@@ -15,7 +10,6 @@
     --rojo-error: #ef4444;
 }
 
-/* --- Base (Heredado de tu tema) --- */
 html {
     font-size: 62.5%;
     box-sizing: border-box;
@@ -42,7 +36,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- Contenedor Principal del Login --- */
+/*Contenedor Principal del Login*/
 .cont-login {
     background-color: var(--gris-oscuro);
     border: 1px solid var(--gris);
@@ -60,7 +54,7 @@ body {
     font-size: 2.8rem;
 }
 
-/* --- Formulario --- */
+/*Formulario*/
 .form-login {
     display: flex;
     flex-direction: column;
@@ -112,10 +106,10 @@ body {
     background-color: var(--azul);
 }
 
-/* --- Mensaje de Error (Estilo Consistente) --- */
+/*Mensaje de Error*/
 .mensajeError, .resultado {
-    background-color: #3e1919; /* Rojo oscuro de fondo */
-    color: #fecaca;           /* Texto rojo claro */
+    background-color: #3e1919;
+    color: #fecaca;        
     border: 1px solid var(--rojo-error);
     padding: 1.5rem;
     border-radius: 0.5rem;
@@ -130,7 +124,7 @@ body {
   color: var(--blanco);
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Izquierda - Centro - Derecha */
+  justify-content: space-between;
   padding: 0.5rem 3rem;
   width: 100vw;
 }

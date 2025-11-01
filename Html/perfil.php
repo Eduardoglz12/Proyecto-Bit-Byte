@@ -2,7 +2,7 @@
 session_start();
 require '../php/db_conexion.php';
 
-    // --- LÓGICA PARA EL HEADER ---
+    //LÓGICA PARA EL HEADER
 if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
     $linkSesion1 = "perfil.php"; 
@@ -10,14 +10,14 @@ if (isset($_SESSION['usr_user'])) {
     $linkSesion2 = "../php/cerrarSesion.php";
     }
 
-      // --- Lógica del Carrito (para el contador) ---
+      //Lógica del Carrito (para el contador)
   $totalItemsCarrito = 0;
   if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
       $totalItemsCarrito = array_sum($_SESSION['carrito']);
   }
     
 
-// 1. Seguridad: Si el usuario no está logueado, redirigir al inicio de sesión.
+//Si el usuario no está logueado, redirigir al inicio de sesión.
 if (!isset($_SESSION['usr_id'])) {
     header('Location: inicioSesion.php');
     exit();
@@ -25,11 +25,11 @@ if (!isset($_SESSION['usr_id'])) {
 
 $usr_id = $_SESSION['usr_id'];
 
-// 2. Mensaje de resultado (si se actualizaron los datos)
+//Mensaje de resultado (si se actualizaron los datos)
 $resultado_msg = $_SESSION['resultado_perfil'] ?? null;
 unset($_SESSION['resultado_perfil']);
 
-// 3. Obtener los datos actuales del usuario para mostrarlos en el formulario.
+//Obtener los datos actuales del usuario para mostrarlos en el formulario.
 $sql_user = "SELECT usr_nombre_completo, usr_email, usr_telefono, usr_calle, usr_colonia, usr_ciudad, usr_estado, usr_cp FROM users WHERE usr_id = ?";
 $stmt_user = $conexion->prepare($sql_user);
 $stmt_user->bind_param("i", $usr_id);
@@ -37,7 +37,7 @@ $stmt_user->execute();
 $datos_usuario = $stmt_user->get_result()->fetch_assoc();
 $stmt_user->close();
 
-// 4. Obtener el historial de pedidos del usuario.
+//Obtener el historial de pedidos del usuario.
 $sql_orders = "SELECT ord_id, ord_date, os_name FROM orders 
                JOIN order_status ON orders.os_id = order_status.os_id
                WHERE usr_id = ? ORDER BY ord_date DESC";

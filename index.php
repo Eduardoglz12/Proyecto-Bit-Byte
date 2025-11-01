@@ -3,7 +3,7 @@
   // Incluimos la conexión a la BDD
    require 'php/db_conexion.php';
 
-  // --- Lógica de Sesión ---
+  //Lógica de Sesión
 $textoSesion1 = "Iniciar sesión";
 $linkSesion1 = "html/inicioSesion.php";
 $textoSesion2 = "Registrarme";
@@ -12,18 +12,18 @@ $linkSesion2 = "html/registro.php";
     // --- LÓGICA PARA EL HEADER ---
 if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "html/perfil.php"; // <--- CAMBIO IMPORTANTE
+    $linkSesion1 = "html/perfil.php";
     $textoSesion2 = "Cerrar sesión";
     $linkSesion2 = "php/cerrarSesion.php";
     }
     
-  // --- Lógica del Carrito (para el contador) ---
+  //Lógica del Carrito (para el contador)
   $totalItemsCarrito = 0;
   if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
       $totalItemsCarrito = array_sum($_SESSION['carrito']);
   }
 
-  // --- Lógica para Mensaje de Carrito ---
+  //Lógica para Mensaje de Carrito
   $mensaje_carrito = "";
   if (isset($_SESSION['mensaje_carrito'])) {
       $mensaje_carrito = $_SESSION['mensaje_carrito'];

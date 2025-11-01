@@ -3,10 +3,7 @@
 
     require '../php/db_conexion.php';
 
-    // Esta página ya no procesa, solo muestra el resultado.
-    // La lógica real está en procesar_pedido.php
-
-    // --- LÓGICA DE LA PÁGINA ---
+    //LÓGICA DE LA PÁGINA 
     $status = $_GET['status'] ?? 'error';
     $mensaje_principal = "";
     $mensaje_detalle = "";
@@ -37,7 +34,6 @@
     <link rel="stylesheet" href="../CSS/Inicio.css">
     <link rel="stylesheet" href="../CSS/gracias.css"> </head>
 <body>
-    <?php // include 'header.php'; // Incluye tu header aquí ?>
     
     <main class="contenedor-principal">
         <div class="gracias-wrapper <?php echo $status; ?>">
@@ -55,6 +51,11 @@
                     <span>Tu número de pedido es:</span>
                     <strong>#<?php echo $order_id; ?></strong>
                 </div>
+
+                <div class="acciones-finales">
+                    <a href="../php/generar_recibo.php?id=<?php echo $order_id; ?>" class="btn-volver">Descargar Recibo (PDF)</a>
+                </div>
+
             <?php endif; ?>
 
             <div class="acciones-finales">

@@ -1,5 +1,4 @@
 <header>
-    <!-- ... (El header no cambia) ... -->
     <div class="barra-negra">
       <div class="ba-contenedor">
         <ul>

@@ -2,7 +2,7 @@
   session_start();
   require '../php/db_conexion.php'; // Incluimos la conexión
 
-  // --- Lógica de Sesión de Usuario ---
+  //Lógica de Sesión de Usuario
   $textoSesion1 = "Iniciar sesion";
   $linkSesion1 = "inicioSesion.php";
   $textoSesion2 = "Registrarme";
@@ -15,26 +15,26 @@
     $linkSesion2 = "../php/cerrarSesion.php";
   }
 
-  // --- Lógica del Carrito (para el contador) ---
+  //Lógica del Carrito (para el contador)
   $totalItemsCarrito = 0;
   if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
       $totalItemsCarrito = array_sum($_SESSION['carrito']);
   }
 
-  // --- Lógica para Cargar el Producto Específico ---
+  //Lógica para Cargar el Producto Específico
   $producto = null;
-  // 1. Verificar si se pasó una ID por la URL
+  //Verificar si se pasó una ID por la URL
   if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $prod_id = $_GET['id'];
 
-    // 2. Preparar la consulta para evitar inyección SQL
+    //Preparar la consulta para evitar inyección SQL
     $sql = "SELECT prod_id, prod_name, prod_imagen_url, prod_spec_url, prod_price, prod_stock FROM products WHERE prod_id = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("i", $prod_id);
     $stmt->execute();
     $resultado = $stmt->get_result();
 
-    // 3. Si se encontró el producto, guardar sus datos
+    //Si se encontró el producto, guardar sus datos
     if ($resultado->num_rows === 1) {
       $producto = $resultado->fetch_assoc();
     }
@@ -42,8 +42,6 @@
   }
   $conexion->close();
 
-  // Si no se encontró el producto, podríamos redirigir o mostrar un error.
-  // Por ahora, el HTML de abajo manejará el caso de que $producto sea null.
 ?>
 
 <!DOCTYPE html>

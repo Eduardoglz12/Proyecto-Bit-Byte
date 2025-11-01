@@ -4,19 +4,19 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// --- DEPURACIÓN ---
+//DEPURACIÓN
 $log_file = __DIR__ . '/debug_log.txt';
 file_put_contents($log_file, "INICIO DE DEPURACIÓN DE PEDIDO - " . date('Y-m-d H:i:s') . "\n\n");
 
 session_start();
 require 'db_conexion.php';
 
-// --- CREDENCIALES PAYPAL SANDBOX ---
+//CREDENCIALES PAYPAL SANDBOX
 $clientID = "ASUajecFhJzfxHxdX4POf20OweQ_rqAY2zMB02SPs1Sq6EJ9loM2upMo5YcQW8GEw3_UMfWes7_I7yao";
 $secret   = "ELsm95H5C9MbVibXh6zlG4mVCjk8RZqVdxEfzCM7B0N0MOYvyAlR4NlOVYYTgI9lcywdpH-jEb031idJ";
 $paypalAPI = "https://api-m.sandbox.paypal.com";
 
-// Los tokens 'token' y 'PayerID' son los nuevos parámetros que PayPal envía en la URL
+//Los tokens 'token' y 'PayerID' son los nuevos parámetros que PayPal envía en la URL
 $orderID = $_GET['token'] ?? null; 
 $payerID = $_GET['PayerID'] ?? null;
 
@@ -27,8 +27,7 @@ if (!$orderID || !$payerID || empty($_SESSION['carrito'])) {
     die("Error: Faltan parámetros para procesar el pedido.");
 }
 
-// --- 2. OBTENER TOKEN DE ACCESO ---
-// (Esta parte es idéntica a tu código original)
+//OBTENER TOKEN DE ACCESO
 $ch_token = curl_init();
 curl_setopt($ch_token, CURLOPT_URL, "$paypalAPI/v1/oauth2/token");
 curl_setopt($ch_token, CURLOPT_USERPWD, "$clientID:$secret");
@@ -43,7 +42,7 @@ if (!isset($data_token->access_token)) {
 $accessToken = $data_token->access_token;
 file_put_contents($log_file, "2. Token de acceso obtenido.\n\n", FILE_APPEND);
 
-// --- 3. CAPTURAR EL PAGO (NUEVO PASO CRÍTICO) ---
+//CAPTURAR EL PAGO
 $ch_capture = curl_init();
 curl_setopt($ch_capture, CURLOPT_URL, "$paypalAPI/v2/checkout/orders/$orderID/capture");
 curl_setopt($ch_capture, CURLOPT_HTTPHEADER, [
@@ -69,7 +68,7 @@ if (!$captureDetails || !isset($captureDetails->status) || $captureDetails->stat
 
 file_put_contents($log_file, "4. Pago COMPLETADO. Procediendo a guardar en BDD.\n", FILE_APPEND);
 
-// --- 4. GUARDAR PEDIDO EN BASE DE DATOS ---
+//GUARDAR PEDIDO EN BASE DE DATOS
 try {
     $conexion->begin_transaction();
     
@@ -94,12 +93,11 @@ try {
         $stmt_update->close();
     }
     
-    // --- LÓGICA CORREGIDA PARA INSERTAR LA ORDEN ---
+    //LÓGICA PARA INSERTAR LA ORDEN
     
     $direccion_completa = $datos_cliente['calle'] . ", " . $datos_cliente['colonia'] . ", " . 
                           $datos_cliente['ciudad'] . ", " . $datos_cliente['estado'] . ", C.P. " . $datos_cliente['cp'];
 
-    // CAMBIO 1: Se añade 'ord_customer_phone' a la consulta
     $sql_order = "INSERT INTO orders (ord_date, os_id, usr_id, ord_customer_name, ord_customer_email, ord_customer_phone, ord_shipping_address) 
                   VALUES (NOW(), ?, ?, ?, ?, ?, ?)";
     
@@ -108,20 +106,19 @@ try {
     $usr_id_orden = $_SESSION['usr_id'] ?? null;
     $os_id = 1;
 
-    // CAMBIO 2: Se ajusta el bind_param para incluir el teléfono
     $stmt_order->bind_param("iissss", 
         $os_id, 
         $usr_id_orden, 
         $datos_cliente['nombre'], 
         $datos_cliente['email'],
-        $datos_cliente['telefono'], // <-- ¡TELÉFONO AÑADIDO!
+        $datos_cliente['telefono'],
         $direccion_completa
     );
     $stmt_order->execute();
     $new_ord_id = $conexion->insert_id;
     $stmt_order->close();
 
-    // Insertar detalles y actualizar stock (esta parte ya estaba bien)
+    // Insertar detalles y actualizar stock
     $stmt_details = $conexion->prepare("INSERT INTO order_details (od_amount, prod_id, ord_id) VALUES (?, ?, ?)");
     $stmt_update_stock = $conexion->prepare("UPDATE products SET prod_stock = prod_stock - ? WHERE prod_id = ?");
 
@@ -138,13 +135,13 @@ try {
     unset($_SESSION['carrito'], $_SESSION['datos_cliente']);
     $_SESSION['last_order_id'] = $new_ord_id;
 
-    header('Location: ../html/gracias.php?status=success'); // Asegúrate que esta ruta es correcta
+    header('Location: ../html/gracias.php?status=success');
     exit();
 
 } catch (Exception $e) {
     $conexion->rollback();
     $_SESSION['error_compra'] = "Error al procesar el pedido: " . $e->getMessage();
-    header('Location: ../html/gracias.php?status=error'); // Asegúrate que esta ruta es correcta
+    header('Location: ../html/gracias.php?status=error');
     exit();
 }
 ?>

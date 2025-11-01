@@ -2,7 +2,7 @@
   session_start();
   require '../php/db_conexion.php';
 
-  // --- Lógica de Sesión (igual que en index.php) ---
+  //Lógica de Sesión
   $textoSesion1 = "Iniciar sesion";
   $linkSesion1 = "inicioSesion.php";
   $textoSesion2 = "Registrarme";
@@ -15,13 +15,13 @@
     $linkSesion2 = "../Php/cerrarSesion.php";
   }
 
-  // --- Lógica del Carrito (para el contador) ---
+  //Lógica del Carrito
   $totalItemsCarrito = 0;
   if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
       $totalItemsCarrito = array_sum($_SESSION['carrito']);
   }
 
-  // --- Lógica para Cargar Productos del Carrito ---
+  //Lógica para Cargar Productos del Carrito
   $productos_en_carrito = [];
   $gran_total = 0.0;
 
@@ -152,7 +152,7 @@
           </table>
 
           <div class="checkout-seccion">
-            <form action="comprar.php"> <!-- Este formulario no hará nada por ahora -->
+            <form action="comprar.php">
               <button type="submit" class="btn-checkout">Continuar con el pago</button>
             </form>
           </div>

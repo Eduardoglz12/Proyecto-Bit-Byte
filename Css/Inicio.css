@@ -74,7 +74,7 @@ img {
   list-style: none;
   display: flex;
   align-items: center;
-  gap: 1rem; /* Espacio entre elementos del mismo grupo */
+  gap: 1rem;
   margin: 0;
   padding: 0;
 }
@@ -84,23 +84,21 @@ img {
   text-decoration: none;
 }
 
-/* Este es el bloque CENTRAL (redes sociales y teléfono) */
 .ba-contenedor.central {
-  flex: 1; /* ocupa el espacio intermedio */
-  justify-content: center; /* centra el contenido horizontalmente */
+  flex: 1;
+  justify-content: center;
 }
 
 .contenedor-principal {
-  display: grid; /* Cambiado a grid para mejor control */
-  grid-template-columns: 20% 1fr; /* Columna1 (20%) y Columna2 (resto) */
+  display: grid; 
+  grid-template-columns: 20% 1fr;
   align-items: flex-start;
   gap: 3rem;
   padding: 3rem 1rem;
-  max-width: 1400px; /* Ancho máximo consistente */
-  margin: 0 auto; /* Centrar */
+  max-width: 1400px;
+  margin: 0 auto; 
 }
 
-/* Header */
 header {
  background-color: var(--gris-oscuro);
 }
@@ -110,7 +108,7 @@ header {
   color: var(--blanco);
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Izquierda - Centro - Derecha */
+  justify-content: space-between;
   padding: 0.5rem 3rem;
 }
 
@@ -171,8 +169,8 @@ header {
  flex: 1;
  display: flex;
  justify-content: flex-end;
- min-width: 250px; /* Ancho mínimo para el formulario de búsqueda */
- align-items: center; /* <-- AÑADIDO */
+ min-width: 250px;
+ align-items: center;
 }
 
 .barra-azul ul {
@@ -186,8 +184,8 @@ header {
  font-weight: 500;
  color: var(--blanco);
  transition: color 0.3s ease;
- display: flex; /* <-- AÑADIDO */
- align-items: center; /* <-- AÑADIDO */
+ display: flex;
+ align-items: center;
 }
 
 .barra-azul a:hover {
@@ -256,10 +254,8 @@ header {
  line-height: 1;
 }
 
-/* Main Content */
 .columna1 {
  background-color: var(--gris-oscuro);
- /* width: 20%; */ /* Ya no es necesario, el grid lo controla */
  padding: 2rem;
  border-radius: 0.8rem;
  flex-shrink: 0;
@@ -370,7 +366,7 @@ header {
  margin-bottom: 1.5rem;
 }
 
-/* --- Estilos para Botón "Agregar al Carrito" --- */
+/*Estilos para Botón "Agregar al Carrito"*/
 
 .form-carrito {
  margin: 0;
@@ -409,10 +405,9 @@ header {
  height: 1.8rem;
 }
 
-/* --- Estilos para la Página del Carrito (comprar.php) --- */
-/* Esta regla hace que el contenedor del carrito ocupe todo el ancho */
+/*Estilos para la Página del Carrito*/
 .contenedor-principal > .carrito-container {
-  grid-column: 1 / -1; /* Ocupa todas las columnas del grid */
+  grid-column: 1 / -1;
 }
 
 .carrito-container {
@@ -567,7 +562,7 @@ header {
 /* Sección del botón de pago */
 .checkout-seccion {
   display: flex;
-  justify-content: flex-end; /* Alinea el botón a la derecha */
+  justify-content: flex-end;
   margin-top: 2rem;
   padding-top: 2rem;
   border-top: 1px solid var(--gris);
@@ -591,7 +586,7 @@ header {
   background-color: var(--azul);
 }
 
-/* Footer */
+/*Footer */
 footer {
  text-align: center;
  padding: 2rem;
@@ -604,7 +599,7 @@ footer {
 /* Media Queries */
 @media (max-width: 768px) {
   .barra-negra {
-    flex-wrap: wrap; /* Permite envolver */
+    flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
   }
@@ -639,23 +634,22 @@ footer {
  }
 
  .contenedor-principal {
-  grid-template-columns: 1fr; /* Una sola columna en móvil */
-    padding: 1.5rem; /* Menos padding en móvil */
+  grid-template-columns: 1fr; 
+    padding: 1.5rem;
  }
 
  .columna1 {
-  display: none; /* Oculta las categorías en móviles */
+  display: none;
  }
 
  .grid-productos {
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Columnas más pequeñas */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
  }
   .producto img {
-    height: 150px; /* Imágenes más pequeñas en móvil */
+    height: 150px;
   }
 
-  /* --- INICIO DE ESTILOS DE TABLA RESPONSIVA --- */
   .carrito-tabla {
     font-size: 1.4rem; 
   }
@@ -734,7 +728,7 @@ footer {
   .btn-checkout {
     width: 100%;
   }
-  /* --- FIN DE ESTILOS DE TABLA RESPONSIVA --- */
+  /*FIN DE ESTILOS DE TABLA RESPONSIVA*/
 }
 
 .mensaje-carrito-error {
@@ -749,20 +743,19 @@ footer {
  font-weight: bold;
 }
 
-/* --- ESTILOS PARA LA PÁGINA DE DETALLES (producto.php) --- */
+/*ESTILOS PARA LA PÁGINA DE DETALLES (producto.php)*/
 
-/* Contenedor principal que usa Grid para el layout */
+/*Contenedor principal*/
 .detalle-producto-container {
-  grid-column: 1 / -1; /* Ocupa todo el ancho del contenedor principal */
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+  grid-template-columns: repeat(2, 1fr);
   gap: 3rem;
   background-color: var(--gris-oscuro);
   padding: 3rem;
   border-radius: 0.8rem;
 }
 
-/* Columna izquierda con la imagen principal del producto */
 .detalle-imagen-principal {
   grid-column: 1 / 2;
 }
@@ -771,11 +764,10 @@ footer {
   width: 100%;
   height: auto;
   max-height: 600px;
-  object-fit: contain; /* Asegura que la imagen se vea completa */
+  object-fit: contain;
   border-radius: 0.5rem;
 }
 
-/* Columna derecha con la información y el botón de compra */
 .detalle-info-compra {
   grid-column: 2 / 3;
   display: flex;
@@ -795,7 +787,6 @@ footer {
   margin-bottom: 2rem;
 }
 
-/* Formulario para añadir al carrito en la página de detalles */
 .form-detalle-carrito {
   background-color: var(--gris);
   padding: 2rem;
@@ -815,23 +806,21 @@ footer {
   font-weight: bold;
 }
 
-/* El .btn-agregar-carrito ya tiene estilos, pero podemos ajustar el ancho */
 .form-detalle-carrito .btn-agregar-carrito {
   width: 100%;
-  border-radius: 0.5rem; /* Bordes redondeados completos */
+  border-radius: 0.5rem;
   padding: 1.2rem;
 }
 
 .detalle-stock {
   font-size: 1.4rem;
   color: var(--blanco);
-  margin-top: auto; /* Empuja este elemento al final de la columna */
+  margin-top: auto;
   padding-top: 1.5rem;
 }
 
-/* Sección de la imagen de especificaciones (ocupa todo el ancho) */
 .detalle-especificaciones {
-  grid-column: 1 / -1; /* Ocupa ambas columnas */
+  grid-column: 1 / -1;
   margin-top: 3rem;
   padding-top: 3rem;
   border-top: 1px solid var(--gris);
@@ -848,7 +837,6 @@ footer {
   border-radius: 0.5rem;
 }
 
-/* Estilos para cuando el producto no se encuentra */
 .producto-no-encontrado {
   grid-column: 1 / -1;
   text-align: center;
@@ -864,16 +852,15 @@ footer {
 /* Responsividad para la página de detalles */
 @media (max-width: 768px) {
   .detalle-producto-container {
-    grid-template-columns: 1fr; /* Una sola columna en móvil */
+    grid-template-columns: 1fr;
   }
 
   .detalle-info-compra {
-    /* En móvil, la info va después de la imagen */
     grid-row: 2 / 3;
   }
 }
 
-/* --- ESTILOS PARA LA PÁGINA DE CHECKOUT (comprar.php) --- */
+/*ESTILO PARA LA PÁGINA DE CHECKOUT (comprar.php)*/
 
 .checkout-container {
   grid-column: 1 / -1;
@@ -885,7 +872,6 @@ footer {
   border-radius: 0.8rem;
 }
 
-/* Columna izquierda: Resumen del pedido */
 .resumen-pedido {
   background-color: var(--negro);
   padding: 2rem;
@@ -952,7 +938,6 @@ footer {
   color: var(--azul-claro);
 }
 
-/* Columna derecha: Formulario de datos */
 .form-datos-cliente h2 {
   font-size: 2.2rem;
   margin-bottom: 2rem;
@@ -982,7 +967,7 @@ footer {
   font-size: 1.6rem;
 }
 
-/* Opciones de pago */
+/*Opciones de pago */
 .opciones-pago {
   display: flex;
   gap: 2rem;

@@ -8,21 +8,21 @@
     unset($_SESSION['mensajeError']);
   }
 
-  // --- Lógica de Sesión ---
+  //Lógica de Sesión
   $textoSesion1 = "Iniciar sesion";
   $linkSesion1 = "inicioSesion.php";
   $textoSesion2 = "Registrarme";
   $linkSesion2 = "registro.php";
 
-    // --- LÓGICA PARA EL HEADER ---
+    //LÓGICA PARA EL HEADER
 if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "perfil.php"; // <--- CAMBIO IMPORTANTE
+    $linkSesion1 = "perfil.php";
     $textoSesion2 = "Cerrar sesión";
     $linkSesion2 = "../php/cerrarSesion.php";
     }
     
-  // --- Lógica del Carrito (para el contador) ---
+  //Lógica del Carrito (para el contador)
   $totalItemsCarrito = 0;
   if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
       $totalItemsCarrito = array_sum($_SESSION['carrito']);
@@ -69,7 +69,7 @@ if (isset($_SESSION['usr_user'])) {
 
   <footer>
         Derechos Reservados © Bit&Byte
-    </footer>
+  </footer>
     
 </body>
 </html>
