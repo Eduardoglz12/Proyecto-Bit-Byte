@@ -62,7 +62,7 @@ $orderData = [
         ]
     ]],
     'application_context' => [
-        'return_url' => str_replace('/php', '', $url_base) . '/Php/procesar_pedido.php',
+        'return_url' => str_replace('/php', '', $url_base) . '/php/procesar_pedido.php',
         'cancel_url' => str_replace('/php', '', $url_base) . '/comprar.php?status=cancelled'
     ]
 ];
