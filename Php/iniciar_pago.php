@@ -5,19 +5,19 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
-require_once __DIR__ . '/../db_conexion.php';
+require 'db_conexion.php';
 
-// --- VERIFICACIONES INICIALES ---
+//VERIFICACIONES INICIALES
 if (empty($_SESSION['carrito'])) {
     die("Error: El carrito está vacío.");
 }
 
-// --- CREDENCIALES PAYPAL SANDBOX ---
+//CREDENCIALES PAYPAL SANDBOX
 $clientID = "ASUajecFhJzfxHxdX4POf20OweQ_rqAY2zMB02SPs1Sq6EJ9loM2upMo5YcQW8GEw3_UMfWes7_I7yao";
 $secret   = "ELsm95H5C9MbVibXh6zlG4mVCjk8RZqVdxEfzCM7B0N0MOYvyAlR4NlOVYYTgI9lcywdpH-jEb031idJ";
 $paypalAPI = "https://api-m.sandbox.paypal.com";
 
-// --- CALCULAR TOTAL (DE FORMA SEGURA DESDE LA BDD) ---
+//CALCULAR TOTAL (DE FORMA SEGURA DESDE LA BDD)
 $total_a_pagar = 0.0;
 $product_ids = array_keys($_SESSION['carrito']);
 $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
@@ -34,7 +34,7 @@ while ($producto = $resultado->fetch_assoc()) {
 $stmt->close();
 $conexion->close();
 
-// --- PASO 1: OBTENER TOKEN DE ACCESO ---
+//OBTENER TOKEN DE ACCESO
 $ch_token = curl_init();
 curl_setopt($ch_token, CURLOPT_URL, "$paypalAPI/v1/oauth2/token");
 curl_setopt($ch_token, CURLOPT_USERPWD, "$clientID:$secret");
@@ -50,7 +50,7 @@ if (!isset($data_token->access_token)) {
 }
 $accessToken = $data_token->access_token;
 
-// --- PASO 2: CREAR LA ORDEN DE PAGO ---
+//CREAR LA ORDEN DE PAGO
 $url_base = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
 
 $orderData = [
@@ -85,7 +85,7 @@ if (!isset($data_order->id) || !isset($data_order->links)) {
     die("Error al crear la orden de PayPal.");
 }
 
-// --- PASO 3: ENCONTRAR LA URL DE APROBACIÓN Y REDIRIGIR ---
+//ENCONTRAR LA URL DE APROBACIÓN Y REDIRIGIR
 $approve_url = null;
 foreach ($data_order->links as $link) {
     if ($link->rel == 'approve') {

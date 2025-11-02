@@ -4,19 +4,19 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// --- DEPURACIÓN ---
+//DEPURACIÓN
 $log_file = __DIR__ . '/debug_log.txt';
 file_put_contents($log_file, "INICIO DE DEPURACIÓN DE PEDIDO - " . date('Y-m-d H:i:s') . "\n\n");
 
 session_start();
-require_once __DIR__ . '/../db_conexion.php';
+require 'db_conexion.php';
 
-// --- CREDENCIALES PAYPAL SANDBOX ---
+//CREDENCIALES PAYPAL SANDBOX
 $clientID = "ASUajecFhJzfxHxdX4POf20OweQ_rqAY2zMB02SPs1Sq6EJ9loM2upMo5YcQW8GEw3_UMfWes7_I7yao";
 $secret   = "ELsm95H5C9MbVibXh6zlG4mVCjk8RZqVdxEfzCM7B0N0MOYvyAlR4NlOVYYTgI9lcywdpH-jEb031idJ";
 $paypalAPI = "https://api-m.sandbox.paypal.com";
 
-// Los tokens 'token' y 'PayerID' son los nuevos parámetros que PayPal envía en la URL
+//Los tokens 'token' y 'PayerID' son los nuevos parámetros que PayPal envía en la URL
 $orderID = $_GET['token'] ?? null; 
 $payerID = $_GET['PayerID'] ?? null;
 
@@ -27,8 +27,7 @@ if (!$orderID || !$payerID || empty($_SESSION['carrito'])) {
     die("Error: Faltan parámetros para procesar el pedido.");
 }
 
-// --- 2. OBTENER TOKEN DE ACCESO ---
-// (Esta parte es idéntica a tu código original)
+//OBTENER TOKEN DE ACCESO
 $ch_token = curl_init();
 curl_setopt($ch_token, CURLOPT_URL, "$paypalAPI/v1/oauth2/token");
 curl_setopt($ch_token, CURLOPT_USERPWD, "$clientID:$secret");
@@ -43,7 +42,7 @@ if (!isset($data_token->access_token)) {
 $accessToken = $data_token->access_token;
 file_put_contents($log_file, "2. Token de acceso obtenido.\n\n", FILE_APPEND);
 
-// --- 3. CAPTURAR EL PAGO (NUEVO PASO CRÍTICO) ---
+//CAPTURAR EL PAGO
 $ch_capture = curl_init();
 curl_setopt($ch_capture, CURLOPT_URL, "$paypalAPI/v2/checkout/orders/$orderID/capture");
 curl_setopt($ch_capture, CURLOPT_HTTPHEADER, [
@@ -63,107 +62,86 @@ file_put_contents($log_file, "3. Respuesta de Captura de PayPal:\n" . ($response
 if (!$captureDetails || !isset($captureDetails->status) || $captureDetails->status !== 'COMPLETED') {
     $_SESSION['error_compra'] = "Pago no completado. Estado: " . ($captureDetails->status ?? 'N/A');
     file_put_contents($log_file, "ERROR: El estado del pago no es COMPLETED.\n", FILE_APPEND);
-    header('Location: ../gracias.php?status=error');
+    header('Location: ../html/gracias.php?status=error');
     exit();
 }
 
 file_put_contents($log_file, "4. Pago COMPLETADO. Procediendo a guardar en BDD.\n", FILE_APPEND);
 
-// --- 4. GUARDAR PEDIDO EN BASE DE DATOS ---
-$conexion->begin_transaction();
+//GUARDAR PEDIDO EN BASE DE DATOS
 try {
-
-    if (isset($_SESSION['usr_id']) && isset($_SESSION['datos_cliente'])) {
-        $datos_cliente = $_SESSION['datos_cliente'];
+    $conexion->begin_transaction();
+    
+    $datos_cliente = $_SESSION['datos_cliente'];
+    $carrito = $_SESSION['carrito'];
+    
+    // Si el usuario ESTÁ logueado, actualizamos su perfil
+    if (isset($_SESSION['usr_id'])) {
         $usr_id = $_SESSION['usr_id'];
-
         $sql_update_user = "UPDATE users SET 
-                                usr_nombre_completo = ?,
-                                usr_email = ?,
-                                usr_telefono = ?,
-                                usr_calle = ?,
-                                usr_colonia = ?,
-                                usr_ciudad = ?,
-                                usr_estado = ?,
-                                usr_cp = ?
+                                usr_nombre_completo = ?, usr_email = ?, usr_telefono = ?, 
+                                usr_calle = ?, usr_colonia = ?, usr_ciudad = ?, 
+                                usr_estado = ?, usr_cp = ?
                             WHERE usr_id = ?";
-        
         $stmt_update = $conexion->prepare($sql_update_user);
         $stmt_update->bind_param("ssssssssi", 
-            $datos_cliente['nombre'],
-            $datos_cliente['email'],
-            $datos_cliente['telefono'],
-            $datos_cliente['calle'],
-            $datos_cliente['colonia'],
-            $datos_cliente['ciudad'],
-            $datos_cliente['estado'],
-            $datos_cliente['cp'],
-            $usr_id
+            $datos_cliente['nombre'], $datos_cliente['email'], $datos_cliente['telefono'],
+            $datos_cliente['calle'], $datos_cliente['colonia'], $datos_cliente['ciudad'],
+            $datos_cliente['estado'], $datos_cliente['cp'], $usr_id
         );
         $stmt_update->execute();
         $stmt_update->close();
     }
+    
+    //LÓGICA PARA INSERTAR LA ORDEN
+    
+    $direccion_completa = $datos_cliente['calle'] . ", " . $datos_cliente['colonia'] . ", " . 
+                          $datos_cliente['ciudad'] . ", " . $datos_cliente['estado'] . ", C.P. " . $datos_cliente['cp'];
 
-    $carrito = $_SESSION['carrito'];
-    $usr_id  = $_SESSION['usr_id'] ?? null;
+    $sql_order = "INSERT INTO orders (ord_date, os_id, usr_id, ord_customer_name, ord_customer_email, ord_customer_phone, ord_shipping_address) 
+                  VALUES (NOW(), ?, ?, ?, ?, ?, ?)";
+    
+    $stmt_order = $conexion->prepare($sql_order);
 
-    $product_ids = array_keys($carrito);
-    $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
-
-    // 4a. Verificar stock
-    $stmt_stock = $conexion->prepare("SELECT prod_id, prod_stock FROM products WHERE prod_id IN ($placeholders) FOR UPDATE");
-    $stmt_stock->bind_param(str_repeat('i', count($product_ids)), ...$product_ids);
-    $stmt_stock->execute();
-    $res_stock = $stmt_stock->get_result();
-
-    $productos_db = [];
-    $stock_suficiente = true;
-    while ($fila = $res_stock->fetch_assoc()) {
-        $productos_db[$fila['prod_id']] = $fila;
-    }
-
-    foreach ($carrito as $prod_id => $cantidad) {
-        if (!isset($productos_db[$prod_id]) || $productos_db[$prod_id]['prod_stock'] < $cantidad) {
-            $stock_suficiente = false;
-            break;
-        }
-    }
-
-    if (!$stock_suficiente) throw new Exception("Stock insuficiente.");
-
-    // 4b. Insertar orden
+    $usr_id_orden = $_SESSION['usr_id'] ?? null;
     $os_id = 1;
-    $stmt_order = $conexion->prepare("INSERT INTO orders (ord_date, os_id, usr_id) VALUES (NOW(), ?, ?)");
-    $stmt_order->bind_param("ii", $os_id, $usr_id);
+
+    $stmt_order->bind_param("iissss", 
+        $os_id, 
+        $usr_id_orden, 
+        $datos_cliente['nombre'], 
+        $datos_cliente['email'],
+        $datos_cliente['telefono'],
+        $direccion_completa
+    );
     $stmt_order->execute();
     $new_ord_id = $conexion->insert_id;
+    $stmt_order->close();
 
-    // 4c. Insertar detalles y actualizar stock
+    // Insertar detalles y actualizar stock
     $stmt_details = $conexion->prepare("INSERT INTO order_details (od_amount, prod_id, ord_id) VALUES (?, ?, ?)");
     $stmt_update_stock = $conexion->prepare("UPDATE products SET prod_stock = prod_stock - ? WHERE prod_id = ?");
 
     foreach ($carrito as $prod_id => $cantidad) {
         $stmt_details->bind_param("iii", $cantidad, $prod_id, $new_ord_id);
         $stmt_details->execute();
-
         $stmt_update_stock->bind_param("ii", $cantidad, $prod_id);
         $stmt_update_stock->execute();
     }
+    $stmt_details->close();
+    $stmt_update_stock->close();
 
     $conexion->commit();
-    unset($_SESSION['carrito']);
-    unset($_SESSION['datos_cliente']);
+    unset($_SESSION['carrito'], $_SESSION['datos_cliente']);
     $_SESSION['last_order_id'] = $new_ord_id;
 
-    file_put_contents($log_file, "5. ÉXITO: Pedido guardado correctamente.\n", FILE_APPEND);
-    header('Location: ../gracias.php?status=success');
+    header('Location: ../html/gracias.php?status=success');
+    exit();
 
 } catch (Exception $e) {
     $conexion->rollback();
     $_SESSION['error_compra'] = "Error al procesar el pedido: " . $e->getMessage();
-    file_put_contents($log_file, "ERROR BDD: " . $e->getMessage() . "\n", FILE_APPEND);
-    header('Location: ../gracias.php?status=error');
+    header('Location: ../html/gracias.php?status=error');
+    exit();
 }
-
-exit();
 ?>

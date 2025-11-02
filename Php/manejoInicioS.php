@@ -1,7 +1,7 @@
 <?php
     session_start();
-    // 1. Usamos la conexión centralizada
-    require_once __DIR__ . '/../db_conexion.php';
+    //Usamos la conexión centralizada
+    require 'db_conexion.php';
 
     // Variables de formulario
     $usr_user = $_POST['usr_user'];
@@ -9,7 +9,7 @@
 
     if(!empty($usr_user) && !empty($usr_password)){
         
-        // 2. La variable $conexion ya viene de db_conexion.php
+        //La variable $conexion ya viene de db_conexion.php
 
         $sql = "SELECT usr_id, usr_password FROM users " .
                "WHERE usr_user = ?";
@@ -31,7 +31,7 @@
 
                 // Redirigir al admin al inventario
                 if($usr_user == "admin"){
-                    header('Location: inventario.php');
+                    header('Location: ../html/inventario.php');
                     exit();
                 }
 
@@ -53,7 +53,7 @@
     }
 
     // Si algo falla, regresa a la página de login
-    header('Location: inicioSesion.php');
+    header('Location: ../html/inicioSesion.php');
     exit();
 ?>
 

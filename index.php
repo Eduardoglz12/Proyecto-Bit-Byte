@@ -1,29 +1,29 @@
 <?php
   session_start();
   // Incluimos la conexión a la BDD
-  require 'db_conexion.php';
+   require 'php/db_conexion.php';
 
-  // --- Lógica de Sesión ---
-  $textoSesion1 = "Iniciar sesion";
-  $linkSesion1 = "php/inicioSesion.php";
-  $textoSesion2 = "Registrarme";
-  $linkSesion2 = "php/registro.php";
+  //Lógica de Sesión
+$textoSesion1 = "Iniciar sesión";
+$linkSesion1 = "html/inicioSesion.php";
+$textoSesion2 = "Registrarme";
+$linkSesion2 = "html/registro.php";
 
     // --- LÓGICA PARA EL HEADER ---
 if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "perfil.php"; // <--- CAMBIO IMPORTANTE
+    $linkSesion1 = "html/perfil.php";
     $textoSesion2 = "Cerrar sesión";
     $linkSesion2 = "php/cerrarSesion.php";
     }
     
-  // --- Lógica del Carrito (para el contador) ---
+  //Lógica del Carrito (para el contador)
   $totalItemsCarrito = 0;
   if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
       $totalItemsCarrito = array_sum($_SESSION['carrito']);
   }
 
-  // --- Lógica para Mensaje de Carrito ---
+  //Lógica para Mensaje de Carrito
   $mensaje_carrito = "";
   if (isset($_SESSION['mensaje_carrito'])) {
       $mensaje_carrito = $_SESSION['mensaje_carrito'];
@@ -52,6 +52,7 @@ if (isset($_SESSION['usr_user'])) {
 </head>
 
 <body>
+
   <header>
     <div class="barra-negra">
         <div class="ba-contenedor">
@@ -97,7 +98,7 @@ if (isset($_SESSION['usr_user'])) {
             <ul>
                 <li><a href="index.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></a></li>
                 <li>|</li>
-                <li><a href="comprar.php">PRODUCTOS</a></li>
+                <li><a href="#">PRODUCTOS</a></li>
                 <li>|</li>
                 <li><a href="#">TIENDAS</a></li>
                 <li>|</li>
@@ -115,7 +116,7 @@ if (isset($_SESSION['usr_user'])) {
                     </form>
                 </li>
                 <li class="carrito">
-                    <a href="carrito.php">
+                    <a href="html/carrito.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
                         <span><?php echo $totalItemsCarrito; ?></span>
                     </a>
@@ -124,6 +125,7 @@ if (isset($_SESSION['usr_user'])) {
         </div>
     </div>
   </header>
+
   <main>
     <div class="contenedor-principal">
       <aside class="columna1">
@@ -159,13 +161,13 @@ if (isset($_SESSION['usr_user'])) {
                 while ($producto = $resultado->fetch_assoc()) {
             ?>
               <div class="producto">
-                <a href="producto.php?id=<?php echo $producto['prod_id']; ?>">
+                <a href="html/producto.php?id=<?php echo $producto['prod_id']; ?>">
                   <img src="<?php echo htmlspecialchars($producto['prod_imagen_url']); ?>" 
                        alt="<?php echo htmlspecialchars($producto['prod_name']); ?>" 
                        loading="lazy"
                        onerror="this.src='https://placehold.co/300x300/333333/f5f5f5?text=Producto'; this.onerror=null;">
                 </a>
-                <a href="producto.php?id=<?php echo $producto['prod_id']; ?>">
+                <a href="html/producto.php?id=<?php echo $producto['prod_id']; ?>">
                   <p class="descripcion"><?php echo htmlspecialchars($producto['prod_name']); ?></p>
                 </a>
                 <p class="precio">$<?php echo number_format($producto['prod_price'], 2); ?></p>
