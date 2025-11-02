@@ -73,6 +73,7 @@ if (isset($_SESSION['usr_user'])) {
   <link rel="stylesheet" href="Css/normalize.css">
   <link rel="preload" href="Css/Inicio.css" as="style">
   <link rel="preload" href="Css/normalize.css" as="style">
+  <link rel="stylesheet" href="Css/checkout_pasos.css">
 </head>
 
 <body>
