@@ -750,9 +750,9 @@ footer {
  /* Reduce el total en la página del carrito */
  .carrito-total-monto {
   font-size: 2rem;
-
+  }
   /* AÑADE ESTA LÍNEA AQUÍ */
-  .checkout-container {
+ .checkout-container {
     grid-template-columns: 1fr;
   }
 
