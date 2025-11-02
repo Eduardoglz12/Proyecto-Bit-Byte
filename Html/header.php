@@ -55,9 +55,9 @@
       <div class="search-form">
         <ul>
           <li>
-            <form action="">
-              <input type="text" placeholder="Buscar...">
-              <button type="submit" class="botonBuscar">Buscar</button>
+            <form action="../index.php" method="GET">
+                <input type="text" name="busqueda" placeholder="Buscar...">
+                <button type="submit" class="botonBuscar">Buscar</button>
             </form>
           </li>
           <li class="carrito">
