@@ -216,6 +216,7 @@ header {
  color: var(--blanco);
  flex: 1;
  min-width: 100px;
+ box-sizing: border-box;
 }
 
 .search-form input[type="text"]::placeholder {
