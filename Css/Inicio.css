@@ -622,21 +622,23 @@ footer {
   /* HEADER - Barra Azul */
   .barra-azul {
     flex-direction: column;
-    padding: 1rem;
+    padding: 1rem !important;
     gap: 1.5rem;
   }
 
   /* Logo */
   .barra-azul .ba-contenedor:first-child {
     width: 100%;
+    flex: none !important;
     justify-content: center;
-    min-width: auto;
+    min-width: auto !important;
   }
 
   /* Menú de navegación */
   .barra-azul .ba-contenedor:nth-child(2) {
     width: 100%;
-    min-width: auto;
+    flex: none !important;
+    min-width: auto !important;
   }
 
   .barra-azul ul {
@@ -649,28 +651,41 @@ footer {
     font-size: 1.4rem;
   }
 
-  /* Barra de búsqueda */
+  /* Barra de búsqueda - CRÍTICO */
   .barra-azul .search-form {
-    width: 100%;
-    min-width: auto;
-    justify-content: center;
+    width: 100% !important;
+    min-width: auto !important;
+    max-width: 100% !important;
+    flex: none !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .search-form form {
-    width: 100%;
-    max-width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
   }
 
   .search-form input[type="text"] {
-    min-width: 0;
-    padding: 0.6rem 0.8rem;
-    font-size: 1.4rem;
+    min-width: 0 !important;
+    max-width: none !important;
+    width: 100% !important;
+    flex: 1 !important;
+    padding: 0.5rem !important;
+    font-size: 1.2rem !important;
+    box-sizing: border-box !important;
   }
 
   .search-form .botonBuscar {
-    padding: 0.6rem 1rem;
-    font-size: 1.4rem;
-    white-space: nowrap;
+    padding: 0.5rem 0.8rem !important;
+    font-size: 1.2rem !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+    min-width: auto !important;
   }
 
   /* CONTENIDO PRINCIPAL */
@@ -832,11 +847,4 @@ footer {
   .grid-productos {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   }
-}
-
-/* Responsivo */
-@media (max-width: 576px) {
-    .form-row { flex-direction: column; gap: 1rem; }
-    .payment-methods { grid-template-columns: 1fr; }
-    .form-container { padding: 1.5rem; }
 }
