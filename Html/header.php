@@ -34,17 +34,8 @@
       <div class="ba-contenedor">
         <a href="../index.php">
           <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
-            <g transform="translate(5, 15)">
-              <rect x="0" y="0" width="10" height="50" fill="#3B82F6" />
-              <rect x="10" y="0" width="10" height="10" fill="#3B82F6" />
-              <rect x="20" y="10" width="10" height="10" fill="#93C5FD" />
-              <rect x="10" y="20" width="10" height="10" fill="#3B82F6" />
-              <rect x="20" y="30" width="10" height="10" fill="#93C5FD" />
-              <rect x="10" y="40" width="10" height="10" fill="#3B82F6" />
-            </g>
-            <text x="55" y="52" font-family="Poppins, sans-serif" font-size="28" font-weight="600" fill="#ffffff" class="dark:fill-white">
-              Bit<tspan fill="#3B82F6">&</tspan>Byte
-            </text>
+            <g transform="translate(5, 15)"><rect x="0" y="0" width="10" height="50" fill="#3B82F6" /><rect x="10" y="0" width="10" height="10" fill="#3B82F6" /><rect x="20" y="10" width="10" height="10" fill="#93C5FD" /><rect x="10" y="20" width="10" height="10" fill="#3B82F6" /><rect x="20" y="30" width="10" height="10" fill="#93C5FD" /><rect x="10" y="40" width="10" height="10" fill="#3B82F6" /></g>
+            <text x="55" y="52" font-family="Poppins, sans-serif" font-size="28" font-weight="600" fill="#93C5FD" class="dark:fill-white">Bit<tspan fill="#3B82F6">&</tspan>Byte</text>
           </svg>
         </a>
       </div>
@@ -52,7 +43,7 @@
         <ul>
           <li><a href="../index.php"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></a></li>
           <li>|</li>
-          <li><a href="comprar.php">PRODUCTOS</a></li>
+          <li><a href="../index.php">PRODUCTOS</a></li>
           <li>|</li>
           <li><a href="#">TIENDAS</a></li>
           <li>|</li>
