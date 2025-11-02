@@ -406,8 +406,9 @@ header {
 }
 
 /*Estilos para la Página del Carrito*/
-.contenedor-principal > .carrito-container {
-  grid-column: 1 / -1;
+.contenedor-principal > .carrito-container,
+.contenedor-principal > .detalle-producto-container {
+ grid-column: 1 / -1;
 }
 
 .carrito-container {
