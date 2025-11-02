@@ -527,7 +527,8 @@ header {
   border: none;
   color: var(--gris);
   cursor: pointer;
-  padding: 0.5rem;
+  /* Padding aumentado para un mejor "tap target" */
+  padding: 1rem; 
   border-radius: 0.5rem;
   transition: all 0.3s ease;
 }
@@ -614,6 +615,12 @@ footer {
     flex-wrap: wrap;
     gap: 1.5rem;
   }
+
+  .barra-negra,
+ .barra-azul {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+ }
 
  .barra-azul .ba-contenedor:first-child,
  .barra-azul .ba-contenedor:nth-child(2),
@@ -728,6 +735,27 @@ footer {
   .btn-checkout {
     width: 100%;
   }
+
+  .carrito-container h1,
+ .detalle-info-compra h1,
+ .producto-no-encontrado h1 {
+  font-size: 2.4rem;
+ }
+
+ /* Reduce el precio en la página de detalles */
+ .detalle-precio {
+  font-size: 3rem;
+ }
+
+ /* Reduce el total en la página del carrito */
+ .carrito-total-monto {
+  font-size: 2rem;
+
+  /* AÑADE ESTA LÍNEA AQUÍ */
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
   /*FIN DE ESTILOS DE TABLA RESPONSIVA*/
 }
 
