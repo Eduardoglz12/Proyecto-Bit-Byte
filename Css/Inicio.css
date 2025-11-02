@@ -659,6 +659,18 @@ footer {
     flex: none !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.5rem !important;
+  }
+
+  .search-form ul {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    order: 2 !important;
   }
 
   .search-form form {
@@ -667,6 +679,7 @@ footer {
     display: flex !important;
     box-sizing: border-box !important;
     margin: 0 !important;
+    order: 1 !important;
   }
 
   .search-form input[type="text"] {
