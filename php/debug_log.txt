@@ -1,0 +1,10 @@
+INICIO DE DEPURACIÓN DE PEDIDO - 2025-11-02 05:31:17
+
+1. Order ID (token) recibido: 6D44176764931160B, PayerID: M55A2GG2JZUWN
+
+2. Token de acceso obtenido.
+
+3. Respuesta de Captura de PayPal:
+{"id":"6D44176764931160B","status":"COMPLETED","payment_source":{"paypal":{"email_address":"sb-y2ts247258516@personal.example.com","account_id":"M55A2GG2JZUWN","account_status":"VERIFIED","name":{"given_name":"Eduardo","surname":"Gonzalez"},"address":{"country_code":"US"}}},"purchase_units":[{"reference_id":"default","shipping":{"name":{"full_name":"Eduardo Gonzalez"},"address":{"address_line_1":"1 Main St","admin_area_2":"San Jose","admin_area_1":"CA","postal_code":"95131","country_code":"US"}},"payments":{"captures":[{"id":"93L6599423235673J","status":"COMPLETED","amount":{"currency_code":"MXN","value":"7797.00"},"final_capture":true,"seller_protection":{"status":"ELIGIBLE","dispute_categories":["ITEM_NOT_RECEIVED","UNAUTHORIZED_TRANSACTION"]},"seller_receivable_breakdown":{"gross_amount":{"currency_code":"MXN","value":"7797.00"},"paypal_fee":{"currency_code":"MXN","value":"281.12"},"net_amount":{"currency_code":"MXN","value":"7515.88"},"receivable_amount":{"currency_code":"USD","value":"397.09"},"exchange_rate":{"source_currency":"MXN","target_currency":"USD","value":"0.052833933608271"}},"links":[{"href":"https://api.sandbox.paypal.com/v2/payments/captures/93L6599423235673J","rel":"self","method":"GET"},{"href":"https://api.sandbox.paypal.com/v2/payments/captures/93L6599423235673J/refund","rel":"refund","method":"POST"},{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/6D44176764931160B","rel":"up","method":"GET"}],"create_time":"2025-11-02T04:31:21Z","update_time":"2025-11-02T04:31:21Z"}]}}],"payer":{"name":{"given_name":"Eduardo","surname":"Gonzalez"},"email_address":"sb-y2ts247258516@personal.example.com","payer_id":"M55A2GG2JZUWN","address":{"country_code":"US"}},"links":[{"href":"https://api.sandbox.paypal.com/v2/checkout/orders/6D44176764931160B","rel":"self","method":"GET"}]}
+
+4. Pago COMPLETADO. Procediendo a guardar en BDD.

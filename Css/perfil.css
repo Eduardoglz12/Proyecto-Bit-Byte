@@ -1,0 +1,133 @@
+
+/*Contenedor Principal del Perfil*/
+.contenedor-principal > .perfil-container {
+    grid-column: 1 / -1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.perfil-container h1 {
+    color: var(--azul-claro);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--gris);
+    padding-bottom: 1rem;
+}
+
+/*Paneles de Contenido*/
+.panel {
+    background-color: var(--gris-oscuro);
+    border: 1px solid var(--gris);
+    border-radius: 0.8rem;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.panel h2 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+}
+
+.form-perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.form-perfil .form-row {
+    display: flex;
+    gap: 2rem;
+}
+.form-perfil .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.form-perfil label { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.form-perfil input {
+    background-color: var(--negro);
+    border: 1px solid var(--gris);
+    color: var(--blanco);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+}
+.form-perfil hr {
+    border: none;
+    border-top: 1px solid var(--gris);
+    margin: 1rem 0;
+}
+.btn-guardar {
+    background-color: var(--azul-bajo);
+    color: var(--blanco);
+    border: none;
+    padding: 1.2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+.btn-guardar:hover { background-color: var(--azul); }
+
+/*Tabla de Historial de Pedidos*/
+.tabla-pedidos {
+    width: 100%;
+    border-collapse: collapse;
+}
+.tabla-pedidos th, .tabla-pedidos td {
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--gris);
+    text-align: left;
+}
+.tabla-pedidos thead th {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: #ccc;
+}
+.estado-pedido {
+    background-color: var(--gris);
+    padding: 0.4rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.btn-ver-detalle {
+    background-color: var(--gris);
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    transition: background-color 0.3s ease;
+}
+.btn-ver-detalle:hover {
+    background-color: var(--azul-bajo);
+}
+
+/*Página de Detalle de Pedido*/
+.btn-volver {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--azul-claro);
+    font-weight: bold;
+}
+.resumen-pedido-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--negro);
+    border-radius: 0.5rem;
+}
+.tabla-detalle tfoot .total-label { text-align: right; font-weight: bold; font-size: 1.8rem; }
+.tabla-detalle tfoot .total-monto { font-weight: bold; color: var(--azul-claro); font-size: 2.2rem; }
+
+/*Banner de Resultado*/
+.resultado-banner {
+    background-color: #1a4d2e;
+    color: #a7f3d0;
+    border: 1px solid #22c55e;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
