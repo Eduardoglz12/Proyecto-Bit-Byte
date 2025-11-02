@@ -40,16 +40,25 @@
                 exit();
             }
             else{
-                $_SESSION['mensajeError'] = "Contraseña incorrecta";
+                $_SESSION['notificacion'] = [
+                'tipo' => 'error',
+                'mensaje' => 'Contraseña incorrecta. Inténtalo de nuevo.'
+                ];
             }
         }
         else{
-            $_SESSION['mensajeError'] = "Usuario no encontrado";
+            $_SESSION['notificacion'] = [
+            'tipo' => 'error',
+            'mensaje' => 'El nombre de usuario no existe.'
+            ];
         }
         $stmt->close();
         $conexion->close();
     } else {
-        $_SESSION['mensajeError'] = "Usuario y contraseña requeridos.";
+        $_SESSION['notificacion'] = [
+        'tipo' => 'error',
+        'mensaje' => 'Usuario y contraseña requeridos.'
+        ];
     }
 
     // Si algo falla, regresa a la página de login

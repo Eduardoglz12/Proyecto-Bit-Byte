@@ -129,3 +129,27 @@ button:hover {
     background-color: var(--rojo-error);
     border-color: #b91c1c;
 }
+
+.btn-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: var(--negro);
+  color: var(--blanco);
+  padding: 0.8rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+  background-color: var(--azul-bajo);
+}
+
+.btn-home svg {
+  fill: var(--blanco);
+}

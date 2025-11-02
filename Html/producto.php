@@ -10,7 +10,7 @@
 
   if(isset($_SESSION['usr_user'])){
     $textoSesion1 = $_SESSION['usr_user'];
-    $linkSesion1 = "#";
+    $linkSesion1 = "perfil.php";
     $textoSesion2 = "Cerrar sesion";
     $linkSesion2 = "../php/cerrarSesion.php";
   }

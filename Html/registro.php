@@ -35,10 +35,15 @@ if (isset($_SESSION['usr_user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/Inicio.css" as="style">
     <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
-    <title>Resgistro</title>
+    <title>Registro</title>
 </head>
 
 <body>
@@ -46,9 +51,21 @@ if (isset($_SESSION['usr_user'])) {
   <?php include 'header.php'; ?>
 
   <div class="cont-principal">
-    <?php if(!empty($resultado)): ?>
-      <p class="resultado"><?php echo"$resultado"; ?></p>
-    <?php endif;?>
+
+    <?php
+    // Lee la notificación de la sesión
+    if (isset($_SESSION['notificacion'])) {
+        $mensaje = $_SESSION['notificacion']['mensaje'];
+        $tipo = $_SESSION['notificacion']['tipo'];
+        
+        // Muestra el div con la clase de tipo correcta
+        echo "<div class='notificacion notificacion-{$tipo}'>" . htmlspecialchars($mensaje) . "</div>";
+        
+        // Limpia la sesión
+        unset($_SESSION['notificacion']);
+    }
+    ?>
+
     <div class="cont-login">
       <form action="../Php/manejoRegistro.php" method="post" class="form-login">
         <p>CREAR USUARIO</p>

@@ -30,6 +30,30 @@ if (isset($_SESSION['usr_user'])) {
       // Borrar el mensaje para que no se muestre de nuevo
       unset($_SESSION['mensaje_carrito']);
   }
+
+  $busqueda = trim($_GET['busqueda'] ?? '');
+
+  //Preparar la consulta a la base de datos
+  if (!empty($busqueda)) {
+      // Si hay un término de búsqueda, filtramos los productos
+      $titulo_pagina = "Resultados para: '" . htmlspecialchars($busqueda) . "'";
+      $sql = "SELECT * FROM products WHERE prod_name LIKE ?";
+      $stmt = $conexion->prepare($sql);
+      
+      $termino_busqueda = "%" . $busqueda . "%";
+      $stmt->bind_param("s", $termino_busqueda);
+      
+  } else {
+      $titulo_pagina = "Nuestros Productos";
+      $sql = "SELECT * FROM products";
+      $stmt = $conexion->prepare($sql);
+  }
+
+  $stmt->execute();
+  $resultado_productos = $stmt->get_result();
+  $stmt->close();
+  $conexion->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -90,7 +114,7 @@ if (isset($_SESSION['usr_user'])) {
             <a href="index.php">
                 <svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
                     <g transform="translate(5, 15)"><rect x="0" y="0" width="10" height="50" fill="#3B82F6" /><rect x="10" y="0" width="10" height="10" fill="#3B82F6" /><rect x="20" y="10" width="10" height="10" fill="#93C5FD" /><rect x="10" y="20" width="10" height="10" fill="#3B82F6" /><rect x="20" y="30" width="10" height="10" fill="#93C5FD" /><rect x="10" y="40" width="10" height="10" fill="#3B82F6" /></g>
-                    <text x="55" y="52" font-family="Poppins, sans-serif" font-size="28" font-weight="600" fill="#ffffff" class="dark:fill-white">Bit<tspan fill="#3B82F6">&</tspan>Byte</text>
+                    <text x="55" y="52" font-family="Poppins, sans-serif" font-size="28" font-weight="600" fill="#93C5FD" class="dark:fill-white">Bit<tspan fill="#3B82F6">&</tspan>Byte</text>
                 </svg>
             </a>
         </div>
@@ -110,8 +134,8 @@ if (isset($_SESSION['usr_user'])) {
         <div class="search-form">
             <ul>
                 <li>
-                    <form action="">
-                        <input type="text" placeholder="Buscar...">
+                    <form action="index.php" method="GET">
+                        <input type="text" name="busqueda" placeholder="Buscar...">
                         <button type="submit" class="botonBuscar">Buscar</button>
                     </form>
                 </li>
@@ -128,75 +152,60 @@ if (isset($_SESSION['usr_user'])) {
 
   <main>
     <div class="contenedor-principal">
-      <aside class="columna1">
-        <ul>
-          <li class="li-titulo">CATEGORIAS</li>
-          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2Z"></path><path d="M12 11v-1"></path><path d="M7 11v-1"></path><path d="M17 11v-1"></path></svg><span> Accesorios</span></a></li>
-          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg><span> Computadoras</span></a></li>
-          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M15 9h-3a3 3 0 1 0 0 6h3"></path><path d="M12 7V5"></path><path d="M12 19v-2"></path><path d="M9 12H7"></path><path d="M17 12h-2"></path></svg><span> Componentes</span></a></li>
-          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg><span> Monitores</span></a></li>
-          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14.22a7.5 7.53 0 0 0-1.42-4.14A7.47 7.47 0 0 0 12 8a7.5 7.5 0 0 0-6 11.23"></path><path d="M16.5 10.5a4.5 4.5 0 1 0-9 0"></path><path d="M12 2v6"></path><path d="M12 19v3"></path><path d="M18.93 18.93l-2.12-2.12"></path><path d="M7.19 7.19 5.07 5.07"></path></svg><span> Audio</span></a></li>
-        </ul>
-      </aside>
-      <section class="columna2">
-        <article class="noticias">
-          <img src="img/banner.png" alt="Banner Noticias" 
-               onerror="this.src='https://placehold.co/969x300/222222/f5f5f5?text=Banner+Noticias'; this.onerror=null;">
-        </article>
-        
-        <?php if (!empty($mensaje_carrito)): ?>
-          <div class="mensaje-carrito-error">
-            <?php echo $mensaje_carrito; ?>
-          </div>
-        <?php endif; ?>
-        
-        <section class="productos">
-          <div class="grid-productos">
-
-            <?php
-              $sql = "SELECT prod_id, prod_name, prod_imagen_url, prod_price FROM products WHERE prod_stock > 0";
-              $resultado = $conexion->query($sql);
-
-              if ($resultado && $resultado->num_rows > 0) {
-                while ($producto = $resultado->fetch_assoc()) {
-            ?>
-              <div class="producto">
-                <a href="html/producto.php?id=<?php echo $producto['prod_id']; ?>">
-                  <img src="<?php echo htmlspecialchars($producto['prod_imagen_url']); ?>" 
-                       alt="<?php echo htmlspecialchars($producto['prod_name']); ?>" 
-                       loading="lazy"
-                       onerror="this.src='https://placehold.co/300x300/333333/f5f5f5?text=Producto'; this.onerror=null;">
-                </a>
-                <a href="html/producto.php?id=<?php echo $producto['prod_id']; ?>">
-                  <p class="descripcion"><?php echo htmlspecialchars($producto['prod_name']); ?></p>
-                </a>
-                <p class="precio">$<?php echo number_format($producto['prod_price'], 2); ?></p>
-                
-                <form action="php/carrito_add.php" method="POST" class="form-carrito">
-                  <input type="hidden" name="prod_id" value="<?php echo $producto['prod_id']; ?>">
-                  <button type="submit" class="btn-agregar-carrito">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
-                    </svg>
-                    <span>Agregar</span>
-                  </button>
-                </form>
-              </div>
-              <?php
-                } 
-              } else {
-                echo "<p>No hay productos disponibles en este momento.</p>";
-              }
-              $conexion->close();
-            ?>
             
-          </div>
-        </section>
-      </section>
-    </div>
-  </main>
-  <footer>
-    Derechos Reservados ©. Bit&Byte
-  </footer>
+            <aside class="columna1">
+              <ul>
+                <li class="li-titulo">CATEGORIAS</li>
+                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 17H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2Z"></path><path d="M12 11v-1"></path><path d="M7 11v-1"></path><path d="M17 11v-1"></path></svg><span> Accesorios</span></a></li>
+                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg><span> Computadoras</span></a></li>
+                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M15 9h-3a3 3 0 1 0 0 6h3"></path><path d="M12 7V5"></path><path d="M12 19v-2"></path><path d="M9 12H7"></path><path d="M17 12h-2"></path></svg><span> Componentes</span></a></li>
+                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path></svg><span> Monitores</span></a></li>
+                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14.22a7.5 7.53 0 0 0-1.42-4.14A7.47 7.47 0 0 0 12 8a7.5 7.5 0 0 0-6 11.23"></path><path d="M16.5 10.5a4.5 4.5 0 1 0-9 0"></path><path d="M12 2v6"></path><path d="M12 19v3"></path><path d="M18.93 18.93l-2.12-2.12"></path><path d="M7.19 7.19 5.07 5.07"></path></svg><span> Audio</span></a></li>
+              </ul>
+            </aside>
+            
+            <div class="columna2">
+
+              <article class="noticias">
+                <img src="img/banner.png" alt="Banner Noticias" 
+                onerror="this.src='https://placehold.co/969x300/222222/f5f5f5?text=Banner+Noticias'; this.onerror=null;">
+              </article>
+
+              <?php if (!empty($mensaje_carrito)): ?>
+                <div class="mensaje-carrito-error">
+                  <?php echo $mensaje_carrito; ?>
+                </div>
+              <?php endif; ?>
+                
+                <h2><?php echo $titulo_pagina; ?></h2>
+
+                <div class="grid-productos">
+                    <?php if ($resultado_productos->num_rows > 0): ?>
+                        <?php while($producto = $resultado_productos->fetch_assoc()): ?>
+                            <div class="producto">
+                                <a href="html/producto.php?id=<?php echo $producto['prod_id']; ?>">
+                                    <img src="<?php echo htmlspecialchars($producto['prod_imagen_url']); ?>" alt="<?php echo htmlspecialchars($producto['prod_name']); ?>">
+                                    <p class="descripcion"><?php echo htmlspecialchars($producto['prod_name']); ?></p>
+                                </a>
+                                <p class="precio">$<?php echo number_format($producto['prod_price'], 2); ?></p>
+                                <form action="php/carrito_add.php" method="POST" class="form-carrito">
+                                    <input type="hidden" name="prod_id" value="<?php echo $producto['prod_id']; ?>">
+                                    <input type="hidden" name="cantidad" value="1">
+                                    <button type="submit" class="btn-agregar-carrito">
+                                        <span>Agregar</span>
+                                    </button>
+                                </form>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p class="carrito-vacio">No se encontraron productos que coincidan con tu búsqueda.</p>
+                    <?php endif; ?>
+                </div>
+            </div> </div> </main>
+    
+    <footer>
+        Derechos Reservados © Bit&Byte
+    </footer>
+    
 </body>
 </html>
