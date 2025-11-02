@@ -26,26 +26,26 @@
   $gran_total = 0.0;
 
   if (!empty($_SESSION['carrito'])) {
-      // 1. Obtener los IDs de los productos del carrito
+      //Obtener los IDs de los productos del carrito
       $product_ids = array_keys($_SESSION['carrito']);
       
-      // 2. Preparar los placeholders para la consulta SQL (ej. ?,?,?)
+      //Preparar los placeholders para la consulta SQL (ej. ?,?,?)
       $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
       
-      // 3. Preparar la consulta
+      //Preparar la consulta
       $sql = "SELECT prod_id, prod_name, prod_imagen_url, prod_price, prod_stock FROM products WHERE prod_id IN ($placeholders)";
       $stmt = $conexion->prepare($sql);
       
-      // 4. Bindear los IDs
+      //Bindear los IDs
       // 'i' se repite por cada ID
       $types = str_repeat('i', count($product_ids));
       $stmt->bind_param($types, ...$product_ids);
       
-      // 5. Ejecutar y obtener resultados
+      //Ejecutar y obtener resultados
       $stmt->execute();
       $resultado = $stmt->get_result();
       
-      // 6. Guardar los datos de los productos en un array para fácil acceso
+      //Guardar los datos de los productos en un array para fácil acceso
       while ($producto = $resultado->fetch_assoc()) {
           $productos_en_carrito[$producto['prod_id']] = $producto;
       }
@@ -132,7 +132,7 @@
                     <form action="../Php/carrito_remove.php" method="POST">
                       <input type="hidden" name="prod_id" value="<?php echo $prod_id; ?>">
                       <button type="submit" class="btn-remove" title="Eliminar producto">
-                        <!-- Icono de "X" o "Basura" -->
+                        <!-- Icono de "X" -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
                       </button>
                     </form>
