@@ -753,9 +753,26 @@ footer {
  .carrito-total-monto {
   font-size: 2rem;
   }
-  /* AÑADE ESTA LÍNEA AQUÍ */
+
  .checkout-container {
     grid-template-columns: 1fr;
+  }
+
+  .barra-azul .search-form ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .barra-azul .search-form li {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+  }
+
+  .search-form form {
+      width: 100%;
+      max-width: 450px; 
   }
 
   /*FIN DE ESTILOS DE TABLA RESPONSIVA*/
