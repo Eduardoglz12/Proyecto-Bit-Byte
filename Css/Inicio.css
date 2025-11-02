@@ -1089,3 +1089,105 @@ footer {
 }
 
 
+@media (max-width: 480px) {
+  /* Evitar paddings grandes que empujan el contenido fuera */
+  .barra-negra,
+  .barra-azul {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* Hacer que los contenedores del header puedan encoger */
+  .barra-negra .ba-contenedor,
+  .barra-azul .ba-contenedor,
+  .barra-azul .search-form {
+    flex: 0 1 auto !important; /* permitir encoger */
+    min-width: 0 !important;   /* important: permite que el flex-item se reduzca */
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Eliminar min-width que provoca overflow */
+  .barra-azul .search-form,
+  .barra-azul .ba-contenedor:first-child {
+    min-width: 0 !important;
+  }
+
+  /* Formulario de búsqueda: ocupen ancho disponible y envuélvanse */
+  .search-form {
+    display: flex !important;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100% !important;
+    justify-content: space-between;
+  }
+
+  .search-form form {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+
+  .search-form input[type="text"] {
+    min-width: 0 !important;   /* clave para evitar overflow en input dentro de flex */
+    flex: 1 1 auto !important;
+    width: 1px; /* hack útil junto con flex para evitar que el input empuje */
+    font-size: 1.4rem !important;
+    padding: 0.6rem 0.8rem !important;
+  }
+
+  .search-form .botonBuscar,
+  .search-form button {
+    flex: 0 0 auto !important;
+    padding: 0.6rem 0.8rem !important;
+    font-size: 1.4rem !important;
+    white-space: nowrap;
+  }
+
+  /* Logo y SVGs deben escalar y no forzar ancho */
+  .logo img,
+  .barra-azul img,
+  .barra-negra img,
+  .barra-azul svg,
+  .barra-negra svg {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Forzar que los items del menú no rompan el layout */
+  .barra-azul ul,
+  .barra-negra ul {
+    flex-wrap: wrap !important;
+    gap: 0.6rem !important;
+  }
+
+  /* Si había paddings grandes en li/a reducirlos */
+  .barra-azul a,
+  .barra-negra a,
+  .barra-azul span {
+    font-size: 1.4rem !important;
+    padding: 0 !important;
+  }
+}
+
+/* Ajuste adicional para pantallas muy estrechas (ej. 360px como POCO M4) */
+@media (max-width: 360px) {
+  .barra-negra,
+  .barra-azul {
+    padding-left: 0.6rem !important;
+    padding-right: 0.6rem !important;
+  }
+
+  .search-form input[type="text"] {
+    font-size: 1.3rem !important;
+    padding: 0.5rem 0.6rem !important;
+  }
+
+  .search-form .botonBuscar,
+  .search-form button {
+    padding: 0.5rem 0.6rem !important;
+    font-size: 1.3rem !important;
+  }
+}

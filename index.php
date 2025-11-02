@@ -69,10 +69,12 @@ if (isset($_SESSION['usr_user'])) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="Css/Inicio.css">
-  <link rel="stylesheet" href="Css/normalize.css">
-  <link rel="preload" href="Css/Inicio.css" as="style">
   <link rel="preload" href="Css/normalize.css" as="style">
+  <link rel="preload" href="Css/Inicio.css" as="style">
+  <link rel="stylesheet" href="Css/normalize.css">
+  <link rel="stylesheet" href="Css/Inicio.css">
+  
+  
 </head>
 
 <body>
