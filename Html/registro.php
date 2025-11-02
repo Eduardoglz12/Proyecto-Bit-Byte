@@ -18,7 +18,7 @@ if (isset($_SESSION['usr_user'])) {
     $textoSesion1 = $_SESSION['usr_user'];
     $linkSesion1 = "perfil.php";
     $textoSesion2 = "Cerrar sesión";
-    $linkSesion2 = "../Php/cerrarSesion.php";
+    $linkSesion2 = "../php/cerrarSesion.php";
     }
     
     
@@ -67,7 +67,7 @@ if (isset($_SESSION['usr_user'])) {
     ?>
 
     <div class="cont-login">
-      <form action="../Php/manejoRegistro.php" method="post" class="form-login">
+      <form action="../php/manejoRegistro.php" method="post" class="form-login">
         <p>CREAR USUARIO</p>
         <label for="usr_user">Usuario:</label>
         <input type="text" name="usr_user" id="usr_user">

@@ -12,7 +12,7 @@
     $textoSesion1 = $_SESSION['usr_user'];
     $linkSesion1 = "perfil.php";
     $textoSesion2 = "Cerrar sesion";
-    $linkSesion2 = "../Php/cerrarSesion.php";
+    $linkSesion2 = "../php/cerrarSesion.php";
   }
 
   //Lógica del Carrito
@@ -114,7 +114,7 @@
                   
                   <!-- Celda Cantidad (Spin Box) -->
                   <td class="cantidad-celda">
-                    <form action="../Php/carrito_update.php" method="POST" class="form-cantidad">
+                    <form action="../php/carrito_update.php" method="POST" class="form-cantidad">
                       <input type="hidden" name="prod_id" value="<?php echo $prod_id; ?>">
                       <input type="number" name="cantidad" value="<?php echo $cantidad; ?>" 
                              min="1" max="<?php echo $producto['prod_stock']; ?>" class="spin-box"
@@ -129,7 +129,7 @@
                   
                   <!-- Celda Eliminar (Botón) -->
                   <td class="eliminar-celda">
-                    <form action="../Php/carrito_remove.php" method="POST">
+                    <form action="../php/carrito_remove.php" method="POST">
                       <input type="hidden" name="prod_id" value="<?php echo $prod_id; ?>">
                       <button type="submit" class="btn-remove" title="Eliminar producto">
                         <!-- Icono de "X" -->
