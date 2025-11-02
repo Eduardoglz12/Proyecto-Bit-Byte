@@ -53,7 +53,7 @@ class PDF extends FPDF {
     function Footer() {
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo(), 0, 0, 'C');
+        $this->Cell(0, 10, @utf8_decode('Página ') . $this->PageNo(), 0, 0, 'C');
     }
 }
 
@@ -64,7 +64,7 @@ $pdf->SetFont('Arial', '', 12);
 
 //Información del Pedido
 $pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(40, 10, utf8_decode('Número de Pedido:'), 0, 0);
+$pdf->Cell(40, 10, @utf8_decode('Número de Pedido:'), 0, 0);
 $pdf->SetFont('Arial', '', 12);
 $pdf->Cell(0, 10, '#' . $pedido['ord_id'], 0, 1);
 
@@ -78,10 +78,10 @@ $pdf->Ln(10);
 $pdf->SetFont('Arial', 'B', 12);
 $pdf->Cell(0, 10, 'Datos del Cliente', 0, 1, 'L');
 $pdf->SetFont('Arial', '', 12);
-$pdf->Cell(0, 7, utf8_decode('Nombre: ' . $pedido['ord_customer_name']), 0, 1);
-$pdf->Cell(0, 7, utf8_decode('Correo: ' . $pedido['ord_customer_email']), 0, 1);
-$pdf->Cell(0, 7, utf8_decode('Teléfono: ' . $pedido['ord_customer_phone']), 0, 1);
-$pdf->Cell(0, 7, utf8_decode('Dirección de Envío: ' . $pedido['ord_shipping_address']), 0, 1);
+$pdf->Cell(0, 7, @utf8_decode('Nombre: ' . $pedido['ord_customer_name']), 0, 1);
+$pdf->Cell(0, 7, @utf8_decode('Correo: ' . $pedido['ord_customer_email']), 0, 1);
+$pdf->Cell(0, 7, @utf8_decode('Teléfono: ' . $pedido['ord_customer_phone']), 0, 1);
+$pdf->Cell(0, 7, @utf8_decode('Dirección de Envío: ' . $pedido['ord_shipping_address']), 0, 1);
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial', 'B', 12);
@@ -97,7 +97,7 @@ while ($item = $detalles_pedido->fetch_assoc()) {
     $subtotal = $item['od_amount'] * $item['prod_price'];
     $gran_total += $subtotal;
     
-    $pdf->Cell(95, 10, utf8_decode($item['prod_name']), 1, 0);
+    $pdf->Cell(95, 10, @utf8_decode($item['prod_name']), 1, 0);
     $pdf->Cell(30, 10, $item['od_amount'], 1, 0, 'C');
     $pdf->Cell(30, 10, '$' . number_format($item['prod_price'], 2), 1, 0, 'R');
     $pdf->Cell(35, 10, '$' . number_format($subtotal, 2), 1, 1, 'R');
