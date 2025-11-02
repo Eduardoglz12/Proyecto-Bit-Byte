@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (isset($_SESSION['usr_user']) && $_SESSION['usr_user'] === 'admin') {
+    header('Location: inventario.php'); 
+    exit();
+}
+
 require '../php/db_conexion.php';
 
     //LÓGICA PARA EL HEADER

@@ -38,7 +38,7 @@ if (isset($_SESSION['usr_user'])) {
     <link rel="stylesheet" href="../CSS/login.css">
     <link rel="stylesheet" href="../CSS/Inicio.css" as="style">
     <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
-    <title>Resgistro</title>
+    <title>Registro</title>
 </head>
 
 <body>
@@ -46,9 +46,21 @@ if (isset($_SESSION['usr_user'])) {
   <?php include 'header.php'; ?>
 
   <div class="cont-principal">
-    <?php if(!empty($resultado)): ?>
-      <p class="resultado"><?php echo"$resultado"; ?></p>
-    <?php endif;?>
+
+    <?php
+    // Lee la notificación de la sesión
+    if (isset($_SESSION['notificacion'])) {
+        $mensaje = $_SESSION['notificacion']['mensaje'];
+        $tipo = $_SESSION['notificacion']['tipo'];
+        
+        // Muestra el div con la clase de tipo correcta
+        echo "<div class='notificacion notificacion-{$tipo}'>" . htmlspecialchars($mensaje) . "</div>";
+        
+        // Limpia la sesión
+        unset($_SESSION['notificacion']);
+    }
+    ?>
+
     <div class="cont-login">
       <form action="../Php/manejoRegistro.php" method="post" class="form-login">
         <p>CREAR USUARIO</p>

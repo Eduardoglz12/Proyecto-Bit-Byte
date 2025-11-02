@@ -32,7 +32,9 @@
     <title>Estado de tu Compra - Bit&Byte</title>
     <link rel="stylesheet" href="../CSS/normalize.css">
     <link rel="stylesheet" href="../CSS/Inicio.css">
-    <link rel="stylesheet" href="../CSS/gracias.css"> </head>
+    <link rel="stylesheet" href="../CSS/gracias.css">
+    <link rel="icon" href="../img/favicon.svg" type="image/svg+xml"> 
+</head>
 <body>
     
     <main class="contenedor-principal">

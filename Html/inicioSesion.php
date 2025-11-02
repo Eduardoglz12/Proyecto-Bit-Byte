@@ -51,10 +51,19 @@ if (isset($_SESSION['usr_user'])) {
 
   <?php include 'header.php'; ?>
 
-  <div class="cont-principal">
-    <?php if(!empty($mensajeError)): ?>
-      <p class="mensajeError"><?php echo"$mensajeError"; ?></p>
-    <?php endif; ?>
+    <div class="cont-principal">
+    
+    <?php
+    if (isset($_SESSION['notificacion'])) {
+        $mensaje = $_SESSION['notificacion']['mensaje'];
+        $tipo = $_SESSION['notificacion']['tipo'];
+        
+        echo "<div class='notificacion notificacion-{$tipo}'>" . htmlspecialchars($mensaje) . "</div>";
+        
+        unset($_SESSION['notificacion']);
+    }
+    ?>
+
     <div class="cont-login">
       <form action="../php/manejoInicioS.php" method="post" class="form-login">
         <p>INICIAR SESION</p>

@@ -20,26 +20,28 @@
 
         try{
             if($stmt->execute()){
-                $_SESSION['resultado'] = "Se realizo el registro con exito";
+                $_SESSION['notificacion'] = [
+                    'tipo' => 'success',
+                    'mensaje' => 'Se realizó el registro con éxito'
+                ];
             }
             else{
-                $_SESSION['resultado'] = "Error: " . $stmt->error;
+                $_SESSION['notificacion'] = ['tipo' => 'error', 'mensaje' => 'Error: ' . $stmt->error];
             }
         }
         catch(mysqli_sql_exception $e){
-            // Error 1062 es para "Entrada duplicada" (username ya existe)
             if($e->getCode() === 1062){
-                $_SESSION['resultado'] = "Nombre de usuario no disponible";
+                $_SESSION['notificacion'] = ['tipo' => 'error', 'mensaje' => 'Nombre de usuario no disponible'];
             }
             else{
-                $_SESSION['resultado'] = "Error: " . $e->getMessage();
+                $_SESSION['notificacion'] = ['tipo' => 'error', 'mensaje' => 'Error: ' . $e->getMessage()];
             }
         }
 
         $stmt->close();
         $conexion->close();
     } else {
-        $_SESSION['resultado'] = "Usuario y contraseña no pueden estar vacíos.";
+        $_SESSION['notificacion'] = ['tipo' => 'error', 'mensaje' => 'Usuario y contraseña no pueden estar vacíos.'];
     }
 
     header('Location: ../html/registro.php');
