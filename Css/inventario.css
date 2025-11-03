@@ -153,3 +153,228 @@ button:hover {
 .btn-home svg {
   fill: var(--blanco);
 }
+
+@media (max-width: 1024px) {
+  body {
+    padding: 1.5rem;
+  }
+
+  caption {
+    font-size: 2rem;
+  }
+
+  th, td {
+    padding: 1rem;
+    font-size: 1.3rem;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 1.3rem;
+    padding: 0.7rem;
+  }
+
+  button {
+    padding: 0.7rem 1.2rem;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .cont-principal {
+    padding: 0;
+  }
+
+  /* Caption fuera de la tabla */
+  caption {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    background-color: var(--gris-oscuro);
+    border-radius: 8px;
+  }
+
+  /* Hacer las tablas responsive */
+  table {
+    border: 0;
+    margin-bottom: 3rem;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tbody {
+    display: block;
+  }
+
+  table tbody tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--gris);
+    border-radius: 8px;
+    background-color: var(--gris-oscuro);
+    padding: 1rem;
+  }
+
+  table tbody tr:hover {
+    background-color: #3a3a3a;
+  }
+
+  table td {
+    display: block;
+    text-align: right;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--gris);
+    position: relative;
+    padding-left: 50%;
+  }
+
+  table td:last-child {
+    border-bottom: none;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 0;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    color: var(--azul-claro);
+  }
+
+  /* Ajustes para inputs y selects en móvil */
+  table td input[type="text"],
+  table td input[type="number"],
+  table td select {
+    width: 100%;
+    font-size: 1.3rem;
+  }
+
+  /* Botones en móvil */
+  table td button {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.3rem;
+    padding: 0.8rem;
+  }
+
+  /* Fila de formulario de agregar producto */
+  table tfoot tr {
+    display: block;
+    border: 2px solid var(--azul-bajo);
+    padding: 1rem;
+  }
+
+  table tfoot td {
+    display: block;
+    padding: 0.8rem 0;
+    text-align: left;
+    padding-left: 0;
+  }
+
+  table tfoot td::before {
+    display: block;
+    position: static;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Mensajes de resultado */
+  .resultado {
+    font-size: 1.4rem;
+    padding: 1.2rem;
+  }
+
+  /* Botón home */
+  .btn-home {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  caption {
+    font-size: 1.6rem;
+    padding: 0.8rem;
+  }
+
+  table td {
+    padding: 0.6rem 0;
+    font-size: 1.2rem;
+  }
+
+  table td::before {
+    font-size: 1.1rem;
+    width: 40%;
+    padding-left: 0;
+  }
+
+  table td {
+    padding-left: 42%;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select {
+    font-size: 1.2rem;
+    padding: 0.6rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .btn-home {
+    font-size: 1.2rem;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .resultado {
+    font-size: 1.3rem;
+    padding: 1rem;
+  }
+}
+
+/* Estilos adicionales para mejorar la usabilidad en móviles */
+@media (max-width: 768px) {
+  /* Asegurar que los inputs no se desborden */
+  input[type="text"],
+  input[type="number"],
+  select {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Mejorar tap targets para botones */
+  button {
+    min-height: 44px; /* Recomendación de Apple para touch targets */
+  }
+
+  /* Espaciado entre campos en formulario de agregar */
+  table tfoot td {
+    margin-bottom: 0.5rem;
+  }
+
+  table tfoot td:last-child {
+    margin-bottom: 0;
+    margin-top: 1rem;
+  }
+}
