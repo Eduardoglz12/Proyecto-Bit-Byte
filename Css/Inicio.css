@@ -1024,7 +1024,9 @@ footer {
     align-items: center;
     gap: 1.5rem;
     padding-left: 1rem !important;
+    padding-right: 1rem !important;
     text-align: left !important;
+    justify-content: flex-start !important;
   }
 
   .producto-celda::before {
@@ -1034,6 +1036,12 @@ footer {
   .producto-celda .carrito-img {
     float: none;
     margin-right: 0;
+    flex-shrink: 0;
+  }
+
+  .producto-celda span {
+    flex: 1;
+    text-align: left !important;
   }
 
   .cantidad-celda .form-cantidad {
