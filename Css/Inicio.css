@@ -717,6 +717,145 @@ footer {
   margin-bottom: 1.5rem;
 }
 
+/*ESTILO PARA LA PÁGINA DE CHECKOUT (comprar.php)*/
+
+.checkout-container {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  background-color: var(--gris-oscuro);
+  padding: 3rem;
+  border-radius: 0.8rem;
+}
+
+.resumen-pedido {
+  background-color: var(--negro);
+  padding: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--gris);
+}
+
+.resumen-pedido h2 {
+  font-size: 2.2rem;
+  color: var(--azul-claro);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gris);
+}
+
+.resumen-producto {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.resumen-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.resumen-info {
+  flex-grow: 1;
+}
+
+.resumen-nombre {
+  font-weight: 500;
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.resumen-cantidad {
+  font-size: 1.2rem;
+  color: var(--gris);
+  margin: 0;
+}
+
+.resumen-subtotal {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.resumen-total {
+  border-top: 1px solid var(--gris);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.resumen-total .total-monto {
+  font-size: 2.4rem;
+  color: var(--azul-claro);
+}
+
+.form-datos-cliente h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.form-datos-cliente .campo {
+  margin-bottom: 1.5rem;
+}
+
+.form-datos-cliente label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-datos-cliente input[type="text"],
+.form-datos-cliente input[type="email"],
+.form-datos-cliente input[type="tel"],
+.form-datos-cliente textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--gris);
+  background-color: var(--negro);
+  color: var(--blanco);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+}
+
+/*Opciones de pago */
+.opciones-pago {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  background-color: var(--negro);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.opciones-pago label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--gris);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.opciones-pago input[type="radio"] {
+  accent-color: var(--azul-bajo);
+}
+
+.btn-checkout.disabled {
+  background-color: var(--gris);
+  cursor: not-allowed;
+}
+
+
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {
   /* HEADER - Barra Negra */
