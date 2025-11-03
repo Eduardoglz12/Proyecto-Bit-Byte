@@ -1088,41 +1088,76 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  /* PÁGINA DE DETALLES */
+  /* PÁGINA DE DETALLES - MÓVIL */
   .detalle-producto-container {
-    grid-template-columns: 1fr;
-    padding: 1.5rem !important;
+    grid-template-columns: 1fr !important;
+    padding: 1rem !important;
+    gap: 1.5rem !important;
+  }
+
+  .detalle-imagen-principal {
+    width: 100% !important;
   }
 
   .detalle-imagen-principal img {
-    max-height: 300px !important;
-    object-fit: contain !important;
+    max-height: 250px !important;
+    width: 100% !important;
   }
 
   .detalle-info-compra {
     grid-row: 2 / 3;
+    grid-column: 1 !important;
+    width: 100% !important;
   }
 
   .detalle-info-compra h1 {
     font-size: 2rem !important;
+    line-height: 1.3 !important;
   }
 
   .detalle-precio {
     font-size: 2.4rem !important;
+    margin-bottom: 1.5rem !important;
   }
 
-  /* Control de cantidad con más espacio */
   .control-cantidad {
-    gap: 1.5rem !important;
+    gap: 1rem !important;
+    flex-wrap: wrap !important;
     margin-bottom: 1.5rem !important;
+  }
+
+  .control-cantidad label {
+    font-size: 1.4rem !important;
+    width: 100% !important;
+  }
+
+  .control-cantidad .spin-box {
+    width: 100% !important;
+    max-width: 150px !important;
   }
 
   .form-detalle-carrito {
     padding: 1.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .form-detalle-carrito .btn-agregar-carrito {
     margin-top: 1rem !important;
+    width: 100% !important;
+  }
+
+  .detalle-stock {
+    font-size: 1.6rem !important;
+  }
+
+  .detalle-especificaciones {
+    padding: 1.5rem !important;
+    margin-top: 1.5rem !important;
+  }
+
+  .detalle-especificaciones h2 {
+    font-size: 2rem !important;
   }
 }
 
