@@ -131,3 +131,220 @@
     margin-bottom: 2rem;
     text-align: center;
 }
+
+@media (max-width: 768px) {
+  /* Contenedor principal del perfil */
+  .contenedor-principal > .perfil-container {
+    grid-column: 1 / -1;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .perfil-container h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Paneles */
+  .panel {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .panel h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Formulario de perfil */
+  .form-perfil {
+    gap: 1rem;
+  }
+
+  .form-perfil .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-perfil label {
+    font-size: 1.3rem;
+  }
+
+  .form-perfil input {
+    padding: 0.8rem;
+    font-size: 1.5rem;
+  }
+
+  .btn-guardar {
+    width: 100%;
+    align-self: stretch;
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+
+  /* Tabla de pedidos - Responsive */
+  .tabla-pedidos {
+    font-size: 1.4rem;
+  }
+
+  .tabla-pedidos thead {
+    display: none;
+  }
+
+  .tabla-pedidos tbody tr {
+    display: block;
+    margin-bottom: 2rem;
+    border: 1px solid var(--gris);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    padding: 1rem;
+  }
+
+  .tabla-pedidos td {
+    display: block;
+    text-align: right;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--gris);
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .tabla-pedidos td:last-child {
+    border-bottom: none;
+  }
+
+  .tabla-pedidos td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 0;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    color: var(--azul-claro);
+  }
+
+  .estado-pedido {
+    display: inline-block;
+    font-size: 1.1rem;
+  }
+
+  .btn-ver-detalle {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Resumen de pedido info */
+  .resumen-pedido-info {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .resumen-pedido-info > div {
+    width: 100%;
+  }
+
+  /* Tabla de detalle */
+  .tabla-detalle {
+    font-size: 1.4rem;
+  }
+
+  .tabla-detalle thead {
+    display: none;
+  }
+
+  .tabla-detalle tbody tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--gris);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    padding: 1rem;
+  }
+
+  .tabla-detalle td {
+    display: block;
+    text-align: right;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--gris);
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .tabla-detalle td:last-child {
+    border-bottom: none;
+  }
+
+  .tabla-detalle td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 45%;
+    padding-left: 0;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    color: var(--azul-claro);
+  }
+
+  .tabla-detalle tfoot tr {
+    border: none;
+    padding: 0;
+  }
+
+  .tabla-detalle tfoot td {
+    padding: 1rem 0;
+  }
+
+  .tabla-detalle tfoot .total-label,
+  .tabla-detalle tfoot .total-monto {
+    text-align: right !important;
+    font-size: 1.8rem;
+  }
+
+  .tabla-detalle tfoot .total-label::before,
+  .tabla-detalle tfoot .total-monto::before {
+    display: none;
+  }
+
+  /* Banner de resultado */
+  .resultado-banner {
+    padding: 1.2rem;
+    font-size: 1.4rem;
+  }
+
+  /* Botón volver */
+  .btn-volver {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-container h1 {
+    font-size: 2rem;
+  }
+
+  .panel h2 {
+    font-size: 1.6rem;
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+
+  .form-perfil input {
+    font-size: 1.4rem;
+  }
+
+  .btn-guardar {
+    font-size: 1.4rem;
+  }
+}

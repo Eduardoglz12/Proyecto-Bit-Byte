@@ -57,6 +57,7 @@ $historial_pedidos = $stmt_orders->get_result();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil - Bit&Byte</title>
     <link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../Css/normalize.css">
@@ -138,10 +139,10 @@ $historial_pedidos = $stmt_orders->get_result();
                         <tbody>
                             <?php while ($pedido = $historial_pedidos->fetch_assoc()): ?>
                                 <tr>
-                                    <td>#<?= $pedido['ord_id'] ?></td>
-                                    <td><?= date("d/m/Y", strtotime($pedido['ord_date'])) ?></td>
-                                    <td><span class="estado-pedido"><?= htmlspecialchars($pedido['os_name']) ?></span></td>
-                                    <td>
+                                    <td data-label="ID Pedido">#<?= $pedido['ord_id'] ?></td>
+                                    <td data-label="Fecha"><?= date("d/m/Y", strtotime($pedido['ord_date'])) ?></td>
+                                    <td data-label="Estado"><span class="estado-pedido"><?= htmlspecialchars($pedido['os_name']) ?></span></td>
+                                    <td data-label="Acción">
                                         <a href="pedido_detalle.php?id=<?= $pedido['ord_id'] ?>" class="btn-ver-detalle">Ver Detalle</a>
                                     </td>
                                 </tr>
