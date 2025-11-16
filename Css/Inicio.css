@@ -1189,3 +1189,50 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   }
 }
+
+/* --- Estilos para el Slider (Slick) --- */
+.hero-slider .slick-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 300px; /* Ajusta la altura del banner */
+    border-radius: 0.8rem;
+}
+
+/* Estilos para las flechas (para que se vean bien en tu tema oscuro) */
+.slick-prev:before, .slick-next:before {
+    font-size: 30px !important;
+    color: var(--blanco) !important;
+    opacity: 0.5 !important;
+}
+.slick-prev:hover:before, .slick-next:hover:before {
+    opacity: 1 !important;
+}
+
+#btn-volver-arriba {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background-color: var(--azul-bajo);
+    color: var(--blanco);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: background-color 0.3s, opacity 0.3s;
+    
+    /* Centrar el SVG */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#btn-volver-arriba:hover {
+    background-color: var(--azul);
+}
+#btn-volver-arriba svg {
+    fill: var(--blanco);
+}

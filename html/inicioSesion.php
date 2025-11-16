@@ -84,6 +84,9 @@ if (isset($_SESSION['usr_user'])) {
   <footer>
         Derechos Reservados © Bit&Byte
   </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="../js/main.js"></script>
     
 </body>
 </html>

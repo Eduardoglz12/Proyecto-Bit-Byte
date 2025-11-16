@@ -74,6 +74,8 @@ if (isset($_SESSION['usr_user'])) {
   <link rel="stylesheet" href="Css/normalize.css">
   <link rel="stylesheet" href="Css/Inicio.css">
   
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
   
 </head>
 
@@ -168,10 +170,15 @@ if (isset($_SESSION['usr_user'])) {
             
             <div class="columna2">
 
-              <article class="noticias">
-                <img src="img/banner.png" alt="Banner Noticias" 
-                onerror="this.src='https://placehold.co/969x300/222222/f5f5f5?text=Banner+Noticias'; this.onerror=null;">
-              </article>
+            <article class="noticias">
+                <div class="hero-slider">
+                    <div><img src="img/banner1.webp" alt="Banner Promoción 1"></div>
+                    <div><img src="img/banner2.webp" alt="Banner Promoción 2"></div>
+                    <div><img src="img/banner3.webp" alt="Banner Promoción 3"></div>
+                    <div><img src="img/banner4.webp" alt="Banner Promoción 4"></div>
+                    <div><img src="img/banner5.webp" alt="Banner Promoción 5"></div>
+                </div>
+            </article>
 
               <?php if (!empty($mensaje_carrito)): ?>
                 <div class="mensaje-carrito-error">
@@ -209,5 +216,9 @@ if (isset($_SESSION['usr_user'])) {
         Derechos Reservados © Bit&Byte
     </footer>
     
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
 </html>

@@ -76,23 +76,26 @@ unset($_SESSION['error_datos'], $_SESSION['form_data']);
                     <div class="error-banner"><?= htmlspecialchars($error_msg) ?></div>
                 <?php endif; ?>
 
-                <form action="../php/validar_datos.php" method="POST" class="customer-form">
+                <form action="../php/validar_datos.php" method="POST" class="customer-form" id="form-datos-cliente">
                     <fieldset>
                         <legend>1. Información de Contacto</legend>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="nombre">Nombre Completo</label>
                                 <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($datos_usuario['usr_nombre_completo'] ?? $form_data['nombre'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-nombre"></span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="email">Correo Electrónico</label>
                                 <input type="email" id="email" name="email" value="<?= htmlspecialchars($datos_usuario['usr_email'] ?? $form_data['email'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-email"></span>
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Teléfono de Contacto</label>
                                 <input type="tel" id="telefono" name="telefono" value="<?= htmlspecialchars($datos_usuario['usr_telefono'] ?? $form_data['telefono'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-telefono"></span>
                             </div>
                         </div>
                     </fieldset>
@@ -103,26 +106,31 @@ unset($_SESSION['error_datos'], $_SESSION['form_data']);
                             <div class="form-group full-width">
                                 <label for="calle">Calle y Número</label>
                                 <input type="text" id="calle" name="calle" value="<?= htmlspecialchars($datos_usuario['usr_calle'] ?? $form_data['calle'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-calle"></span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="colonia">Colonia</label>
                                 <input type="text" id="colonia" name="colonia" value="<?= htmlspecialchars($datos_usuario['usr_colonia'] ?? $form_data['colonia'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-colonia"></span>
                             </div>
                             <div class="form-group">
                                 <label for="cp">Código Postal</label>
                                 <input type="text" id="cp" name="cp" value="<?= htmlspecialchars($datos_usuario['usr_cp'] ?? $form_data['cp'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-cp"></span>
                             </div>
                         </div>
-                         <div class="form-row">
+                        <div class="form-row">
                             <div class="form-group">
                                 <label for="ciudad">Ciudad</label>
                                 <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($datos_usuario['usr_ciudad'] ?? $form_data['ciudad'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-ciudad"></span>
                             </div>
                             <div class="form-group">
                                 <label for="estado">Estado</label>
                                 <input type="text" id="estado" name="estado" value="<?= htmlspecialchars($datos_usuario['usr_estado'] ?? $form_data['estado'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-estado"></span>
                             </div>
                         </div>
                     </fieldset>
@@ -134,8 +142,14 @@ unset($_SESSION['error_datos'], $_SESSION['form_data']);
     </div>
 
     <footer>
+        <a href="#" id="btn-volver-arriba">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>
+        </a>     
         Derechos Reservados © Bit&Byte
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/main.js"></script>
 
     </body>
 </html>
