@@ -252,3 +252,11 @@ input:-webkit-autofill:active {
 .btn-pago-tarjeta:hover {
     background-color: var(--azul);
 }
+
+.error-texto {
+    color: var(--rojo-error);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    display: none; /* Oculto por defecto */
+}

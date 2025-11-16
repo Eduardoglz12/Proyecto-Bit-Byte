@@ -99,7 +99,14 @@ $gran_total = 0;
     </div>
 
     <footer>
+        <a href="#" id="btn-volver-arriba">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>
+        </a> 
         Derechos Reservados © Bit&Byte
     </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/main.js"></script>
+
 </body>
 </html>
