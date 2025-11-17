@@ -1266,17 +1266,18 @@ max-width: 100% !important;
 }
 /* Cada slide individual - CRÍTICO: Fijar dimensiones */
 .hero-slider .slick-slide {
-display: none;
 float: left;
 height: 464px;
 min-height: 1px;
 width: 100% !important;
 max-width: 100% !important;
 position: relative;
+outline: none;
 }
-/* Solo el slide activo se muestra */
-.hero-slider .slick-slide.slick-active {
-display: block;
+/* Permitir que Slick controle la visibilidad */
+.hero-slider .slick-slide {
+opacity: 1;
+transition: opacity 0.3s ease;
 }
 /* Wrapper interno del slide (div generado por Slick) */
 .hero-slider .slick-slide > div {
