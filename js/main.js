@@ -2,38 +2,18 @@
 // 1. INICIALIZAR EL SLIDER - SOLUCIÓN CORRECTA
 // ==========================================
 
-$(window).on('load', function(){
-    
-    if ($('.hero-slider').length) {
-        
-        // Destruir cualquier instancia previa
-        if ($('.hero-slider').hasClass('slick-initialized')) {
-            $('.hero-slider').slick('unslick');
-        }
-        
-        // NO manipular CSS de las imágenes - dejar que el CSS haga su trabajo
-        
-        // Inicializar Slick sin opciones problemáticas
-        $('.hero-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 800,
-            fade: false,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 4000,
-            arrows: true,
-            pauseOnHover: true,
-            cssEase: 'ease-in-out',
-            adaptiveHeight: false,
-            draggable: true,
-            swipe: true
-        });
-        
-        console.log('Slider inicializado correctamente');
-    }
+$(document).ready(function(){
+    $('.hero-slider').slick({
+        autoplay: true,          // Reproducción automática
+        autoplaySpeed: 3000,     // Velocidad en ms (3 segundos)
+        dots: true,              // Mostrar puntos de navegación
+        arrows: true,            // Mostrar flechas
+        infinite: true,          // Bucle infinito
+        slidesToShow: 1,         // Mostrar 1 slide a la vez
+        slidesToScroll: 1        // Desplazar 1 slide
+    });
 });
+
 
 // ==========================================
 // 2. VALIDACIÓN DE FORMULARIOS
