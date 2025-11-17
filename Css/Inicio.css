@@ -1233,3 +1233,61 @@ footer {
     width: 100%;
     height: auto;
 }
+
+/* Personalización de los puntos de navegación (dots) del slider Slick */
+.slick-dots {
+    bottom: 10px; /* Ajusta la posición vertical si es necesario */
+}
+.slick-dots li {
+    margin: 0 5px; /* Espacio entre dots */
+}
+.slick-dots li button:before {
+    font-size: 14px; /* Aumenta el tamaño (original es ~10px) */
+    color: #93C5FD; /* Azul claro para inactivos (cambia a #3B82F6 si quieres más oscuro) */
+    opacity: 0.7; /* Un poco transparente para inactivos */
+}
+.slick-dots li.slick-active button:before {
+    color: #3B82F6; /* Azul más fuerte para el dot activo */
+    opacity: 1; /* Totalmente visible */
+}
+/* Opcional: Agregar un borde o sombra para más visibilidad en fondos grises */
+.slick-dots li button {
+    border: 2px solid transparent; /* Borde invisible por defecto */
+}
+.slick-dots li.slick-active button {
+    border-color: #3B82F6; /* Borde azul para el activo */
+}
+
+/* Media queries para responsividad del slider */
+@media (max-width: 768px) { /* Tablets y móviles */
+    .hero-slider {
+        max-width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+        height: auto; /* Ajusta altura automáticamente */
+    }
+    
+    .hero-slider img {
+        height: 200px; /* Reduce altura de imágenes para móviles */
+        object-fit: cover; /* Asegura que las imágenes se ajusten sin deformarse */
+    }
+    
+    .slick-dots {
+        bottom: 5px; /* Acerca los dots en móviles */
+    }
+    
+    .slick-dots li button:before {
+        font-size: 12px; /* Dots un poco más pequeños en móviles */
+    }
+}
+@media (max-width: 480px) { /* Móviles pequeños */
+    .hero-slider img {
+        height: 150px; /* Aún más pequeño */
+    }
+    
+    .slick-prev, .slick-next { /* Flechas de navegación */
+        display: none; /* Oculta flechas en móviles para simplificar (opcional) */
+    }
+    
+    .slick-dots li {
+        margin: 0 3px; /* Menos espacio entre dots */
+    }
+}
