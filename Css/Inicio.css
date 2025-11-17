@@ -1318,14 +1318,15 @@ footer {
     .hero-slider img {
     width: 95%;
     height: auto;
-  }
+    margin: 0 auto; 
+    }
 
     /* 3. Reducimos la altura a 30% de la altura de la pantalla */
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
-        height: 30vh; /* 30% de la altura de la pantalla */
-        width: 50vh;
+        height: 35vh; /* 30% de la altura de la pantalla */
+        width: 40vh;
     }
   
     .hero-slider .slick-prev,
