@@ -1225,7 +1225,7 @@ footer {
 }
 
 /* ===============================================
-   ESTILOS PARA EL SLIDER - FUNCIONANDO
+   ESTILOS PARA EL SLIDER - VERSIÓN FINAL CON !IMPORTANT
    =============================================== */
 
 .noticias {
@@ -1237,27 +1237,37 @@ footer {
 
 .hero-slider {
   position: relative;
+  width: 100%;
+  max-width: 100%;
 }
 
 .hero-slider .slick-list {
-  overflow: hidden;
-  height: 464px;
+  overflow: hidden !important;
+  height: 464px !important;
+}
+
+.hero-slider .slick-track {
+  height: 464px !important;
 }
 
 .hero-slider .slick-slide {
-  height: 464px;
-  overflow: hidden;
+  height: 464px !important;
+  overflow: hidden !important;
 }
 
 .hero-slider .slick-slide > div {
-  height: 100%;
+  height: 464px !important;
+  width: 100% !important;
+  overflow: hidden !important;
 }
 
-.hero-slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.hero-slider .slick-slide img {
+  width: 100% !important;
+  height: 464px !important;
+  max-width: 100% !important;
+  max-height: 464px !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 .hero-slider .slick-prev,
@@ -1307,17 +1317,29 @@ footer {
 
 @media (max-width: 768px) {
   .hero-slider .slick-list,
+  .hero-slider .slick-track,
   .hero-slider .slick-slide,
   .hero-slider .slick-slide > div {
-    height: 300px;
+    height: 300px !important;
+  }
+  
+  .hero-slider .slick-slide img {
+    height: 300px !important;
+    max-height: 300px !important;
   }
 }
 
 @media (max-width: 480px) {
   .hero-slider .slick-list,
+  .hero-slider .slick-track,
   .hero-slider .slick-slide,
   .hero-slider .slick-slide > div {
-    height: 200px;
+    height: 200px !important;
+  }
+  
+  .hero-slider .slick-slide img {
+    height: 200px !important;
+    max-height: 200px !important;
   }
   
   .hero-slider .slick-prev,
