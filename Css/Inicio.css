@@ -597,6 +597,7 @@ footer {
  background-color: var(--gris-oscuro);
  color: var(--blanco);
  font-size: 1.4rem;
+ width: 100%;
 }
 
 /*Codigo faltante */
@@ -1193,7 +1194,7 @@ footer {
 /* Estilos para el botón "Volver arriba" */
 
 #btn-volver-arriba {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -1208,7 +1209,7 @@ footer {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transition: background-color 0.3s, opacity 0.3s;
     
-    /* Centrar el SVG */
+
     justify-content: center;
     align-items: center;
 }
@@ -1226,8 +1227,8 @@ footer {
 
 .hero-slider {
     width: 100%;
-    max-width: 900px;  /* Ajusta el ancho */
-    margin: 0 auto;    /* Centrar */
+    max-width: 900px; 
+    margin: 0 auto;    
 }
 .hero-slider img {
     width: 100%;
@@ -1285,27 +1286,26 @@ footer {
   line-height: 20px;
   top: 0;
   left: 0;
-  width: 25px; /* <-- Ajustado */
-  height: 25px; /* <-- Ajustado */
+  width: 25px;
+  height: 25px; 
   content: '•';
   text-align: center; 
-  opacity: 1; /* <-- Sin opacidad */
-  color: var(--gris); /* <-- COLOR AZUL/GRISÁCEO OPACO */
-  text-shadow: none; /* Quitamos la sombra de texto */
+  opacity: 1;
+  color: var(--gris); 
+  text-shadow: none; 
 }
 .hero-slider .slick-dots li.slick-active button:before {
   opacity: 1;
-  color: var(--azul-bajo); /* <-- COLOR AZUL ACTIVO (ya estaba bien) */
+  color: var(--azul-bajo);
 }
 
-/* --- BREAKPOINT (Tablets y Móviles Grandes) --- */
+
 @media (max-width: 768px) {
     
-    /* Ajusta la altura del slider */
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
-        height: 300px; /* Reducimos la altura de 464px a 300px */
+        height: 300px;
     }
 
     .hero-slider .slick-slide img {
@@ -1314,13 +1314,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-
-    /* * 1. QUITA LAS REGLAS DE ANCHO QUE AÑADIMOS *
-     * Borra los bloques .hero-slider y .hero-slider .slick-slide
-     * que tenían 'width: 100% !important;'.
-    */
-
-    /* 2. DEJA SOLO la altura y la imagen (que estaban bien) */
     .hero-slider .slick-list,
     .hero-slider .slick-slide > div {
         height: 25vh; 

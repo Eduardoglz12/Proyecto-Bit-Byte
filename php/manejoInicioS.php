@@ -9,7 +9,6 @@
 
     if(!empty($usr_user) && !empty($usr_password)){
         
-        //La variable $conexion ya viene de db_conexion.php
 
         $sql = "SELECT usr_id, usr_password FROM users " .
                "WHERE usr_user = ?";

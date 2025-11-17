@@ -74,36 +74,41 @@ unset($_SESSION['error_tarjeta']); // Limpiamos la sesión para no mostrar el er
                 <div class="payment-methods">
                     <div class="payment-box">
                         <h3>💳 Tarjeta de Crédito/Débito</h3>
-                        <form action="../php/procesar_pago_tarjeta.php" method="POST" class="tarjeta-form">
+                        
+                        <form action="../php/procesar_pago_tarjeta.php" method="POST" class="tarjeta-form" id="form-tarjeta">
                             <div class="form-group">
                                 <label for="nombre_tarjeta">Nombre del Titular</label>
                                 <input type="text" id="nombre_tarjeta" name="nombre_tarjeta" required>
+                                <span class="error-texto" id="error-nombre-tarjeta"></span>
                             </div>
                             <div class="form-group">
                                 <label for="numero_tarjeta">Número de Tarjeta</label>
                                 <input type="text" id="numero_tarjeta" name="numero_tarjeta" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                                <span class="error-texto" id="error-numero-tarjeta"></span>
                             </div>
                             <div class="tarjeta-form-row">
                                 <div class="form-group">
                                     <label>Fecha de Vencimiento</label>
                                     <div class="fecha-grupo">
-                                        <select name="mes_vencimiento" required>
+                                        <select name="mes_vencimiento" id="mes_vencimiento" required>
                                             <?php for ($i = 1; $i <= 12; $i++): ?>
                                                 <option value="<?= str_pad($i, 2, '0', STR_PAD_LEFT) ?>"><?= str_pad($i, 2, '0', STR_PAD_LEFT) ?></option>
                                             <?php endfor; ?>
                                         </select>
                                         <span>/</span>
-                                        <select name="ano_vencimiento" required>
+                                        <select name="ano_vencimiento" id="ano_vencimiento" required>
                                             <?php $ano_actual = date('Y'); ?>
                                             <?php for ($i = 0; $i < 10; $i++): ?>
                                                 <option value="<?= $ano_actual + $i ?>"><?= $ano_actual + $i ?></option>
                                             <?php endfor; ?>
                                         </select>
                                     </div>
+                                    <span class_name="error-texto" id="error-fecha"></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="cvv">CVV</label>
                                     <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                                    <span class_name="error-texto" id="error-cvv"></span>
                                 </div>
                             </div>
                             <button type="submit" class="btn-pago-tarjeta">Pagar con Tarjeta</button>

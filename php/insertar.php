@@ -13,7 +13,6 @@
     //Validar que todos los campos, incluido el nuevo, no estén vacíos
     if(!empty($prod_name) && !empty($prod_imagen_url) && !empty($prod_spec_url) && !empty($prod_stock) && !empty($prod_price)){
         
-        // La variable $conexion ya viene de db_conexion.php
 
         //Actualizar la consulta SQL para incluir la nueva columna
         $sql = "INSERT INTO products(prod_name, prod_imagen_url, prod_spec_url, prod_stock, prod_price)" .

@@ -67,12 +67,21 @@ if (isset($_SESSION['usr_user'])) {
     ?>
 
     <div class="cont-login">
-      <form action="../php/manejoRegistro.php" method="post" class="form-login">
+      <form action="../php/manejoRegistro.php" method="post" class="form-login" id="form-registro">
         <p>CREAR USUARIO</p>
+        
         <label for="usr_user">Usuario:</label>
         <input type="text" name="usr_user" id="usr_user">
+        <span class="error-texto" id="error-usuario"></span>
+        
         <label for="usr_password">Contraseña:</label>
         <input type="password" name="usr_password" id="usr_password">
+        <span class="error-texto" id="error-password"></span>
+
+        <label for="usr_password_confirm">Confirmar Contraseña:</label>
+        <input type="password" name="usr_password_confirm" id="usr_password_confirm">
+        <span class="error-texto" id="error-password-confirm"></span>
+        
         <button type="submit">Registrarme</button>
       </form>
     </div>
