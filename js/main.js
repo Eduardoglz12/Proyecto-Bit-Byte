@@ -16,7 +16,7 @@ $(window).on('load', function(){
             dots: true,
             infinite: true,
             speed: 800,
-            fade: true,              // CAMBIO CRÍTICO: false en lugar de true
+            fade: false,              // CAMBIO CRÍTICO: false en lugar de true
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
