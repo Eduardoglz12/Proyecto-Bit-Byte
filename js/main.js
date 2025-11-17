@@ -1,33 +1,38 @@
 // ==========================================
-// 1. INICIALIZAR EL SLIDER (SOLUCIÓN DEFINITIVA)
+// 1. INICIALIZAR EL SLIDER - SIN FADE (Solución al bug)
 // ==========================================
 
-// Esperamos a que TODAS las imágenes del slider estén completamente cargadas
 $(window).on('load', function(){
     
     if ($('.hero-slider').length) {
         
-        // Destruir cualquier instancia previa (por si acaso)
+        // Destruir cualquier instancia previa
         if ($('.hero-slider').hasClass('slick-initialized')) {
             $('.hero-slider').slick('unslick');
         }
         
-        // Inicializar el slider después de que todo esté cargado
+        // Inicializar con slide en lugar de fade
         $('.hero-slider').slick({
             dots: true,
             infinite: true,
             speed: 800,
-            fade: true,
-            cssEase: 'ease-in-out',
+            fade: false,              // CAMBIO CRÍTICO: false en lugar de true
+            slidesToShow: 1,
+            slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 4000,
             arrows: true,
             pauseOnHover: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            lazyLoad: 'ondemand',
-            adaptiveHeight: false // Importante: mantener altura fija
+            cssEase: 'ease-in-out',
+            adaptiveHeight: false,
+            draggable: true,
+            swipe: true
         });
+        
+        // Forzar recálculo después de inicializar
+        setTimeout(function() {
+            $('.hero-slider').slick('setPosition');
+        }, 100);
         
         console.log('Slider inicializado correctamente');
     }
