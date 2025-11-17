@@ -1,5 +1,5 @@
-// Espera a que todo el documento esté listo
-$(document).ready(function(){
+// Espera a que TODO (imágenes, CSS, etc.) esté cargado
+$(window).on('load', function(){
     
     // 1. INICIALIZAR EL SLIDER (Requisito 1)
     if ($('.hero-slider').length) {
@@ -14,7 +14,7 @@ $(document).ready(function(){
         });
     }
 
-});
+}); // Fin de window.load
 
 // 2. VALIDACIÓN DE FORMULARIOS (Requisito 2)
 // DOM: Usamos getElementById para encontrar el formulario
