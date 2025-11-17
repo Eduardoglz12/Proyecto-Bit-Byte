@@ -1,5 +1,5 @@
 // ==========================================
-// 1. INICIALIZAR EL SLIDER - SOLUCIÓN COMPLETA
+// 1. INICIALIZAR EL SLIDER - SOLUCIÓN CORRECTA
 // ==========================================
 
 $(window).on('load', function(){
@@ -11,15 +11,9 @@ $(window).on('load', function(){
             $('.hero-slider').slick('unslick');
         }
         
-        // SOLUCIÓN: Establecer dimensiones explícitas ANTES de inicializar
-        $('.hero-slider img').css({
-            'width': '100%',
-            'height': '100%',
-            'object-fit': 'cover',
-            'display': 'block'
-        });
+        // NO manipular CSS de las imágenes - dejar que el CSS haga su trabajo
         
-        // Inicializar Slick
+        // Inicializar Slick sin opciones problemáticas
         $('.hero-slider').slick({
             dots: true,
             infinite: true,
@@ -34,31 +28,8 @@ $(window).on('load', function(){
             cssEase: 'ease-in-out',
             adaptiveHeight: false,
             draggable: true,
-            swipe: true,
-            // CRÍTICO: Prevenir el recálculo automático de dimensiones
-            waitForAnimate: false,
-            // Mantener posición fija
-            variableWidth: false
+            swipe: true
         });
-        
-        // Forzar dimensiones después de cada cambio de slide
-        $('.hero-slider').on('afterChange', function(event, slick, currentSlide){
-            $('.hero-slider img').css({
-                'width': '100%',
-                'height': '100%',
-                'object-fit': 'cover'
-            });
-        });
-        
-        // Forzar recálculo inicial
-        setTimeout(function() {
-            $('.hero-slider').slick('setPosition');
-            $('.hero-slider img').css({
-                'width': '100%',
-                'height': '100%',
-                'object-fit': 'cover'
-            });
-        }, 100);
         
         console.log('Slider inicializado correctamente');
     }

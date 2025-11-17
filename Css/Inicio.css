@@ -1234,23 +1234,50 @@ footer {
     min-height: 150px; 
 }
 
+/* Contenedor del slider - CRÍTICO */
+.hero-slider {
+    position: relative;
+    width: 100%;
+}
+
 /* El slide (el <div> que envuelve la imagen) */
 .hero-slider .slick-slide {
     height: 300px; /* Altura fija para el slide */
     overflow: hidden;
     border-radius: 0.8rem;
-    background-color: var(--gris-oscuro); /* Relleno mientras carga */
+    background-color: var(--gris-oscuro);
 }
 
-/* La imagen dentro del slide */
+/* SOLUCIÓN: Contenedor interno del slide */
+.hero-slider .slick-slide > div {
+    height: 100%;
+}
+
+/* La imagen dentro del slide - SIN transform ni manipulación JS */
 .hero-slider .slick-slide img {
-    width: 100%;
-    height: 100%; 
-    object-fit: cover; /* La imagen rellena el contenedor */
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
     border-radius: 0.8rem;
+    display: block !important;
 }
 
-/* Flechas de navegación (Tus estilos) */
+/* CRÍTICO: Prevenir que Slick manipule el tamaño de las imágenes */
+.hero-slider .slick-track {
+    display: flex !important;
+    align-items: center;
+}
+
+.hero-slider .slick-slide {
+    float: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Flechas de navegación */
 .hero-slider .slick-prev,
 .hero-slider .slick-next {
     font-size: 0;
@@ -1284,7 +1311,7 @@ footer {
     opacity: 1;
 }
 
-/* Puntos de navegación (Tus estilos) */
+/* Puntos de navegación */
 .hero-slider .slick-dots {
     position: absolute;
     bottom: 20px;
@@ -1348,11 +1375,4 @@ footer {
     .hero-slider .slick-slide {
         height: 200px;
     }
-}
-
-.hero-slider img {
-    max-width: 100% !important;
-    max-height: 100% !important;
-    width: 100% !important;
-    height: 100% !important;
 }
