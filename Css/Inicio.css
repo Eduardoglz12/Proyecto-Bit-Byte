@@ -1313,21 +1313,16 @@ footer {
     }
 }
 
-/* --- BREAKPOINT (Móviles Pequeños) --- */
 @media (max-width: 480px) {
 
-    /* Ajusta la altura del slider (aún más pequeño) */
+    /* 3. Reducimos la altura a 30% de la altura de la pantalla */
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
-        height: 200px;
+        height: 30vh; /* 30% de la altura de la pantalla */
+        width: 95vh;
     }
-
-    .hero-slider .slick-slide img {
-        max-height: 200px;
-    }
-
-    /* Ajusta el tamaño de las flechas */
+  
     .hero-slider .slick-prev,
     .hero-slider .slick-next {
         width: 30px;
@@ -1337,8 +1332,6 @@ footer {
     .hero-slider .slick-next:before {
         font-size: 25px;
     }
-
-    /* Reduce el tamaño de los dots (que agrandamos) */
     .hero-slider .slick-dots li,
     .hero-slider .slick-dots li button {
         width: 20px;
@@ -1350,5 +1343,3 @@ footer {
         height: 20px;
     }
 }
-
-
