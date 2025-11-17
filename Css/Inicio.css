@@ -1190,22 +1190,46 @@ footer {
   }
 }
 
-/* --- Estilos para el Slider (Slick) --- */
+/* ===============================================
+   ESTILOS PARA EL SLIDER (CARRUSEL)
+   =============================================== */
+
+/* Contenedor principal del slider */
+.noticias {
+    overflow: hidden; /* Asegura que el slider se mantenga dentro del borde */
+}
+
+/* Estilo para cada slide */
 .hero-slider .slick-slide img {
     width: 100%;
     height: auto;
     object-fit: cover;
     max-height: 300px; /* Ajusta la altura del banner */
-    border-radius: 0.8rem;
+    border-radius: 0.8rem; /* Hereda el borde del contenedor de noticias */
 }
 
 /* Estilos para las flechas (para que se vean bien en tu tema oscuro) */
+.slick-prev, .slick-next {
+    z-index: 10;
+}
 .slick-prev:before, .slick-next:before {
     font-size: 30px !important;
     color: var(--blanco) !important;
     opacity: 0.5 !important;
+    text-shadow: 0 0 5px var(--negro); /* Sombra para legibilidad */
 }
 .slick-prev:hover:before, .slick-next:hover:before {
+    opacity: 1 !important;
+}
+
+/* Estilos para los puntos de navegación (abajo) */
+.slick-dots li button:before {
+    font-size: 10px !important;
+    color: var(--gris) !important;
+    opacity: 0.75 !important;
+}
+.slick-dots li.slick-active button:before {
+    color: var(--azul-bajo) !important;
     opacity: 1 !important;
 }
 
