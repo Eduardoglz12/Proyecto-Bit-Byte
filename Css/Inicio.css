@@ -1325,7 +1325,7 @@ footer {
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
-        height: 35vh; /* 30% de la altura de la pantalla */
+        height: 25vh; /* 30% de la altura de la pantalla */
         width: 40vh;
     }
   
