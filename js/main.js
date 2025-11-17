@@ -11,30 +11,32 @@ $(window).on('load', function(){
             $('.hero-slider').slick('unslick');
         }
         
-        // Inicializar con slide en lugar de fade
-        $('.hero-slider').slick({
-            dots: true,
-            infinite: true,
-            speed: 800,
-            fade: false,              // CAMBIO CRÍTICO: false en lugar de true
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            autoplay: true,
-            autoplaySpeed: 4000,
-            arrows: true,
-            pauseOnHover: true,
-            cssEase: 'ease-in-out',
-            adaptiveHeight: false,
-            draggable: true,
-            swipe: true
-        });
-        
-        // Forzar recálculo después de inicializar
+        // Pequeño delay para asegurar que todo está cargado
         setTimeout(function() {
-            $('.hero-slider').slick('setPosition');
-        }, 100);
-        
-        console.log('Slider inicializado correctamente');
+            $('.hero-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 600,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                arrows: true,
+                pauseOnHover: true,
+                cssEase: 'ease-in-out',
+                adaptiveHeight: false,
+                draggable: true,
+                swipe: true,
+                touchMove: true,
+                waitForAnimate: false
+            });
+            
+            console.log('Slider inicializado correctamente');
+            
+            // Verificar que funciona
+            console.log('Total de slides:', $('.hero-slider .slick-slide:not(.slick-cloned)').length);
+            console.log('Slide actual:', $('.hero-slider').slick('slickCurrentSlide'));
+        }, 200);
     }
 });
 
