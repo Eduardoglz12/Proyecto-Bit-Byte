@@ -1224,17 +1224,33 @@ footer {
     fill: var(--blanco);
 }
 
+/* ===============================================
+   ESTILOS PARA EL SLIDER (CORREGIDO)
+   =============================================== */
+
+/* --- Base (Escritorio) --- */
 .hero-slider {
     width: 100%;
-    max-width: 900px;  /* Ajusta el ancho */
-    margin: 0 auto;    /* Centrar */
-}
-.hero-slider img {
-    width: 100%;
-    height: auto;
+    max-width: 900px;  /* Ancho máximo para ESCRITORIO */
+    margin: 0 auto;    /* Centrado */
 }
 
-/* Puntos de navegación - slick dots (refactor) */
+/* Contenedor del slide (div que envuelve la img) */
+.hero-slider .slick-list,
+.hero-slider .slick-slide,
+.hero-slider .slick-slide > div {
+    height: 464px; /* Altura fija para ESCRITORIO */
+}
+
+/* La imagen */
+.hero-slider img {
+    width: 100%;
+    height: 100%;       /* CAMBIO CLAVE: Rellenar el 100% del contenedor */
+    object-fit: cover;  /* CAMBIO CLAVE: Recortar la imagen para que encaje */
+}
+
+/* --- Puntos de navegación (Dots) --- */
+/* (Todo tu código para los dots es perfecto y se queda igual) */
 .hero-slider {
   --slick-dot-size: 25px;
   --slick-dot-gap: 5px;
@@ -1298,18 +1314,18 @@ footer {
   color: var(--azul-bajo); /* <-- COLOR AZUL ACTIVO (ya estaba bien) */
 }
 
-/* --- BREAKPOINT (Tablets y Móviles Grandes) --- */
 @media (max-width: 768px) {
     
+    /* CAMBIO CLAVE: El slider ahora ocupa el 100% del ancho del móvil */
+    .hero-slider {
+        max-width: 100%; 
+    }
+
     /* Ajusta la altura del slider */
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
-        height: 300px; /* Reducimos la altura de 464px a 300px */
-    }
-
-    .hero-slider .slick-slide img {
-        max-height: 300px;
+        height: 300px; /* Reducimos la altura a 300px */
     }
 }
 
@@ -1323,9 +1339,6 @@ footer {
         height: 200px;
     }
 
-    .hero-slider .slick-slide img {
-        max-height: 200px;
-    }
 
     /* Ajusta el tamaño de las flechas */
     .hero-slider .slick-prev,
@@ -1338,7 +1351,7 @@ footer {
         font-size: 25px;
     }
 
-    /* Reduce el tamaño de los dots (que agrandamos) */
+    /* Reduce el tamaño de los dots */
     .hero-slider .slick-dots li,
     .hero-slider .slick-dots li button {
         width: 20px;
@@ -1350,4 +1363,3 @@ footer {
         height: 20px;
     }
 }
-
