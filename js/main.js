@@ -1,3 +1,4 @@
+
 // ==========================================
 // 1. INICIALIZAR EL SLIDER - SIN FADE (Solución al bug)
 // ==========================================
@@ -36,6 +37,30 @@ $(window).on('load', function(){
             // Verificar que funciona
             console.log('Total de slides:', $('.hero-slider .slick-slide:not(.slick-cloned)').length);
             console.log('Slide actual:', $('.hero-slider').slick('slickCurrentSlide'));
+            
+            // FIX CRÍTICO: Forzar dimensiones de las imágenes
+            function fixSliderImages() {
+                $('.hero-slider .slick-slide img').each(function() {
+                    $(this).removeAttr('width').removeAttr('height');
+                    this.style.setProperty('width', '100%', 'important');
+                    this.style.setProperty('height', '464px', 'important');
+                    this.style.setProperty('max-width', '100%', 'important');
+                    this.style.setProperty('object-fit', 'cover', 'important');
+                });
+            }
+            
+            // Ejecutar inmediatamente
+            fixSliderImages();
+            
+            // Ejecutar cada vez que cambia el slide
+            $('.hero-slider').on('beforeChange', function() {
+                fixSliderImages();
+            });
+            
+            $('.hero-slider').on('afterChange', function() {
+                fixSliderImages();
+            });
+            
         }, 200);
     }
 });
