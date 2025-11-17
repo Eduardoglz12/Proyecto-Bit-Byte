@@ -1261,8 +1261,6 @@ position: relative;
 top: 0;
 left: 0;
 display: block;
-width: 100% !important;
-max-width: 100% !important;
 }
 /* Cada slide individual - CRÍTICO: Fijar dimensiones */
 .hero-slider .slick-slide {
@@ -1297,10 +1295,6 @@ position: relative;
 /* Fix específico para el efecto fade */
 .hero-slider.slick-slider .slick-slide {
 width: 100% !important;
-}
-.hero-slider.slick-slider .slick-track {
-width: 100% !important;
-transform: translate3d(0, 0, 0) !important;
 }
 /* Flechas de navegación */
 .hero-slider .slick-prev,
