@@ -174,9 +174,8 @@ if (isset($_SESSION['usr_user'])) {
                 <div class="hero-slider">
                     <div><img src="img/banner1.png" alt="Banner Promoción 1"></div>
                     <div><img src="img/banner2.webp" alt="Banner Promoción 2"></div>
-                    <div><img src="img/banner3.webp" alt="Banner Promoción 3"></div>
-                    <div><img src="img/banner4.webp" alt="Banner Promoción 4"></div>
-                    <div><img src="img/banner5.webp" alt="Banner Promoción 5"></div>
+                    
+                    
                 </div>
             </article>
 
