@@ -1315,12 +1315,17 @@ footer {
 
 @media (max-width: 480px) {
 
+    .hero-slider img {
+    width: 66%;
+    height: auto;
+  }
+
     /* 3. Reducimos la altura a 30% de la altura de la pantalla */
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
         height: 30vh; /* 30% de la altura de la pantalla */
-        width: 95vh;
+        width: 66vh;
     }
   
     .hero-slider .slick-prev,
