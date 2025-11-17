@@ -1316,6 +1316,12 @@ footer {
 /* --- BREAKPOINT (Móviles Pequeños) --- */
 @media (max-width: 480px) {
 
+    .hero-slider {
+    width: 100%;
+    max-width: 50%;  /* Ajusta el ancho */
+    margin: 0 auto;    /* Centrar */
+    }
+
     /* Ajusta la altura del slider (aún más pequeño) */
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
@@ -1325,6 +1331,7 @@ footer {
 
     .hero-slider .slick-slide img {
         max-height: 200px;
+        max-width: 50%;
     }
 
     /* Ajusta el tamaño de las flechas */
