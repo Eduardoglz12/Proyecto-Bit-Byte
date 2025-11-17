@@ -1316,7 +1316,7 @@ footer {
 @media (max-width: 480px) {
 
     .hero-slider img {
-    width: 66%;
+    width: 95%;
     height: auto;
   }
 
@@ -1325,7 +1325,7 @@ footer {
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
         height: 30vh; /* 30% de la altura de la pantalla */
-        width: 66vh;
+        width: 50vh;
     }
   
     .hero-slider .slick-prev,
