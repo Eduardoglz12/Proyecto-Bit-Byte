@@ -4,13 +4,34 @@
 
 $(document).ready(function(){
     $('.hero-slider').slick({
-        autoplay: true,          // Reproducción automática
-        autoplaySpeed: 3000,     // Velocidad en ms (3 segundos)
-        dots: true,              // Mostrar puntos de navegación
-        arrows: true,            // Mostrar flechas
-        infinite: true,          // Bucle infinito
-        slidesToShow: 1,         // Mostrar 1 slide a la vez
-        slidesToScroll: 1        // Desplazar 1 slide
+        autoplay: true,
+        autoplaySpeed: 3000,
+        dots: true,
+        arrows: true,         // <-- Flechas SÍ en escritorio
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        
+        // --- BLOQUE 'RESPONSIVE' AJUSTADO ---
+        responsive: [
+            {
+                breakpoint: 769,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false  // <-- Flechas NO en tablet
+                }
+            },
+            {
+                breakpoint: 481,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false  // <-- Flechas NO en móvil
+                }
+            }
+        ]
+        // --- FIN DEL BLOQUE ---
     });
 });
 

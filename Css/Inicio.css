@@ -1244,7 +1244,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0px;
+  /*bottom: 0px;*/
   width: 100%;
   margin: 0;
   padding: 0;
@@ -1315,20 +1315,24 @@ footer {
 
 @media (max-width: 480px) {
 
+    /* * 1. QUITA LAS REGLAS DE ANCHO QUE AÑADIMOS *
+     * Borra los bloques .hero-slider y .hero-slider .slick-slide
+     * que tenían 'width: 100% !important;'.
+    */
+
+    /* 2. DEJA SOLO la altura y la imagen (que estaban bien) */
+    .hero-slider .slick-list,
+    .hero-slider .slick-slide > div {
+        height: 25vh; 
+        width: 47vh;
+    }
     .hero-slider img {
-    width: 100%;
-    height: auto;
-    margin: 0 auto; 
+        width: 100%;
+        height: auto;
+        display: block; 
+        margin: 0 auto; 
     }
 
-    /* 3. Reducimos la altura a 30% de la altura de la pantalla */
-    .hero-slider .slick-list,
-    .hero-slider .slick-slide,
-    .hero-slider .slick-slide > div {
-        height: 25vh; /* 30% de la altura de la pantalla */
-        width: 40vh;
-    }
-  
     .hero-slider .slick-prev,
     .hero-slider .slick-next {
         width: 30px;
