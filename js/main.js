@@ -1,32 +1,37 @@
 // ==========================================
-// 1. INICIALIZAR EL SLIDER (CORREGIDO)
+// 1. INICIALIZAR EL SLIDER (SOLUCIÓN DEFINITIVA)
 // ==========================================
 
-$(document).ready(function(){
+// Esperamos a que TODAS las imágenes del slider estén completamente cargadas
+$(window).on('load', function(){
     
-    // Verificamos que el slider exista
     if ($('.hero-slider').length) {
         
-        // Método 1: Inicializar inmediatamente
+        // Destruir cualquier instancia previa (por si acaso)
+        if ($('.hero-slider').hasClass('slick-initialized')) {
+            $('.hero-slider').slick('unslick');
+        }
+        
+        // Inicializar el slider después de que todo esté cargado
         $('.hero-slider').slick({
-            dots: true,           // Puntos de navegación
-            infinite: true,       // Bucle infinito
-            speed: 500,          // Velocidad de transición
-            fade: true,          // Efecto fade
-            cssEase: 'linear',   // Tipo de transición
-            autoplay: true,      // Reproducción automática
-            autoplaySpeed: 3000, // Cada 3 segundos
-            arrows: true,        // Mostrar flechas
-            adaptiveHeight: true // Ajusta altura automáticamente
+            dots: true,
+            infinite: true,
+            speed: 800,
+            fade: true,
+            cssEase: 'ease-in-out',
+            autoplay: true,
+            autoplaySpeed: 4000,
+            arrows: true,
+            pauseOnHover: true,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            lazyLoad: 'ondemand',
+            adaptiveHeight: false // Importante: mantener altura fija
         });
         
-        // Opcional: Forzar recálculo después de que carguen las imágenes
-        $('.hero-slider img').on('load', function() {
-            $('.hero-slider').slick('setPosition');
-        });
+        console.log('Slider inicializado correctamente');
     }
-
-}); // Fin de document.ready
+});
 
 // ==========================================
 // 2. VALIDACIÓN DE FORMULARIOS
@@ -54,33 +59,30 @@ function validarFormularioCliente() {
     const emailRegex = /^\S+@\S+\.\S+$/;
     const telefonoRegex = /^\d{10}$/;
 
-    // Validación de Nombre
-    if (nombre.value.trim() === '') {
+    if (nombre && nombre.value.trim() === '') {
         mostrarError('error-nombre', 'El nombre es obligatorio.');
         esValido = false;
-    } else {
+    } else if (nombre) {
         ocultarError('error-nombre');
     }
 
-    // Validación de Email
-    if (email.value.trim() === '') {
+    if (email && email.value.trim() === '') {
         mostrarError('error-email', 'El correo es obligatorio.');
         esValido = false;
-    } else if (!emailRegex.test(email.value)) {
+    } else if (email && !emailRegex.test(email.value)) {
         mostrarError('error-email', 'El formato del correo no es válido.');
         esValido = false;
-    } else {
+    } else if (email) {
         ocultarError('error-email');
     }
 
-    // Validación de Teléfono
-    if (telefono.value.trim() === '') {
+    if (telefono && telefono.value.trim() === '') {
         mostrarError('error-telefono', 'El teléfono es obligatorio.');
         esValido = false;
-    } else if (!telefonoRegex.test(telefono.value)) {
+    } else if (telefono && !telefonoRegex.test(telefono.value)) {
         mostrarError('error-telefono', 'El teléfono debe tener 10 dígitos.');
         esValido = false;
-    } else {
+    } else if (telefono) {
         ocultarError('error-telefono');
     }
 

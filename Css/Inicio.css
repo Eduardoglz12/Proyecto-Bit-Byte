@@ -1190,69 +1190,7 @@ footer {
   }
 }
 
-.hero-slider .slick-slide {
-    position: relative;
-    /* Removemos la altura fija para que sea responsive */
-    overflow: hidden;
-    border-radius: 0.8rem;
-}
-
-.hero-slider .slick-slide img {
-  width: 100%;
-  height: auto; /* Cambio importante: auto en lugar de 100% */
-  display: block;
-  border-radius: 0.8rem;
-}
-
-/* Para pantallas grandes, limitamos la altura máxima */
-@media (min-width: 769px) {
-  .hero-slider .slick-slide img {
-    max-height: 400px;
-    object-fit: cover;
-  }
-}
-
-/* Flechas más visibles */
-.slick-prev, .slick-next {
-  z-index: 10;
-  width: 40px;
-  height: 40px;
-}
-
-.slick-prev {
-  left: 15px;
-}
-
-.slick-next {
-  right: 15px;
-}
-
-.slick-prev:before, .slick-next:before {
-  font-size: 35px !important;
-  color: var(--blanco) !important;
-  opacity: 0.7 !important;
-  text-shadow: 0 0 10px rgba(0,0,0,0.8);
-}
-
-.slick-prev:hover:before, .slick-next:hover:before {
-  opacity: 1 !important;
-}
-
-/* Puntos de navegación */
-.slick-dots {
-  bottom: 15px;
-}
-
-.slick-dots li button:before {
-  font-size: 12px !important;
-  color: var(--blanco) !important;
-  opacity: 0.5 !important;
-}
-
-.slick-dots li.slick-active button:before {
-  color: var(--azul-bajo) !important;
-  opacity: 1 !important;
-}
+/* Estilos para el botón "Volver arriba" */
 
 #btn-volver-arriba {
     display: none; /* Oculto por defecto */
@@ -1284,4 +1222,155 @@ footer {
 }
 #btn-volver-arriba svg {
     fill: var(--blanco);
+}
+
+/* ===============================================
+   ESTILOS PARA EL SLIDER - VERSIÓN CORREGIDA
+   =============================================== */
+
+/* Contenedor principal del slider */
+.noticias {
+  background-color: var(--gris-oscuro);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Contenedor del slider Slick */
+.hero-slider {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cada slide individual */
+.hero-slider .slick-slide {
+  height: 400px; /* Altura fija - AJUSTA ESTE VALOR según tus necesidades */
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Las imágenes dentro de cada slide */
+.hero-slider .slick-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cubre todo el espacio sin deformar */
+  object-position: center;
+  display: block;
+  border-radius: 0;
+}
+
+/* Contenedor de las diapositivas (track) */
+.hero-slider .slick-track {
+  display: flex;
+  align-items: center;
+}
+
+/* Lista de slides */
+.hero-slider .slick-list {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 400px; /* Misma altura que los slides */
+}
+
+/* ============================================
+   FLECHAS DE NAVEGACIÓN
+   ============================================ */
+
+.hero-slider .slick-prev,
+.hero-slider .slick-next {
+  z-index: 100;
+  width: 50px;
+  height: 50px;
+}
+
+.hero-slider .slick-prev {
+  left: 20px;
+}
+
+.hero-slider .slick-next {
+  right: 20px;
+}
+
+.hero-slider .slick-prev:before,
+.hero-slider .slick-next:before {
+  font-size: 40px !important;
+  color: var(--blanco) !important;
+  opacity: 0.6 !important;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.hero-slider .slick-prev:hover:before,
+.hero-slider .slick-next:hover:before {
+  opacity: 1 !important;
+}
+
+/* ============================================
+   PUNTOS DE NAVEGACIÓN
+   ============================================ */
+
+.hero-slider .slick-dots {
+  bottom: 20px;
+  z-index: 100;
+}
+
+.hero-slider .slick-dots li {
+  margin: 0 5px;
+}
+
+.hero-slider .slick-dots li button:before {
+  font-size: 14px !important;
+  color: var(--blanco) !important;
+  opacity: 0.5 !important;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.hero-slider .slick-dots li.slick-active button:before {
+  color: var(--azul-bajo) !important;
+  opacity: 1 !important;
+}
+
+/* ============================================
+   RESPONSIVE - MÓVILES
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero-slider .slick-slide,
+  .hero-slider .slick-list {
+    height: 250px; /* Altura más pequeña en móviles */
+  }
+  
+  .hero-slider .slick-prev,
+  .hero-slider .slick-next {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .hero-slider .slick-prev {
+    left: 10px;
+  }
+  
+  .hero-slider .slick-next {
+    right: 10px;
+  }
+  
+  .hero-slider .slick-prev:before,
+  .hero-slider .slick-next:before {
+    font-size: 30px !important;
+  }
+  
+  .hero-slider .slick-dots {
+    bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider .slick-slide,
+  .hero-slider .slick-list {
+    height: 200px; /* Aún más pequeño en pantallas muy pequeñas */
+  }
 }
