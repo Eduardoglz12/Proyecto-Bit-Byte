@@ -74,8 +74,8 @@ if (isset($_SESSION['usr_user'])) {
   <link rel="stylesheet" href="Css/normalize.css">
   <link rel="stylesheet" href="Css/Inicio.css">
   
-  <link rel="stylesheet" type="text/Css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-  <link rel="stylesheet" type="text/Css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="Css/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="Css/slick-theme.css"/>
   
 </head>
 
@@ -218,7 +218,7 @@ if (isset($_SESSION['usr_user'])) {
     </footer>
     
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script type="text/javascript" src="js/slick.min.js"></script>
     <script src="js/main.js"></script>
 
 </body>
