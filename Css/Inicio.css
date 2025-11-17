@@ -1226,7 +1226,7 @@ footer {
 
 .hero-slider {
     width: 100%;
-    max-width: 800px;  /* Ajusta el ancho */
+    max-width: 900px;  /* Ajusta el ancho */
     margin: 0 auto;    /* Centrar */
 }
 .hero-slider img {
