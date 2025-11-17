@@ -1261,15 +1261,6 @@ footer {
   overflow: hidden !important;
 }
 
-.hero-slider .slick-slide img {
-  width: 100% !important;
-  height: 464px !important;
-  max-width: 100% !important;
-  max-height: 464px !important;
-  object-fit: cover !important;
-  display: block !important;
-}
-
 .hero-slider .slick-prev,
 .hero-slider .slick-next {
   z-index: 100;
@@ -1352,4 +1343,24 @@ footer {
   .hero-slider .slick-next:before {
     font-size: 25px;
   }
+}
+
+.hero-slider .slide-item {
+    width: 100%;
+    height: 464px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    .hero-slider .slide-item {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-slider .slide-item {
+        height: 200px;
+    }
 }
