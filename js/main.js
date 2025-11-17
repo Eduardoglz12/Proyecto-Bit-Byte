@@ -1,4 +1,3 @@
-
 // ==========================================
 // 1. INICIALIZAR EL SLIDER - SIN FADE (Solución al bug)
 // ==========================================
@@ -12,56 +11,30 @@ $(window).on('load', function(){
             $('.hero-slider').slick('unslick');
         }
         
-        // Pequeño delay para asegurar que todo está cargado
+        // Inicializar con slide en lugar de fade
+        $('.hero-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 800,
+            fade: false,              // CAMBIO CRÍTICO: false en lugar de true
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 4000,
+            arrows: true,
+            pauseOnHover: true,
+            cssEase: 'ease-in-out',
+            adaptiveHeight: false,
+            draggable: true,
+            swipe: true
+        });
+        
+        // Forzar recálculo después de inicializar
         setTimeout(function() {
-            $('.hero-slider').slick({
-                dots: true,
-                infinite: true,
-                speed: 600,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                arrows: true,
-                pauseOnHover: true,
-                cssEase: 'ease-in-out',
-                adaptiveHeight: false,
-                draggable: true,
-                swipe: true,
-                touchMove: true,
-                waitForAnimate: false
-            });
-            
-            console.log('Slider inicializado correctamente');
-            
-            // Verificar que funciona
-            console.log('Total de slides:', $('.hero-slider .slick-slide:not(.slick-cloned)').length);
-            console.log('Slide actual:', $('.hero-slider').slick('slickCurrentSlide'));
-            
-            // FIX CRÍTICO: Forzar dimensiones de las imágenes
-            function fixSliderImages() {
-                $('.hero-slider .slick-slide img').each(function() {
-                    $(this).removeAttr('width').removeAttr('height');
-                    this.style.setProperty('width', '100%', 'important');
-                    this.style.setProperty('height', '464px', 'important');
-                    this.style.setProperty('max-width', '100%', 'important');
-                    this.style.setProperty('object-fit', 'cover', 'important');
-                });
-            }
-            
-            // Ejecutar inmediatamente
-            fixSliderImages();
-            
-            // Ejecutar cada vez que cambia el slide
-            $('.hero-slider').on('beforeChange', function() {
-                fixSliderImages();
-            });
-            
-            $('.hero-slider').on('afterChange', function() {
-                fixSliderImages();
-            });
-            
-        }, 200);
+            $('.hero-slider').slick('setPosition');
+        }, 100);
+        
+        console.log('Slider inicializado correctamente');
     }
 });
 
