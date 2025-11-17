@@ -1,5 +1,5 @@
 // ==========================================
-// 1. INICIALIZAR EL SLIDER - SIN FADE (Solución al bug)
+// 1. INICIALIZAR EL SLIDER - SOLUCIÓN COMPLETA
 // ==========================================
 
 $(window).on('load', function(){
@@ -11,12 +11,20 @@ $(window).on('load', function(){
             $('.hero-slider').slick('unslick');
         }
         
-        // Inicializar con slide en lugar de fade
+        // SOLUCIÓN: Establecer dimensiones explícitas ANTES de inicializar
+        $('.hero-slider img').css({
+            'width': '100%',
+            'height': '100%',
+            'object-fit': 'cover',
+            'display': 'block'
+        });
+        
+        // Inicializar Slick
         $('.hero-slider').slick({
             dots: true,
             infinite: true,
             speed: 800,
-            fade: true,              // CAMBIO CRÍTICO: false en lugar de true
+            fade: false,
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
@@ -26,12 +34,30 @@ $(window).on('load', function(){
             cssEase: 'ease-in-out',
             adaptiveHeight: false,
             draggable: true,
-            swipe: true
+            swipe: true,
+            // CRÍTICO: Prevenir el recálculo automático de dimensiones
+            waitForAnimate: false,
+            // Mantener posición fija
+            variableWidth: false
         });
         
-        // Forzar recálculo después de inicializar
+        // Forzar dimensiones después de cada cambio de slide
+        $('.hero-slider').on('afterChange', function(event, slick, currentSlide){
+            $('.hero-slider img').css({
+                'width': '100%',
+                'height': '100%',
+                'object-fit': 'cover'
+            });
+        });
+        
+        // Forzar recálculo inicial
         setTimeout(function() {
             $('.hero-slider').slick('setPosition');
+            $('.hero-slider img').css({
+                'width': '100%',
+                'height': '100%',
+                'object-fit': 'cover'
+            });
         }, 100);
         
         console.log('Slider inicializado correctamente');
