@@ -1225,191 +1225,200 @@ footer {
 }
 
 /* ===============================================
-   ESTILOS PARA EL SLIDER - LIMPIO Y FUNCIONAL
-   =============================================== */
-
+ESTILOS PARA EL SLIDER - SOLUCIÓN AL BUG DE MULTIPLICACIÓN
+=============================================== */
 /* Contenedor principal */
 .noticias {
-  background-color: var(--gris-oscuro);
-  border-radius: 0.8rem;
-  overflow: hidden;
-  width: 100%;
-  margin-bottom: 3rem;
+background-color: var(--gris-oscuro);
+border-radius: 0.8rem;
+overflow: hidden;
+width: 100%;
+max-width: 100%;
+margin-bottom: 3rem;
 }
-
-/* Resetear estilos de Slick */
+/* Slider principal - CRÍTICO: Fijar ancho */
 .hero-slider {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
-  user-select: none;
-  touch-action: pan-y;
+position: relative;
+display: block;
+box-sizing: border-box;
+width: 100% !important;
+max-width: 100% !important;
 }
-
+/* Lista de slides - CRÍTICO: Controlar overflow */
 .hero-slider .slick-list {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  height: 464px; /* Altura proporcional a tus imágenes: 1938/900 = 2.15, entonces para ancho completo ~464px */
+position: relative;
+display: block;
+overflow: hidden;
+margin: 0;
+padding: 0;
+height: 464px;
+width: 100% !important;
+max-width: 100% !important;
 }
-
+/* Track (contenedor de todos los slides) - CRÍTICO: Evitar expansión */
 .hero-slider .slick-track {
-  position: relative;
-  top: 0;
-  left: 0;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+position: relative;
+top: 0;
+left: 0;
+display: block;
+width: 100% !important;
+max-width: 100% !important;
 }
-
+/* Cada slide individual - CRÍTICO: Fijar dimensiones */
 .hero-slider .slick-slide {
-  display: none;
-  float: left;
-  height: 100%;
-  min-height: 1px;
+display: none;
+float: left;
+height: 464px;
+min-height: 1px;
+width: 100% !important;
+max-width: 100% !important;
+position: relative;
 }
-
+/* Solo el slide activo se muestra */
 .hero-slider .slick-slide.slick-active {
-  display: block;
+display: block;
 }
-
+/* Wrapper interno del slide (div generado por Slick) */
+.hero-slider .slick-slide > div {
+width: 100% !important;
+max-width: 100% !important;
+height: 464px;
+}
+/* Las imágenes - CRÍTICO: Evitar que se expandan */
 .hero-slider .slick-slide img {
-  width: 100%;
-  height: auto;
-  max-height: 464px;
-  object-fit: cover;
-  display: block;
+width: 100% !important;
+max-width: 100% !important;
+height: auto;
+max-height: 464px;
+object-fit: cover;
+display: block;
+position: relative;
 }
-
+/* Fix específico para el efecto fade */
+.hero-slider.slick-slider .slick-slide {
+width: 100% !important;
+}
+.hero-slider.slick-slider .slick-track {
+width: 100% !important;
+transform: translate3d(0, 0, 0) !important;
+}
 /* Flechas de navegación */
 .hero-slider .slick-prev,
 .hero-slider .slick-next {
-  font-size: 0;
-  line-height: 0;
-  position: absolute;
-  top: 50%;
-  display: block;
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  transform: translate(0, -50%);
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background: transparent;
-  z-index: 100;
+font-size: 0;
+line-height: 0;
+position: absolute;
+top: 50%;
+display: block;
+width: 50px;
+height: 50px;
+padding: 0;
+transform: translate(0, -50%);
+cursor: pointer;
+border: none;
+outline: none;
+background: transparent;
+z-index: 100;
 }
-
 .hero-slider .slick-prev {
-  left: 20px;
+left: 20px;
 }
-
 .hero-slider .slick-next {
-  right: 20px;
+right: 20px;
 }
-
 .hero-slider .slick-prev:before,
 .hero-slider .slick-next:before {
-  font-family: 'slick';
-  font-size: 40px;
-  line-height: 1;
-  opacity: 0.75;
-  color: var(--blanco);
-  -webkit-font-smoothing: antialiased;
+font-family: 'slick';
+font-size: 40px;
+line-height: 1;
+opacity: 0.75;
+color: var(--blanco);
+text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
 }
-
 .hero-slider .slick-prev:hover:before,
 .hero-slider .slick-next:hover:before {
-  opacity: 1;
+opacity: 1;
 }
-
 /* Puntos de navegación */
 .hero-slider .slick-dots {
-  position: absolute;
-  bottom: 20px;
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  text-align: center;
-  z-index: 100;
+position: absolute;
+bottom: 20px;
+display: block;
+width: 100%;
+padding: 0;
+margin: 0;
+list-style: none;
+text-align: center;
+z-index: 100;
 }
-
 .hero-slider .slick-dots li {
-  position: relative;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin: 0 5px;
-  padding: 0;
-  cursor: pointer;
+position: relative;
+display: inline-block;
+width: 20px;
+height: 20px;
+margin: 0 5px;
+padding: 0;
+cursor: pointer;
 }
-
 .hero-slider .slick-dots li button {
-  font-size: 0;
-  line-height: 0;
-  display: block;
-  width: 20px;
-  height: 20px;
-  padding: 5px;
-  cursor: pointer;
-  color: transparent;
-  border: 0;
-  outline: none;
-  background: transparent;
+font-size: 0;
+line-height: 0;
+display: block;
+width: 20px;
+height: 20px;
+padding: 5px;
+cursor: pointer;
+color: transparent;
+border: 0;
+outline: none;
+background: transparent;
 }
-
 .hero-slider .slick-dots li button:before {
-  font-family: 'slick';
-  font-size: 12px;
-  line-height: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  content: '•';
-  text-align: center;
-  opacity: 0.5;
-  color: var(--blanco);
+font-family: 'slick';
+font-size: 14px;
+line-height: 20px;
+position: absolute;
+top: 0;
+left: 0;
+width: 20px;
+height: 20px;
+content: '•';
+text-align: center;
+opacity: 0.5;
+color: var(--blanco);
+text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
-
 .hero-slider .slick-dots li.slick-active button:before {
-  opacity: 1;
-  color: var(--azul-bajo);
+opacity: 1;
+color: var(--azul-bajo);
 }
-
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-slider .slick-list {
-    height: 300px;
-  }
-  
-  .hero-slider .slick-slide img {
-    max-height: 300px;
-  }
+.hero-slider .slick-list,
+.hero-slider .slick-slide,
+.hero-slider .slick-slide > div {
+height: 300px;
 }
-
+.hero-slider .slick-slide img {
+max-height: 300px;
+}
+}
 @media (max-width: 480px) {
-  .hero-slider .slick-list {
-    height: 200px;
-  }
-  
-  .hero-slider .slick-slide img {
-    max-height: 200px;
-  }
-  
-  .hero-slider .slick-prev,
-  .hero-slider .slick-next {
-    width: 30px;
-    height: 30px;
-  }
-  
-  .hero-slider .slick-prev:before,
-  .hero-slider .slick-next:before {
-    font-size: 25px;
-  }
+.hero-slider .slick-list,
+.hero-slider .slick-slide,
+.hero-slider .slick-slide > div {
+height: 200px;
+}
+.hero-slider .slick-slide img {
+max-height: 200px;
+}
+.hero-slider .slick-prev,
+.hero-slider .slick-next {
+width: 30px;
+height: 30px;
+}
+.hero-slider .slick-prev:before,
+.hero-slider .slick-next:before {
+font-size: 25px;
+}
 }
