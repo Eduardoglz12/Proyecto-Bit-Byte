@@ -1314,52 +1314,75 @@ footer {
   color: var(--azul-bajo); /* <-- COLOR AZUL ACTIVO (ya estaba bien) */
 }
 
-@media (max-width: 768px) {
-    
-    /* CAMBIO CLAVE: El slider ahora ocupa el 100% del ancho del móvil */
-    .hero-slider {
-        max-width: 100%; 
-    }
-
-    /* Ajusta la altura del slider */
-    .hero-slider .slick-list,
-    .hero-slider .slick-slide,
-    .hero-slider .slick-slide > div {
-        height: 300px; /* Reducimos la altura a 300px */
-    }
-}
-
-/* --- BREAKPOINT (Móviles Pequeños) --- */
 @media (max-width: 480px) {
+    .hero-slider {
+        max-width: 100%;
+    }
 
-    /* Ajusta la altura del slider (aún más pequeño) */
     .hero-slider .slick-list,
     .hero-slider .slick-slide,
     .hero-slider .slick-slide > div {
         height: 200px;
     }
 
-
-    /* Ajusta el tamaño de las flechas */
-    .hero-slider .slick-prev,
-    .hero-slider .slick-next {
-        width: 30px;
-        height: 30px;
-    }
-    .hero-slider .slick-prev:before,
-    .hero-slider .slick-next:before {
-        font-size: 25px;
+    .hero-slider {
+        --slick-dot-size: 14px;
+        --slick-dot-gap: 3px;
     }
 
-    /* Reduce el tamaño de los dots */
-    .hero-slider .slick-dots li,
-    .hero-slider .slick-dots li button {
-        width: 20px;
-        height: 20px;
+    .hero-slider .slick-dots li button:before {
+        font-size: 16px;
     }
+}
+
+
+
+@media (max-width: 768px) {
+    .hero-slider .slick-list,
+    .hero-slider .slick-slide,
+    .hero-slider .slick-slide > div {
+        height: 300px;   /* Altura ideal */
+    }
+
+    .hero-slider {
+        --slick-dot-size: 18px;
+        --slick-dot-gap: 4px;
+    }
+
     .hero-slider .slick-dots li button:before {
         font-size: 20px;
-        width: 20px;
-        height: 20px;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .hero-slider {
+        max-width: 100%;  /* Ocupar más ancho */
+    }
+
+    .hero-slider .slick-list,
+    .hero-slider .slick-slide,
+    .hero-slider .slick-slide > div {
+        height: 380px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .hero-slider .slick-list,
+    .hero-slider .slick-slide,
+    .hero-slider .slick-slide > div {
+        height: 420px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .hero-slider {
+        max-width: 1200px;   /* Slider más grande */
+    }
+
+    .hero-slider .slick-list,
+    .hero-slider .slick-slide,
+    .hero-slider .slick-slide > div {
+        height: 550px;
     }
 }
