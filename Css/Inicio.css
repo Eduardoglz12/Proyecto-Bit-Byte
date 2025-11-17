@@ -1244,7 +1244,7 @@ footer {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 20px;
+  bottom: 0px;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -1316,7 +1316,7 @@ footer {
 @media (max-width: 480px) {
 
     .hero-slider img {
-    width: 95%;
+    width: 100%;
     height: auto;
     margin: 0 auto; 
     }
@@ -1348,4 +1348,9 @@ footer {
         width: 20px;
         height: 20px;
     }
+
+  .slick-dotted.slick-slider
+  {
+    margin-bottom: 0px;
+  }
 }
