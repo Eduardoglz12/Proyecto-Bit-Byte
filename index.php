@@ -173,8 +173,7 @@ if (isset($_SESSION['usr_user'])) {
             <article class="noticias">
                 <div class="hero-slider">
                     <div><img src="img/banner1.png" alt="Banner Promoción 1"></div>
-                    <div><img src="img/banner2.png" alt="Banner Promoción 2"></div>
-                    <div><img src="img/banner3.png" alt="Banner Promoción 3"></div>
+                    
                 </div>
             </article>
 
