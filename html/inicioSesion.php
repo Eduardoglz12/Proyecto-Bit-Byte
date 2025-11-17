@@ -70,12 +70,17 @@ if (isset($_SESSION['usr_user'])) {
     ?>
 
     <div class="cont-login">
-      <form action="../php/manejoInicioS.php" method="post" class="form-login">
+      <form action="../php/manejoInicioS.php" method="post" class="form-login" id="form-login">
         <p>INICIAR SESION</p>
+        
         <label for="usr_user">Usuario:</label>
         <input type="text" name="usr_user" id="usr_user">
+        <span class="error-texto" id="error-usuario"></span>
+        
         <label for="usr_password">Contraseña:</label>
         <input type="password" name="usr_password" id="usr_password">
+        <span class="error-texto" id="error-password"></span>
+        
         <button type="submit">Iniciar sesion</button>
       </form>
     </div>

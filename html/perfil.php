@@ -68,61 +68,70 @@ $historial_pedidos = $stmt_orders->get_result();
     
     <?php include 'header.php'; ?>
 
-    <div class="contenedor-principal">
-        <main class="perfil-container">
-            <h1>Mi Perfil</h1>
+        <div class="contenedor-principal">
+            <main class="perfil-container">
+                <h1>Mi Perfil</h1>
 
-            <?php if ($resultado_msg): ?>
-                <div class="resultado-banner"><?= htmlspecialchars($resultado_msg) ?></div>
-            <?php endif; ?>
+                <?php if ($resultado_msg): ?>
+                    <div class="resultado-banner"><?= htmlspecialchars($resultado_msg) ?></div>
+                <?php endif; ?>
 
-            <div class="panel datos-panel">
-                <h2>Mis Datos</h2>
-                <form action="../php/actualizar_perfil.php" method="POST" class="form-perfil">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nombre">Nombre Completo</label>
-                            <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($datos_usuario['usr_nombre_completo'] ?? '') ?>" required>
+                <div class="panel datos-panel">
+                    <h2>Mis Datos</h2>
+                    
+                    <form action="../php/actualizar_perfil.php" method="POST" class="form-perfil" id="form-perfil">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre Completo</label>
+                                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($datos_usuario['usr_nombre_completo'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-nombre"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo Electrónico</label>
+                                <input type="email" id="email" name="email" value="<?= htmlspecialchars($datos_usuario['usr_email'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-email"></span>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Correo Electrónico</label>
-                            <input type="email" id="email" name="email" value="<?= htmlspecialchars($datos_usuario['usr_email'] ?? '') ?>" required>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono</label>
+                                    <input type="tel" id="telefono" name="telefono" value="<?= htmlspecialchars($datos_usuario['usr_telefono'] ?? '') ?>" required>
+                                    <span class="error-texto" id="error-telefono"></span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="calle">Calle y Número</label>
+                                    <input type="text" id="calle" name="calle" value="<?= htmlspecialchars($datos_usuario['usr_calle'] ?? '') ?>" required>
+                                    <span class="error-texto" id="error-calle"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="colonia">Colonia</label>
+                                    <input type="text" id="colonia" name="colonia" value="<?= htmlspecialchars($datos_usuario['usr_colonia'] ?? '') ?>" required>
+                                    <span class="error-texto" id="error-colonia"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="telefono">Teléfono</label>
-                            <input type="tel" id="telefono" name="telefono" value="<?= htmlspecialchars($datos_usuario['usr_telefono'] ?? '') ?>" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ciudad">Ciudad</label>
+                                <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($datos_usuario['usr_ciudad'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-ciudad"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <input type="text" id="estado" name="estado" value="<?= htmlspecialchars($datos_usuario['usr_estado'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-estado"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="cp">Código Postal</label>
+                                <input type="text" id="cp" name="cp" value="<?= htmlspecialchars($datos_usuario['usr_cp'] ?? '') ?>" required>
+                                <span class="error-texto" id="error-cp"></span>
+                            </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="calle">Calle y Número</label>
-                            <input type="text" id="calle" name="calle" value="<?= htmlspecialchars($datos_usuario['usr_calle'] ?? '') ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="colonia">Colonia</label>
-                            <input type="text" id="colonia" name="colonia" value="<?= htmlspecialchars($datos_usuario['usr_colonia'] ?? '') ?>" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="ciudad">Ciudad</label>
-                            <input type="text" id="ciudad" name="ciudad" value="<?= htmlspecialchars($datos_usuario['usr_ciudad'] ?? '') ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="estado">Estado</label>
-                            <input type="text" id="estado" name="estado" value="<?= htmlspecialchars($datos_usuario['usr_estado'] ?? '') ?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cp">Código Postal</label>
-                            <input type="text" id="cp" name="cp" value="<?= htmlspecialchars($datos_usuario['usr_cp'] ?? '') ?>" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-guardar">Guardar Cambios</button>
-                </form>
-            </div>
+                        <button type="submit" class="btn-guardar">Guardar Cambios</button>
+                    </form>
+                </div>
 
             <div class="panel pedidos-panel">
                 <h2>Historial de Pedidos</h2>
